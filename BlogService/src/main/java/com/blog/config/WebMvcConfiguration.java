@@ -14,6 +14,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     //拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new MvcMultipleInterceptor()).addPathPatterns("/static/**/packed**.txt");
     }
     //页面跳转
     @Override
