@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-@ConfigurationProperties(prefix="blog")
+@ConfigurationProperties(prefix = "blog")
 @Data
 public class BlogSetting {
 

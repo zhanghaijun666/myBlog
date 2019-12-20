@@ -21,8 +21,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     //拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new MvcMultipleInterceptor(blogSetting.getUIDir(),"application/x-javascript")).addPathPatterns("/static/**/packed-**.js");
-//        registry.addInterceptor(new MvcMultipleInterceptor(blogSetting.getUIDir(),"text/html")).addPathPatterns("/static/**/packed-**.html");
+        registry.addInterceptor(new MvcMultipleInterceptor(blogSetting.getUIDir(),"application/x-javascript")).addPathPatterns("/static/**/packed-**.js");
+        registry.addInterceptor(new MvcMultipleInterceptor(blogSetting.getUIDir(),"text/html")).addPathPatterns("/static/**/packed-**.html");
     }
 
     //页面跳转
@@ -34,7 +34,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     //静态资源
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("file:"+ PathUtils.joinPath(System.getProperty("user.dir"),blogSetting.getUIDir()));
+        registry.addResourceHandler("/static/**").addResourceLocations("file:"+ PathUtils.joinPath(PathUtils.getBlogServerPath(),blogSetting.getUIDir()));
     }
 
     //默认静态资源处理器

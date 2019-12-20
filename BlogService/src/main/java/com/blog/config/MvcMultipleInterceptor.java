@@ -18,7 +18,7 @@ public class MvcMultipleInterceptor implements HandlerInterceptor {
     private String UIDir;
     private String mediaType;
 
-    public MvcMultipleInterceptor(String UIDir,String mediaType) {
+    public MvcMultipleInterceptor(String UIDir, String mediaType) {
         this.UIDir = UIDir;
         this.mediaType = mediaType;
     }
@@ -34,14 +34,13 @@ public class MvcMultipleInterceptor implements HandlerInterceptor {
         }
         File file = new File(PathUtils.joinPath(System.getProperty("user.dir"), this.UIDir, path));
         if (!file.exists() && file.getName().startsWith("packed-")) {
-            file = new File(PathUtils.joinPath(System.getProperty("user.dir"), this.UIDir, path + ".txt"));
+            file = new File(PathUtils.joinPath(PathUtils.getBlogServerPath(), this.UIDir, path + ".txt"));
         }
         if (!file.exists() || !file.canRead()) {
             return true;
         }
         response.setContentType(mediaType);
         writeResource(file, response.getOutputStream());
-        System.out.println("preHandle.......");
         return false;
     }
 
@@ -56,7 +55,6 @@ public class MvcMultipleInterceptor implements HandlerInterceptor {
     }
 
     private void writeResource(File file, final OutputStream out) throws IOException {
-        System.out.println("writeResource()" + file.getCanonicalPath());
         if (file.getName().startsWith("packed-")) {
             try (BufferedReader in = new BufferedReader(new FileReader(file))) {
                 String filePath;
