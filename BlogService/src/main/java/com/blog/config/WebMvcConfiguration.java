@@ -21,13 +21,14 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     //拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new MvcMultipleInterceptor()).addPathPatterns("/static/**/packed**.txt");
+//        registry.addInterceptor(new MvcMultipleInterceptor(blogSetting.getUIDir(),"application/x-javascript")).addPathPatterns("/static/**/packed-**.js");
+//        registry.addInterceptor(new MvcMultipleInterceptor(blogSetting.getUIDir(),"text/html")).addPathPatterns("/static/**/packed-**.html");
     }
 
     //页面跳转
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addRedirectViewController("/", "/static/main/index.html");
+        registry.addRedirectViewController("/", "/static/main/packed-index.html");
     }
 
     //静态资源

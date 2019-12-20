@@ -38,14 +38,10 @@ public class ResourceContorller {
     }
 */
 
-    @RequestMapping("/static")
+    @RequestMapping("/test")
     @ResponseBody
     public String resourceHandle(){
-
-
-
-
-        return "static";
+        return "test";
     }
 
 }
