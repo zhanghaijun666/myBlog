@@ -33,7 +33,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     //静态资源
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        System.out.println(PathUtils.joinPath(System.getProperty("user.dir"),blogSetting.getUIDir()));
         registry.addResourceHandler("/static/**").addResourceLocations("file:"+ PathUtils.joinPath(System.getProperty("user.dir"),blogSetting.getUIDir()));
     }
 
