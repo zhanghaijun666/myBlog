@@ -21,6 +21,6 @@ define("knockout", [], function () {
     return ko;
 });
 
-define("protobufjs/light", [], function () {
-    return protobuf;
-});
+// define("protobufjs/light", [], function () {
+//     return protobuf;
+// });
