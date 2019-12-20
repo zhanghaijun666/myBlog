@@ -1,9 +1,9 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
+**/HELP.md
+BlogService/target/
+!BlogService/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
-./out/**
+BlogService/out/**
 
 ### STS ###
 .apt_generated
@@ -15,18 +15,18 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+*.idea
 *.iws
 *.iml
 *.ipr
 
 ### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
+**/build/
 
 ### VS Code ###
-.vscode/
+**/.vscode/
