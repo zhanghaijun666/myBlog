@@ -21,8 +21,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     //拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new MvcMultipleInterceptor(blogSetting.getUIDir(),"application/x-javascript")).addPathPatterns("/static/**/packed-**.js");
-        registry.addInterceptor(new MvcMultipleInterceptor(blogSetting.getUIDir(),"text/html")).addPathPatterns("/static/**/packed-**.html");
+        registry.addInterceptor(new MvcMultipleInterceptor(blogSetting.getUIDir(),"application/x-javascript;charset=utf-8")).addPathPatterns("/static/**/packed-**.js");
+        registry.addInterceptor(new MvcMultipleInterceptor(blogSetting.getUIDir(),"text/html;charset=utf-8")).addPathPatterns("/static/**/packed-**.html");
     }
 
     //页面跳转
