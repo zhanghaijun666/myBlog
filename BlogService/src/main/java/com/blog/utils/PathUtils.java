@@ -13,7 +13,6 @@ public class PathUtils {
         } catch (IOException e) {
             return System.getProperty("user.dir");
         }
-
     }
 
     public static String joinPath(Object... paths) {

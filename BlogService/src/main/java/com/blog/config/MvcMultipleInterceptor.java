@@ -1,6 +1,7 @@
 package com.blog.config;
 
 import com.blog.utils.PathUtils;
+import com.blog.utils.ResourceUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -14,7 +15,6 @@ import java.io.*;
 //ResourceHttpRequestHandler
 public class MvcMultipleInterceptor implements HandlerInterceptor {
 
-    private static final byte[] NEWLINE = "\r\n".getBytes();
     private String UIDir;
     private String mediaType;
 
@@ -32,7 +32,7 @@ public class MvcMultipleInterceptor implements HandlerInterceptor {
         if (path == null) {
             return true;
         }
-        File file = new File(PathUtils.joinPath(System.getProperty("user.dir"), this.UIDir, path));
+        File file = new File(PathUtils.joinPath(PathUtils.getBlogServerPath(), this.UIDir, path));
         if (!file.exists() && file.getName().startsWith("packed-")) {
             file = new File(PathUtils.joinPath(PathUtils.getBlogServerPath(), this.UIDir, path + ".txt"));
         }
@@ -40,7 +40,7 @@ public class MvcMultipleInterceptor implements HandlerInterceptor {
             return true;
         }
         response.setContentType(mediaType);
-        writeResource(file, response.getOutputStream());
+        ResourceUtils.writeResource(file, response.getOutputStream());
         return false;
     }
 
@@ -50,36 +50,5 @@ public class MvcMultipleInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception {
-    }
-
-    private void writeResource(File file, final OutputStream out) throws IOException {
-        if (file.getName().startsWith("packed-")) {
-            try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-                String filePath;
-                while ((filePath = in.readLine()) != null) {
-                    filePath = filePath.trim();
-                    if (filePath.length() > 0 && !filePath.startsWith("#")) {
-                        File innerFile = new File(file.getParent(), filePath);
-                        writeResource(innerFile, out);
-                        out.write(NEWLINE);
-                    }
-                }
-            }
-        } else if (file.isDirectory()) {
-            File[] childFiles = file.listFiles();
-            for (File childFile : childFiles) {
-                writeResource(childFile, out);
-                out.write(NEWLINE);
-            }
-        } else {
-            byte[] buffer = new byte[2048];
-            try (BufferedInputStream innerStream = new BufferedInputStream(new FileInputStream(file))) {
-                int bytesSize;
-                while ((bytesSize = innerStream.read(buffer)) != -1) {
-                    out.write(buffer, 0, bytesSize);
-                }
-                out.flush();
-            }
-        }
     }
 }

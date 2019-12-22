@@ -1,0 +1,23 @@
+<div class="layout-user row">
+    <div class="col-md-2">
+        <div class="user-head">
+            <img alt="头像">
+        </div>
+        <div class="user-menu">
+            <ul class="nav flex-column" data-bind="foreach: [1,2,3,4,5,6]">
+                <li class="nav-item">
+                    <a class="nav-link" data-bind="text:'我的文件'"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Library</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Data</li>
+            </ol>
+        </nav>
+    </div>
+</div>

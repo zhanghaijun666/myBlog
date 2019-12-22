@@ -1,3 +1,8 @@
-<template id="template-demo">
-    <h2>template-demo</h2>>
+<template id="common-template">
+    <!-- {{{ --><!-- ko if: name && ko.components.isRegistered(name) --><!-- }}} -->
+    <!-- {{{ --><!-- ko component: {name: name, params: $data } --><!-- }}} --><!-- {{{ --><!-- /ko --><!-- }}} -->
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
+    <!-- {{{ --><!-- ko if: name && !ko.components.isRegistered(name) --><!-- }}} -->
+    <!-- {{{ --><!-- ko template: {name: name, data: $data } --><!-- }}} --><!-- {{{ --><!-- /ko --><!-- }}} -->
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
 </template>

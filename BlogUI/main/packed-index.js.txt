@@ -1,5 +1,5 @@
 ../resource/lib/jquery/jquery-3.4.1.js
-../resource/lib/bootstrap/js/bootstrap.js
+../resource/lib/bootstrap/js/bootstrap.min.js
 ../resource/lib/knockout/knockout-3.5.1.js
 ../resource/lib/knockout/knockout.validation.js
 ../resource/lib/sammy.js

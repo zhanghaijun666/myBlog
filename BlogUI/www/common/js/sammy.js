@@ -7,15 +7,17 @@ function SammyPage(options) {
         this.get(/\#login(.*)/, function () {
             root.setRootTemplate('login-page');
         });
-        this.get(/\#message(.*)/, function () {
-            root.setRootTemplate('message');
+        this.get(/\#visitor(.*)/, function () {
+            root.setRootTemplate('layout-visitor');
+        });
+        this.get(/\#user(.*)/, function () {
+            root.setRootTemplate('layout-user');
         });
         this.get(/\#admin(.*)/, function () {
-            toastShowMsg("暂未开发，尽情期待！！！");
-            this.redirect("#login");
+            root.setRootTemplate('layout-admin');
         });
         this.get(/.+/, function () {
-            this.redirect("#file");
+            this.redirect("#login");
         });
         this.around(function (callback) {
             callback();
@@ -23,4 +25,5 @@ function SammyPage(options) {
     }).run();
     return sammy;
 }
+
 window.SammyPage = SammyPage;

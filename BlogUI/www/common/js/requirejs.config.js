@@ -7,8 +7,8 @@ requirejs.config({
     //never includes a ".js" extension since
     //the paths config could be for a directory.
     paths: {
-        "text": "static/resource/require/text",
-        "css": "static/resource/require/css"
+        "text": "/static/resource/require/text",
+        "css": "/static/resource/require/css"
     },
     shim: {
         // "bcstore": {

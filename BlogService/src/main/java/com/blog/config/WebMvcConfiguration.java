@@ -28,7 +28,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     //页面跳转
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addRedirectViewController("/", "/static/main/packed-index.html");
+        registry.addRedirectViewController("/index", "/static/main/packed-index.html");
     }
 
     //静态资源
