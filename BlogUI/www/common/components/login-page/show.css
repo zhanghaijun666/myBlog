@@ -56,6 +56,7 @@
     height: 100%;
     width: 100%;
     background: #27A9E3;
+    color: #fff;
 }
 .login-page > .login-large span {
     font-size: 16px;
