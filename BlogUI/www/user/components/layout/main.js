@@ -4,6 +4,14 @@
             var self = this;
 
         }
+        LayoutUserModel.prototype.getUserMenu = function () {
+            return [
+                new MenuItem("",{icon:"fa fa-address-card",iconText:"我的菜单",ItemClass:"",targetItem:{}}),
+                new MenuItem("",{icon:"fa fa-address-card",iconText:"我的菜单",ItemClass:"",targetItem:{}}),
+                new MenuItem("",{icon:"fa fa-address-card",iconText:"我的菜单",ItemClass:"",targetItem:{}}),
+                new MenuItem("",{icon:"fa fa-address-card",iconText:"我的菜单",ItemClass:"",targetItem:{}})
+            ];
+        };
         return {
             viewModel: {
                 createViewModel: function (params, componentInfo) {

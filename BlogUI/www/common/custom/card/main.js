@@ -1,5 +1,5 @@
 (function (global) {
-    define(['knockout', "css!./show.css"], function (ko) {
+    define(['knockout', "text!./show.html","css!./show.css"], function (ko,pageView) {
         function CustomCardViewModel(params, componentInfo) {
             var defaultValue = {
                 dataList: []  /*数据*/
@@ -38,7 +38,8 @@
         return {
             createViewModel: function (params, componentInfo) {
                 return new CustomCardViewModel(params, componentInfo);
-            }
+            },
+            template: pageView
         };
 
     });

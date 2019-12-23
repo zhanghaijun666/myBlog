@@ -1,5 +1,5 @@
 (function (global) {
-    define(['knockout', "css!./show.css"], function (ko) {
+    define(['knockout', "text!./show.html","css!./show.css"], function (ko,pageView) {
         function TreeNode(name, item, options) {
             var defaultValue = {
                 icon: ko.observable("fa fa-user"),
@@ -89,7 +89,8 @@
         return {
             createViewModel: function (params, componentInfo) {
                 return new CustomTreeModel(params, componentInfo);
-            }
+            },
+            template: pageView
         };
 
     });

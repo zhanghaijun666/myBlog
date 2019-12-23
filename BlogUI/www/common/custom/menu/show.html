@@ -1,21 +1,25 @@
-<div class="custom-menu" data-bind="class: menuClass">
-    <ul data-bind="with: $data.getMenuWith()">
-        <!-- {{{ --><!--  ko foreach: menus  --><!-- }}} -->
-        <!-- {{{ --><!--  ko template: {name: 'custom-menu-li',data: $data}  --><!-- }}} --><!-- {{{ --><!-- /ko --><!-- }}} -->
-        <!-- {{{ --><!-- /ko --><!-- }}} -->
-        <!-- {{{ --><!--  ko if: dropMenu.length > 0  --><!-- }}} -->
-        <li class="dropdown">
-            <a   data-toggle="dropdown">
-                <i class="material-icons">more_horiz</i>
-            </a>
-            <ul class="dropdown-menu" data-bind="foreach: dropMenu">
-                <!-- {{{ --><!--  ko template: {name: 'custom-menu-li',data: $data}  --><!-- }}} --><!-- {{{ --><!-- /ko --><!-- }}} -->
-            </ul>
-        </li>
-        <!-- {{{ --><!-- /ko --><!-- }}} -->
-    </ul>
-</div>
-
+<div class="custom-menu">8888888888888</div>
+<template id="custom-menu-ul">
+    <div class="custom-menu" data-bind="class: menuClass">
+        <ul data-bind="with: $data.getMenuWith()">
+            <!-- {{{ --><!--  ko foreach: menus  --><!-- }}} -->
+            <!-- {{{ --><!--  ko template: {name: 'custom-menu-li',data: $data}  --><!-- }}} --><!-- {{{ --><!-- /ko -->
+            <!-- }}} -->
+            <!-- {{{ --><!-- /ko --><!-- }}} -->
+            <!-- {{{ --><!--  ko if: dropMenu.length > 0  --><!-- }}} -->
+            <li class="dropdown">
+                <a data-toggle="dropdown">
+                    <i class="material-icons">more_horiz</i>
+                </a>
+                <ul class="dropdown-menu" data-bind="foreach: dropMenu">
+                    <!-- {{{ --><!--  ko template: {name: 'custom-menu-li',data: $data}  --><!-- }}} --><!-- {{{ -->
+                    <!-- /ko --><!-- }}} -->
+                </ul>
+            </li>
+            <!-- {{{ --><!-- /ko --><!-- }}} -->
+        </ul>
+    </div>
+</template>
 <template id="custom-menu-li">
     <li data-bind="clickPermit:{click: $data.click,type: 'disabled:',permit: $data.getPermit() ,msg: $data.msg},css:{'dropdown': $data.isDropdown()}">
         <a data-bind="attr:{'title': $data.text, 'data-toggle': $data.isDropdown() ? 'dropdown' :''},css:{disabled: !$data.getPermit()}">
@@ -30,11 +34,13 @@
         </a>
         <!-- {{{ --><!-- ko if: $data.isDropdown() && !$data.template --><!-- }}} -->
         <ul class="dropdown-menu" data-bind="foreach: childMenuItems">
-            <!-- {{{ --><!--  ko template: {name: 'custom-menu-li',data: $data}  --><!-- }}} --><!-- {{{ --><!-- /ko --><!-- }}} -->
+            <!-- {{{ --><!--  ko template: {name: 'custom-menu-li',data: $data}  --><!-- }}} --><!-- {{{ --><!-- /ko -->
+            <!-- }}} -->
         </ul>
         <!-- {{{ --><!-- /ko --><!-- }}} -->
         <!-- {{{ --><!-- ko if: $data.isDropdown() && $data.template --><!-- }}} -->
-        <!-- {{{ --><!-- ko template: {name :$data.template,data: $data}--><!-- }}} --><!-- {{{ --><!-- /ko --><!-- }}} -->
+        <!-- {{{ --><!-- ko template: {name :$data.template,data: $data}--><!-- }}} --><!-- {{{ --><!-- /ko -->
+        <!-- }}} -->
         <!-- {{{ --><!-- /ko --><!-- }}} -->
     </li>
 </template>

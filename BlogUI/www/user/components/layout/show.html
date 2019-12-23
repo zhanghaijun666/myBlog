@@ -12,12 +12,7 @@
         </div>
     </div>
     <div class="col-md-10">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Library</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Data</li>
-            </ol>
-        </nav>
+        <custom-menu params="menuList:getUserMenu(),count:-1"></custom-menu>
+        <div data-bind='component: {name: "custom-menu",params: { menuList:getUserMenu(),count:-1 }}'></div>
     </div>
 </div>
