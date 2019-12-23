@@ -1,0 +1,40 @@
+<div class="custom-menu" data-bind="class: menuClass">
+    <ul data-bind="with: $data.getMenuWith()">
+        <!-- {{{ --><!--  ko foreach: menus  --><!-- }}} -->
+        <!-- {{{ --><!--  ko template: {name: 'custom-menu-li',data: $data}  --><!-- }}} --><!-- {{{ --><!-- /ko --><!-- }}} -->
+        <!-- {{{ --><!-- /ko --><!-- }}} -->
+        <!-- {{{ --><!--  ko if: dropMenu.length > 0  --><!-- }}} -->
+        <li class="dropdown">
+            <a   data-toggle="dropdown">
+                <i class="material-icons">more_horiz</i>
+            </a>
+            <ul class="dropdown-menu" data-bind="foreach: dropMenu">
+                <!-- {{{ --><!--  ko template: {name: 'custom-menu-li',data: $data}  --><!-- }}} --><!-- {{{ --><!-- /ko --><!-- }}} -->
+            </ul>
+        </li>
+        <!-- {{{ --><!-- /ko --><!-- }}} -->
+    </ul>
+</div>
+
+<template id="custom-menu-li">
+    <li data-bind="clickPermit:{click: $data.click,type: 'disabled:',permit: $data.getPermit() ,msg: $data.msg},css:{'dropdown': $data.isDropdown()}">
+        <a data-bind="attr:{'title': $data.text, 'data-toggle': $data.isDropdown() ? 'dropdown' :''},css:{disabled: !$data.getPermit()}">
+            <sup data-bind="text: $data.opIconSpanText"></sup>
+            <!-- {{{ --><!-- ko ifnot: /<svg/.test($data.icon) --><!-- }}} -->
+            <i class="material-icons" data-bind="class: $data.ItemClass,text: $data.icon"></i>
+            <!-- {{{ --><!-- /ko --><!-- }}} -->
+            <!-- {{{ --><!-- ko if: /<svg/.test($data.icon) --><!-- }}} -->
+            <span class="recycle-svg" data-bind="html: $data.icon"></span>
+            <!-- {{{ --><!-- /ko --><!-- }}} -->
+            <span class="menu-text" data-bind="text: $data.text"></span>
+        </a>
+        <!-- {{{ --><!-- ko if: $data.isDropdown() && !$data.template --><!-- }}} -->
+        <ul class="dropdown-menu" data-bind="foreach: childMenuItems">
+            <!-- {{{ --><!--  ko template: {name: 'custom-menu-li',data: $data}  --><!-- }}} --><!-- {{{ --><!-- /ko --><!-- }}} -->
+        </ul>
+        <!-- {{{ --><!-- /ko --><!-- }}} -->
+        <!-- {{{ --><!-- ko if: $data.isDropdown() && $data.template --><!-- }}} -->
+        <!-- {{{ --><!-- ko template: {name :$data.template,data: $data}--><!-- }}} --><!-- {{{ --><!-- /ko --><!-- }}} -->
+        <!-- {{{ --><!-- /ko --><!-- }}} -->
+    </li>
+</template>

@@ -1,0 +1,50 @@
+<template id="custom-card-large">
+    <div class="custom-card-body" data-bind="visible: !loading()">
+        <!-- {{{ --><!-- ko if: headTemplateLarge --><!-- }}} -->
+        <div class="custom-card-head admin-header">
+            <!-- {{{ --><!-- ko if: $component.topMenus --><!-- }}} -->
+            <div class="dl card-checkbox"><custom-checkbox params="checked: $data.checkAll"></custom-checkbox></div>
+            <!-- {{{ --><!-- /ko --><!-- }}} -->
+
+            <div class="card-data" data-bind="template:{name: headTemplateLarge,data:$data}"></div>
+
+            <!-- {{{ --><!-- ko if: $component.rightMenus --><!-- }}} -->
+            <div class="card-operate"><span data-bind="text: '操作'"></span></div>
+            <!-- {{{ --><!-- /ko --><!-- }}} -->
+        </div>
+        <!-- {{{ --><!-- /ko --><!-- }}} -->
+        
+        <!-- {{{ --><!-- ko if:  dataList().length > 0 --><!-- }}} -->
+            <!-- {{{ --><!-- ko foreach: dataList --><!-- }}} -->
+            <div class="data-item">
+                <!-- {{{ --><!-- ko if: $component.topMenus --><!-- }}} -->
+                <div class="dl card-checkbox"><custom-checkbox params="checked: $data.select"></custom-checkbox></div>
+                <!-- {{{ --><!-- /ko --><!-- }}} -->
+
+                <!-- {{{ --><!-- ko let: {$component: $component.context} --><!-- }}} -->
+                <div class="card-data" data-bind="template:{name: $parent.rowTemplateLarge, data: $data}"></div>
+                <!-- {{{ --><!-- /ko --><!-- }}} -->
+
+                <!-- {{{ --><!-- ko if: $component.rightMenus --><!-- }}} -->
+                <div class="card-operate" data-bind="component:{name:'custom-menu',params:{origin: $data, menuList: $component.getRightMenus($data)}}"></div>
+                <!-- {{{ --><!-- /ko --><!-- }}} -->
+            </div>
+            <!-- {{{ --><!-- /ko --><!-- }}} -->
+        <!-- {{{ --><!-- /ko --><!-- }}} -->
+        
+        <!-- {{{ --><!-- ko if:  dataList().length == 0 --><!-- }}} -->
+        <div class="nodata">
+            <i data-bind="css: noDataImgCss"></i>
+            <span data-bind="text: noDataHint">无数据</span>
+        </div>
+        <!-- {{{ --><!-- /ko --><!-- }}} -->
+    </div>
+    <div data-bind="visible: loading()">
+        <center><i class="fa fa-spinner fa-pulse fa-3x fa-fw" ></i></center>
+        <span class="centerText" data-bind=" text: l10n( 'operate_hint.loading')"></span>
+    </div>
+    <div class="custom-card-foot-paging"></div>
+</template>
+<template id="custom-card-body-head">
+    <span data-bind="text: '部门/用户'"></span>
+</template>

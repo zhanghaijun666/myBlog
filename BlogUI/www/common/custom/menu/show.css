@@ -1,0 +1,67 @@
+.custom-menu{}
+.custom-menu li{
+    height: 100%;
+    text-align: center;
+    float:left;
+    cursor: pointer;
+}
+.custom-menu .dropdown-menu li{
+    height: 30px;
+    line-height: 30px;
+    text-align: left;
+    clear:both;
+}
+.custom-menu li:hover .material-icons{
+    color: #5871f8;
+}
+.custom-menu ul li a >i{
+    font-size: 22px;
+    color: #aaaeb1;
+    width: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+.custom-menu li .dropdown-menu .material-icons{
+    width: auto;
+    padding-right:3px; 
+    color:#AAAEB1;
+    font-size:18px; 
+}
+.custom-menu .dropdown-menu li .menu-text{
+    display: inline;
+    color: #000;
+}
+/* rightMenu ------ start ------*/
+.right-menu li{
+    /*width: 40px;*/
+}
+.custom-menu ul li >a {display: flex; align-items: center;}
+.custom-menu ul li ul.dropdown-menu{left:-60px; top:30px;}
+.custom-menu ul li >a.disabled,.custom-menu ul li >a[disabled]{cursor: not-allowed; filter: alpha(opacity=65);-webkit-box-shadow: none; box-shadow: none; opacity: .65;}
+.right-menu li .menu-text{
+    display: none;
+}
+.right-menu .dropdown-menu li{
+    width: auto;
+}
+/* rightMenu ------ end ------*/
+/* topMenu ------ start ------*/
+.top-menu .material-icons,.topMenu .recycle-svg{
+    display: none;
+}
+.top-menu li a{
+    border: 1px solid #aabafc;
+    background: #fff;
+    color: #5871f8;
+    border-radius: 3px;
+    padding: 5px 14px;
+    display: inline-block;
+}
+.top-menu .dropdown-menu li a{
+    border: none;
+    padding: 3px 20px;
+    font-weight: 400;
+    color: #333;
+    white-space: nowrap;
+}
+/* topMenu ------ end ------*/

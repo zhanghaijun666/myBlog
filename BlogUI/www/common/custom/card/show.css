@@ -1,0 +1,28 @@
+.custom-card-body{background: #fff; width: 100%; float:left; margin-bottom:30px;}
+.custom-card-body .data-item{display: flex; justify-content:space-between;}
+.custom-card-body .custom-card-head{display: flex;}
+.custom-card-body>div:not(.nodata){
+    width: 100%;
+    line-height:60px;
+    height: 60px;
+    background-color: #fff;
+    border-top: 1px solid #EBEDFD;
+    white-space: nowrap;
+    float:left;
+}
+.custom-card-body .card-checkbox{
+    width: 50px;
+    height: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+.custom-card-body .card-data{
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+.custom-card-body .card-operate{
+    height: 100%;
+    text-align: left;
+    width: 200px;
+}
