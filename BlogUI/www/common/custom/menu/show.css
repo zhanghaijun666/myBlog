@@ -2,7 +2,7 @@
 .custom-menu li{
     height: 100%;
     text-align: center;
-    float:left;
+
     cursor: pointer;
 }
 .custom-menu .dropdown-menu li{
@@ -33,7 +33,7 @@
 }
 /* rightMenu ------ start ------*/
 .right-menu li{
-    /*width: 40px;*/
+    float:left;
 }
 .custom-menu ul li >a {display: flex; align-items: center;}
 .custom-menu ul li ul.dropdown-menu{left:-60px; top:30px;}
@@ -46,6 +46,9 @@
 }
 /* rightMenu ------ end ------*/
 /* topMenu ------ start ------*/
+.top-menu li{
+    float:left;
+}
 .top-menu .material-icons,.topMenu .recycle-svg{
     display: none;
 }
@@ -65,3 +68,10 @@
     white-space: nowrap;
 }
 /* topMenu ------ end ------*/
+/* vertical-menu ------ start ------*/
+.vertical-menu li{
+    padding: 5px 5px;
+    max-width: 100%;
+    overflow: hidden;
+}
+/* vertical-menu ------ end ------*/

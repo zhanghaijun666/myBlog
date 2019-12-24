@@ -18,11 +18,11 @@
  
 
         }
-        CustomCardViewModel.prototype.getMenus = function (Menus, origin) {
-            if (Menus instanceof Array) {
+        CustomCardViewModel.prototype.getMenus = function (menus, origin) {
+            if (menus instanceof Array) {
                 return Menus;
-            } else if (isFunction(Menus)) {
-                return updateFeatureArray(Menus.bind(this.context,origin)());
+            } else if (isFunction(menus)) {
+                return menus.bind(this.context,origin)();
             } else {
                 return new Array();
             }
@@ -36,8 +36,10 @@
         $.extend(CustomCardViewModel.prototype, Selector.prototype);
 
         return {
-            createViewModel: function (params, componentInfo) {
-                return new CustomCardViewModel(params, componentInfo);
+            viewModel: {
+                createViewModel: function (params, componentInfo) {
+                    return new CustomCardViewModel(params, componentInfo);
+                }
             },
             template: pageView
         };

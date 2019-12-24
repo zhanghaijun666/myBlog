@@ -87,8 +87,10 @@
             }
         };
         return {
-            createViewModel: function (params, componentInfo) {
-                return new CustomTreeModel(params, componentInfo);
+            viewModel: {
+                createViewModel: function (params, componentInfo) {
+                    return new CustomTreeModel(params, componentInfo);
+                }
             },
             template: pageView
         };

@@ -26,12 +26,12 @@
     border: .6rem solid #CA7D60;
     border-radius: 50%!important;
 }
-.user-menu .flex-column .nav-item{
-    color: #fff;
-    text-align: center;
-    margin-bottom: 10px;
+.user-menu{
+    padding: 0px 80px;
 }
-.user-menu .flex-column .nav-item>a{
-    font-size: 16px;
-    cursor: pointer;
+.user-menu .vertical-menu li{
+    margin: 5px 0px;
+}
+.user-menu i,.user-menu span{
+    color: #fff;
 }

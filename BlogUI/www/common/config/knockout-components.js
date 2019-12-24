@@ -7,6 +7,7 @@
     ko.components.register('layout-admin', {require: '/static/www/admin/components/layout/main.js'});
 
     //公共组件
+    ko.components.register('drop-down', {require: '/static/www/common/custom/dropdown/main.js'});
     ko.components.register('custom-menu', {require: '/static/www/common/custom/menu/main.js'});
     ko.components.register('custom-card', {require: '/static/www/common/custom/card/main.js'});
     ko.components.register('custom-tree', {require: '/static/www/common/custom/tree/main.js'});

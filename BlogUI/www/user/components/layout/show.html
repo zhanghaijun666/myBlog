@@ -4,15 +4,14 @@
             <img alt="头像">
         </div>
         <div class="user-menu">
-            <ul class="nav" data-bind="foreach: [1,2,3]">
-                <li class="nav-item">
-                    <a class="nav-link" data-bind="text:'我的文件'"></a>
-                </li>
-            </ul>
+            <custom-menu params="menuList:getUserMenu(),count:-1,menuClass:'vertical-menu'"></custom-menu>
         </div>
     </div>
     <div class="col-md-10">
-        <custom-menu params="menuList:getUserMenu(),count:-1"></custom-menu>
-        <div data-bind='component: {name: "custom-menu",params: { menuList:getUserMenu(),count:-1 }}'></div>
+        <ul class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">2013</a></li>
+            <li class="active">十一月</li>
+        </ul>
     </div>
 </div>
