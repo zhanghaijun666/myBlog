@@ -14,6 +14,7 @@
 
     //特效组件
     ko.components.register('canvas-three', {require: '/static/www/visitor/components/canvas/three/main.js'});
+    ko.components.register('bongo-cat', {require: '/static/www/visitor/components/plugin/bongo-cat/main.js'});
 
 
 })(this, ko);
