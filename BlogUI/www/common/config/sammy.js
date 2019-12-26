@@ -4,6 +4,9 @@ function SammyPage(options) {
     options = options || {};
     var root = options.view;
     var sammy = Sammy(function () {
+        this.get(/\#demo(.*)/, function () {
+            root.setRootTemplate('canvas-three');
+        });
         this.get(/\#login(.*)/, function () {
             root.setRootTemplate('login-page');
         });

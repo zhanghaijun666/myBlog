@@ -12,5 +12,8 @@
     ko.components.register('custom-card', {require: '/static/www/common/custom/card/main.js'});
     ko.components.register('custom-tree', {require: '/static/www/common/custom/tree/main.js'});
 
+    //特效组件
+    ko.components.register('canvas-three', {require: '/static/www/visitor/components/canvas/three/main.js'});
+
 
 })(this, ko);
