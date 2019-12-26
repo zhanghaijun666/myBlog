@@ -13,7 +13,7 @@
         self.icon = options.icon;
         self.iconText = options.iconText;
         self.childMenuItems = options.childMenuItems || [];
-        self.ItemClass = options.ItemClass || "";
+        self.itemClass = options.itemClass || "";
         self.targetItem =  options.targetItem || {};
     }
     MenuItem.prototype.getPermit = function () {

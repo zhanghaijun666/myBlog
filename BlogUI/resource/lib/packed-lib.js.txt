@@ -1,2 +1,0 @@
-./jquery/jquery-3.4.1.js
-./knockout/knockout-3.5.1.js

@@ -1,4 +1,7 @@
 <div class="custom-menu" data-bind="class: menuClass">
+    <!-- {{{ --><!--  ko if: $data.shrinkData && $data.shrinkData.template --><!-- }}} -->
+    <div data-bind="template: {name: 'common-template', data: {name: shrinkData.template ,data: shrinkData.templateData }}"></div>
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
     <ul data-bind="with: $data.getMenuWith()">
         <!-- {{{ --><!--  ko foreach: menus  --><!-- }}} -->
         <li data-bind="component: {name: 'drop-down',params: {item: $data }}"></li>

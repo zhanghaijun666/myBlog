@@ -1,80 +1,38 @@
-.custom-menu{}
-.custom-menu li{
-    height: 100%;
-    text-align: center;
+.custom-menu{
 
-    cursor: pointer;
 }
-.custom-menu .dropdown-menu li{
-    height: 30px;
-    line-height: 30px;
-    text-align: left;
-    clear:both;
+.custom-menu li>div{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
 }
-.custom-menu li:hover .material-icons{
-    color: #5871f8;
+
+
+.shrink-menu{
+    height: 100%;
+    max-width: 220px;
+    min-width: 70px;
+    background-color: #eee;
 }
-.custom-menu ul li a >i{
-    font-size: 22px;
-    color: #aaaeb1;
-    width: 40px;
-    text-align: center;
-    cursor: pointer;
+.shrink-menu li{
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
 }
-.custom-menu li .dropdown-menu .material-icons{
-    width: auto;
-    padding-right:3px; 
-    color:#AAAEB1;
-    font-size:18px; 
+.shrink-menu li:hover{
+    background-color: #1e7e34;
 }
-.custom-menu .dropdown-menu li .menu-text{
-    display: inline;
-    color: #000;
+.shrink-menu li a{
+    padding: 14px 20px 14px 25px;
+    display: block;
+    width: 100%;
+    height: 100%;
 }
-/* rightMenu ------ start ------*/
-.right-menu li{
-    float:left;
-}
-.custom-menu ul li >a {display: flex; align-items: center;}
-.custom-menu ul li ul.dropdown-menu{left:-60px; top:30px;}
-.custom-menu ul li >a.disabled,.custom-menu ul li >a[disabled]{cursor: not-allowed; filter: alpha(opacity=65);-webkit-box-shadow: none; box-shadow: none; opacity: .65;}
-.right-menu li .menu-text{
-    display: none;
-}
-.right-menu .dropdown-menu li{
-    width: auto;
-}
-/* rightMenu ------ end ------*/
-/* topMenu ------ start ------*/
-.top-menu li{
-    float:left;
-}
-.top-menu .material-icons,.topMenu .recycle-svg{
-    display: none;
-}
-.top-menu li a{
-    border: 1px solid #aabafc;
-    background: #fff;
-    color: #5871f8;
-    border-radius: 3px;
-    padding: 5px 14px;
-    display: inline-block;
-}
-.top-menu .dropdown-menu li a{
-    border: none;
-    padding: 3px 20px;
-    font-weight: 400;
-    color: #333;
-    white-space: nowrap;
-}
-/* topMenu ------ end ------*/
-/* vertical-menu ------ start ------*/
-.vertical-menu li{
-    padding: 5px 5px;
-    max-width: 100%;
-    overflow: hidden;
-}
-/* vertical-menu ------ end ------*/
+
+
+
+
 
 
 
