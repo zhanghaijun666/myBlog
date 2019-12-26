@@ -1,4 +1,6 @@
 <div class="layout-admin">
-
-    <div class="menu"></div>
+    <div class="col-md-2" data-bind="component: {name:'custom-menu',params:{menuList:getAdminBar(),count:-1,menuClass:'shrink-menu'}}"></div>
+    <div class="col-md-10">
+        <custom-menu params="menuList:getAdminBar()"></custom-menu>
+    </div>
 </div>

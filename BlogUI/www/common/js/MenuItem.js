@@ -1,13 +1,13 @@
 (function (exports) {
-    function MenuItem(name, options){
+    function MenuItem(options){
+        options = options || {};
         var self = $.extend(this,options);
-        self.name = name;
         self.visible = options.visible;
         self.disable = typeof options.disable !== "undefined" ? options.disable : function () {
-            if (typeof options.visible === "undefined") {
-                return false; //没有设置visible和disable, 没有添加权限
+            var visible = true;
+            if (typeof options.visible !== "undefined") {
+                visible = typeof options.visible === "function" ? options.visible.bind(self.targetItem || this)() : options.visible;
             }
-            var visible = typeof options.visible === "function" ? options.visible.bind(self.targetItem || this)() : options.visible;
             return !visible;
         };
         self.icon = options.icon;
@@ -22,9 +22,18 @@
         }
         return !this.disable;
     };
-    MenuItem.prototype.isDropdown = function () {
-        return this.childMenuItems && this.childMenuItems.length > 0;
+    MenuItem.prototype.getChildItems = function () {
+        if(this.childMenuItems instanceof Array){
+            return this.childMenuItems;
+        }else if(isFunction(this.childMenuItems)){
+            return this.childMenuItems();
+        }else{
+            new Array();
+        }
     };
+    MenuItem.prototype.isDropdown = function () {
+        return this.getChildItems().length > 0;
+    }
 
 
     exports.MenuItem = MenuItem;

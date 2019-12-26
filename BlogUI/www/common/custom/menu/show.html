@@ -1,32 +1,10 @@
 <div class="custom-menu" data-bind="class: menuClass">
     <ul data-bind="with: $data.getMenuWith()">
         <!-- {{{ --><!--  ko foreach: menus  --><!-- }}} -->
-        <!-- {{{ --><!--  ko template: {name: 'custom-menu-li',data: $data}  --><!-- }}} --><!-- {{{ --><!-- /ko -->
-        <!-- }}} -->
+        <li data-bind="component: {name: 'drop-down',params: {item: $data }}"></li>
         <!-- {{{ --><!-- /ko --><!-- }}} -->
-        <!-- {{{ --><!--  ko if: dropMenu.length > 0  --><!-- }}} -->
-        <li class="dropdown">
-            <a data-toggle="dropdown">
-                <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-            </a>
-            <ul class="dropdown-menu" style="min-width: auto;" data-bind="foreach: dropMenu">
-                <!-- {{{ --><!--  ko template: {name: 'custom-menu-li',data: $data}  --><!-- }}} --><!-- {{{ -->
-                <!-- /ko --><!-- }}} -->
-            </ul>
-        </li>
+        <!-- {{{ --><!--  ko if: $data.dropMenu --><!-- }}} -->
+        <li data-bind="component: {name: 'drop-down',params: {item: $data.dropMenu }}"></li>
         <!-- {{{ --><!-- /ko --><!-- }}} -->
     </ul>
 </div>
-<template id="custom-menu-li">
-    <li data-bind="click: $data.click,css:{'dropdown': $data.isDropdown()}">
-        <a data-bind="attr:{'title': $data.text, 'data-toggle': $data.isDropdown() ? 'dropdown' :''},css:{disabled: !$data.getPermit()}">
-            <i data-bind="class: $data.icon" aria-hidden="true"></i>
-            <span class="menu-text" data-bind="text: $data.iconText"></span>
-        </a>
-        <!-- {{{ --><!-- ko if: $data.isDropdown() --><!-- }}} -->
-        <ul class="dropdown-menu" style="min-width: auto;" data-bind="foreach: childMenuItems">
-            <!-- {{{ --><!--  ko template: {name: 'custom-menu-li',data: $data}  --><!-- }}} --><!-- {{{ --><!-- /ko --><!-- }}} -->
-        </ul>
-        <!-- {{{ --><!-- /ko --><!-- }}} -->
-    </li>
-</template>

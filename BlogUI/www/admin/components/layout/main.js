@@ -4,6 +4,25 @@
             var self = this;
 
         }
+        LayoutAdminModel.prototype.getAdminBar = function(){
+            return [
+                new MenuItem({visible:true,icon:'fa fa-address-book',iconText:'管理用户',targetItem:{}}),
+                new MenuItem({visible:true,icon:'fa fa-address-book',iconText:'管理用户',targetItem:{}}),
+                new MenuItem({visible:true,icon:'fa fa-address-book',iconText:'管理用户下拉',targetItem:{},childMenuItems:[
+                    new MenuItem({visible:true,icon:'fa fa-address-book',iconText:'管理用户',targetItem:{}}),
+                    new MenuItem({visible:true,icon:'fa fa-address-book',iconText:'管理用户',targetItem:{}}),
+                    new MenuItem({visible:true,icon:'fa fa-address-book',iconText:'管理用户',targetItem:{}})
+                ]}),
+                new MenuItem({visible:true,icon:'fa fa-address-book',iconText:'管理用户',targetItem:{}}),
+                new MenuItem({visible:true,icon:'fa fa-address-book',iconText:'管理用户',targetItem:{}}),
+                new MenuItem({visible:true,icon:'fa fa-address-book',iconText:'管理用户下拉',targetItem:{},childMenuItems:[
+                    new MenuItem({visible:true,icon:'fa fa-address-book',iconText:'管理用户',targetItem:{}}),
+                    new MenuItem({visible:true,icon:'fa fa-address-book',iconText:'管理用户',targetItem:{}}),
+                    new MenuItem({visible:true,icon:'fa fa-address-book',iconText:'管理用户',targetItem:{}})
+                ]}),
+                new MenuItem({visible:true,icon:'fa fa-address-book',iconText:'管理用户',targetItem:{}})
+            ];
+        };
         return {
             viewModel: {
                 createViewModel: function (params, componentInfo) {

@@ -75,3 +75,12 @@
     overflow: hidden;
 }
 /* vertical-menu ------ end ------*/
+
+
+
+.large-menu{
+    width: 220px;
+}
+.mini-menu{
+    width: 70px;
+}

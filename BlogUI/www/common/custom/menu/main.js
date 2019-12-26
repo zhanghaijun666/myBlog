@@ -2,11 +2,15 @@
     define(['knockout',"text!./show.html", "css!./show.css"], function (ko,pageView) {
         function MenuListModel(params, componentInfo) {
             var self = this;
-            self.menuClass = params.menuClass || "right-menu";
+            self.menuClass = params.menuClass || "right-menu"; //shrink-menu
             self.menuList = params.menuList || new Array();
             self.count = isNaN(params.count) ? 4 : Number(params.count);
             self.permitType = params.permitType || "visible";
+            self.shrinkLarge = params.shrinkLarge || ko.observable(true);
 
+        }
+        MenuListModel.prototype.getMenuList = function () {
+            this.shrinkLarge(!this.shrinkLarge());
         }
         MenuListModel.prototype.getMenuList = function () {
             if (this.permitType !== "visible") {
@@ -23,9 +27,12 @@
         MenuListModel.prototype.getMenuWith = function () {
             var list = this.getMenuList();
             if (this.count > 0 && list.length > this.count) {
-                return {menus: list.slice(0, this.count - 1), dropMenu: list.slice(this.count - 1, list.length)};
+                return {
+                    menus: list.slice(0, this.count - 1),
+                    dropMenu: new MenuItem({visible:true,icon:'fa fa-bars',iconText:'更多',childMenuItems:list.slice(this.count - 1, list.length)})
+                };
             }
-            return {menus: list, dropMenu: new Array()};
+            return {menus: list};
         };
         return {
             viewModel: {
