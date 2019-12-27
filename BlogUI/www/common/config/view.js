@@ -2,7 +2,7 @@ requirejs(["knockout"], function (ko) {
     function RootViewModel() {
         var self = this;
         self.rootTemplate = ko.observable("layout-visitor");
-
+        self.routeHash = ko.observable("");
         self.sammyPage = new SammyPage({view: self}); /*thie last step*/
     }
 

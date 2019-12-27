@@ -23,6 +23,7 @@ function SammyPage(options) {
             this.redirect("#login");
         });
         this.around(function (callback) {
+            root.routeHash(customDecodeURI(window.location.hash));
             callback();
         });
     }).run();

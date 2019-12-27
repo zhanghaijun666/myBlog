@@ -16,9 +16,12 @@
             }
         }
 
-        MenuListModel.prototype.getMenuList = function () {
-            this.shrinkLarge(!this.shrinkLarge());
-        }
+        MenuListModel.prototype.getTemplate = function () {
+            if (this.menuClass === "shrink-menu") {
+                return "menu-shrink-template";
+            }
+            return "menu-normal-template";
+        };
         MenuListModel.prototype.getMenuList = function () {
             if (this.permitType !== "visible") {
                 return ko.unwrap(this.menuList);
@@ -45,6 +48,34 @@
                 };
             }
             return {menus: list};
+        };
+        // nav收缩展开
+        MenuListModel.prototype.itemShrink = function (element, menu) {
+            if (!menu.isDropdown()) {
+                return;
+            }
+            if (!$('.nav').hasClass('nav-mini')) {
+                if ($(element).next().css('display') == "none") {
+                    //展开未展开
+                    $('.nav-item').children('ul').slideUp(300);
+                    $(element).next('ul').slideDown(300);
+                    $(element).parent('li').addClass('nav-show').siblings('li').removeClass('nav-show');
+                }else{
+                    //收缩已展开
+                    $(element).next('ul').slideUp(300);
+                    $('.nav-item.nav-show').removeClass('nav-show');
+                }
+            }
+        };
+        //nav-mini切换
+        MenuListModel.prototype.miniShrink = function (element) {
+            if (!$('.nav').hasClass('nav-mini')) {
+                $('.nav-item.nav-show').removeClass('nav-show');
+                $('.nav-item').children('ul').removeAttr('style');
+                $('.nav').addClass('nav-mini');
+            } else {
+                $('.nav').removeClass('nav-mini');
+            }
         };
         return {
             viewModel: {
