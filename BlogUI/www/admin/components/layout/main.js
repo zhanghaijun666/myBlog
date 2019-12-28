@@ -5,9 +5,9 @@ define(["text!./show.html", "css!./show.css"], function (pageView) {
     }
     LayoutAdminModel.prototype.getAdminRoutes = function () {
         return [
+            {route:"",template:"user-list"},
             {route:"",template:"bongo-cat"},
-            {route:"",template:"canvas-three"},
-            {route:"",template:"user-list"}
+            {route:"",template:"canvas-three"}
         ];
     };
     LayoutAdminModel.prototype.getAdminBar = function () {

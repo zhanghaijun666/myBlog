@@ -1,21 +1,36 @@
 <div class="layout-admin">
     <div data-bind="component: {name:'custom-menu',params:{menuList:getAdminBar(),count:-1,menuClass:'shrink-menu'}}"></div>
-    <div>
-        <nav class="navbar navbar-static-top" style="background: #f3f3f4;">
-            <ul class="navbar-nav">
-                <li><a>888888</a></li>
-            </ul>
-            <ul class="navbar-right">
-                <li><a><i class="fa fa-sign-out"></i><span>logout</span></a></li>
-            </ul>
-        </nav>
-        <div>
-            <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Library</a></li>
-                <li class="active">Data</li>
-            </ol>
+    <div class="admin-container">
+        <div class="navbar navbar-static-top" style="background: #f3f3f4;">
+            <div class="col-md-8">
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Library</a></li>
+                    <li class="active">Data</li>
+                </ul>
+            </div>
+            <div class="col-md-4" data-bind="template:{name:'user-info-template',data:{}}"></div>
         </div>
         <div data-bind="component:{name:'ko-route',params:{routes:$data.getAdminRoutes()}}"></div>
     </div>
 </div>
+<template id="user-info-template">
+    <ul class="user-info">
+        <li  style="cursor:pointer;">
+            <i class="fa fa-sign-out"></i>
+            <span>退出</span>
+        </li>
+        <li>
+            <i class="fa fa-bell" style="cursor:pointer;"></i>
+            <span class="badge">8</span>
+        </li>
+        <li>
+            <i class="fa fa-envelope" style="cursor:pointer;"></i>
+            <span class="badge">6</span>
+        </li>
+        <li>
+            <i class="fa fa-home fa-lg"></i>
+            <span>欢迎登录</span>
+        </li>
+    </ul>
+</template>

@@ -1,8 +1,10 @@
-<div class="custom-menu" data-bind="class: menuClass,template: $data.getTemplate()"></div>
+<!-- {{{ --><!--  ko if: menuClass === "shrink-menu" --><!-- }}} -->
+<shrink-menu params="menuClass:menuClass,menuList:$data.getMenuList()"></shrink-menu>
+<!-- {{{ --><!-- /ko --><!-- }}} -->
+<!-- {{{ --><!--  ko ifnot: menuClass === "shrink-menu" --><!-- }}} -->
+<div class="custom-menu" data-bind="class: menuClass,template: 'menu-normal-template'"></div>
+<!-- {{{ --><!-- /ko --><!-- }}} -->
 <template id="menu-normal-template">
-    <!-- {{{ --><!--  ko if: $data.shrinkData && $data.shrinkData.template --><!-- }}} -->
-    <div data-bind="template: {name: 'common-template', data: {name: shrinkData.template ,data: shrinkData.templateData }}"></div>
-    <!-- {{{ --><!-- /ko --><!-- }}} -->
     <ul data-bind="with: $data.getMenuWith()">
         <!-- {{{ --><!--  ko foreach: menus  --><!-- }}} -->
         <li data-bind="component: {name: 'drop-down',params: {item: $data }}"></li>
@@ -12,26 +14,3 @@
         <!-- {{{ --><!-- /ko --><!-- }}} -->
     </ul>
 </template>
-<template id="menu-shrink-template">
-    <div class="nav">
-        <div class="nav-top" style="color: #fff3cd" data-bind="click: $component.miniShrink.bind($component,$element)">
-            <i class="fa fa-align-justify fa-4x" aria-hidden="true"></i>
-        </div>
-        <ul data-bind="foreach: $data.getMenuList()">
-            <li class="nav-item" data-bind="template: 'menu-shrink-li-template'"></li>
-        </ul>
-    </div>
-</template>
-<template id="menu-shrink-li-template">
-    <a data-bind="click: $component.itemShrink.bind($component,$element) ">
-        <i class="fa fa-address-book"></i>
-        <span data-bind="text: iconText"></span>
-        <i class="fa fa-angle-down" data-bind="visible: $data.isDropdown()" aria-hidden="true" ></i>
-    </a>
-    <!-- {{{ --><!--  ko if: $data.isDropdown() --><!-- }}} -->
-    <ul data-bind="foreach: $data.getChildItems()">
-        <li data-bind="template: 'menu-shrink-li-template'"></li>
-    </ul>
-    <!-- {{{ --><!-- /ko --><!-- }}} -->
-</template>
-

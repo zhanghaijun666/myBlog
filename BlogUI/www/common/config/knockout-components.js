@@ -10,6 +10,7 @@
     ko.components.register('ko-route', {require: '/static/www/common/custom/ko-route/main.js'});
     ko.components.register('drop-down', {require: '/static/www/common/custom/dropdown/main.js'});
     ko.components.register('custom-menu', {require: '/static/www/common/custom/menu/main.js'});
+    ko.components.register('shrink-menu', {require: '/static/www/common/custom/shrink-menu/main.js'});
     ko.components.register('custom-card', {require: '/static/www/common/custom/card/main.js'});
     ko.components.register('custom-tree', {require: '/static/www/common/custom/tree/main.js'});
 
