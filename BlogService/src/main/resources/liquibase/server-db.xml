@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="longtext.type" value="clob" dbms="oracle"/>
+    <property name="longtext.type" value="longtext" dbms="mysql"/>
+    <property name="longtext.type" value="longtext" dbms="h2"/>
+    <property name="longtext.type" value="text" dbms="sqlite"/>
+    <property name="bigint.type" value="bigint" dbms="oracle"/>
+    <property name="bigint.type" value="bigint" dbms="mysql"/>
+    <property name="bigint.type" value="bigint" dbms="h2"/>
+    <property name="bigint.type" value="int" dbms="sqlite"/>
+    <property name="now" value="CURRENT TIMESTAMP" dbms="h2"/>
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+    <property name="type.uuid" value="java.sql.Types.VARCHAR(36)"/>
+
+
+    <changeSet id="createTable-db-users" author="haijun.zhang">
+        <createTable tableName="users" remarks="Create users for db">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_users"/>
+            </column>
+            <column name="username" type="varchar(255)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+            <column name="full_name" type="varchar(255)" defaultValue=""/>
+            <column name="email" type="varchar(255)"/>
+            <column name="phone" type="varchar(255)"/>
+<!--            <column name="birthday" type="$(bigint.type)"/>-->
+
+            <column name="status" type="int"/>
+            <column name="created_at" type="datetime"/>
+            <column name="created_by" type="int"/>
+            <column name="updated_at" type="datetime"/>
+            <column name="updated_by" type="int"/>
+        </createTable>
+    </changeSet>
+
+<!--    <include file="liquibase/common.xml" relativeToChangelogFile="false"/>-->
+</databaseChangeLog>
