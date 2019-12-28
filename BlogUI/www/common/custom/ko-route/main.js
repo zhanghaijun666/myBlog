@@ -1,5 +1,5 @@
 (function (global) {
-    define(['knockout', "text!./show.html", "css!./show.css"], function (ko, pageView) {
+    define(['knockout', "text!./show.html"], function (ko, pageView) {
         function KoRouteModel(params, componentInfo) {
             var self = this;
             BaseComponent.call(self, params, componentInfo);
@@ -8,8 +8,9 @@
             if(self.routes.length > 0){
                 self.currentName(self.routes[0].template);
             }
-
-
+            self.watch(RootView.routeHash,function(value){
+                console.log(value);
+            });
         }
         KoRouteModel.prototype.getTemplateParams = function () {
             return {name: this.currentName(),data:{}};

@@ -4,6 +4,7 @@ BlogService/target/
 !**/src/main/**
 !**/src/test/**
 BlogService/out/**
+BlogService/src/**
 
 ### STS ###
 .apt_generated

@@ -9,6 +9,7 @@
     height: 100%;
     position: absolute;top:0;left: 0;
 }
+
 .layout-admin .admin-container{
     width: 100%;
     height: 100%;
@@ -22,6 +23,10 @@
 .layout-admin .admin-container>div:nth-child(1){
     padding: 0px 30px;
     margin: 0px;
+    background: #f3f3f4;
+}
+.layout-admin  .admin-container>div:nth-child(2){
+    height: 100%;
 }
 .admin-container .navbar .user-info>li{
     line-height: 50px;
