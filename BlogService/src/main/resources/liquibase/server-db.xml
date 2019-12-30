@@ -34,7 +34,7 @@
             <column name="full_name" type="varchar(255)" defaultValue=""/>
             <column name="email" type="varchar(255)"/>
             <column name="phone" type="varchar(255)"/>
-<!--            <column name="birthday" type="$(bigint.type)"/>-->
+            <column name="birthday" type="${bigint.type}"/>
 
             <column name="status" type="int"/>
             <column name="created_at" type="datetime"/>
