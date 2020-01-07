@@ -1,10 +1,10 @@
 **/HELP.md
 BlogServer/target/
-!BlogServer/.mvn/
 !**/src/main/**
 !**/src/test/**
 BlogServer/out/**
 BlogServer/src/**
+BlogServer/store/**
 
 ### STS ###
 .apt_generated
