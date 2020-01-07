@@ -33,7 +33,7 @@
     };
     MenuItem.prototype.isDropdown = function () {
         return this.getChildItems().length > 0;
-    }
+    };
 
 
     exports.MenuItem = MenuItem;
