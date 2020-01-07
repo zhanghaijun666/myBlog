@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.blog</groupId>
-    <artifactId>blog-service</artifactId>
+    <artifactId>blog-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>BlogService</name>
+    <name>BlogServer</name>
     <description>BlogService project for Spring Boot</description>
 
     <!--
