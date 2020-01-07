@@ -1,10 +1,10 @@
 **/HELP.md
-BlogService/target/
-!BlogService/.mvn/wrapper/maven-wrapper.jar
+BlogServer/target/
+!BlogServer/.mvn/
 !**/src/main/**
 !**/src/test/**
-BlogService/out/**
-BlogService/src/**
+BlogServer/out/**
+BlogServer/src/**
 
 ### STS ###
 .apt_generated
