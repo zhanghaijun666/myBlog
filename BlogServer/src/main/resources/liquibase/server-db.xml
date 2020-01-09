@@ -20,8 +20,8 @@
     <property name="type.uuid" value="java.sql.Types.VARCHAR(36)"/>
 
 
-    <changeSet id="createTable-db-users" author="haijun.zhang">
-        <createTable tableName="users" remarks="Create users for db">
+    <changeSet id="createTable-db-user" author="haijun.zhang">
+        <createTable tableName="user" remarks="Create user for db">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_users"/>
             </column>
