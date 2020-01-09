@@ -190,6 +190,19 @@
                             <goal>run</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <target>
+                                <exec executable="node" dir="../BlogUI/node_modules/protobufjs/bin">
+                                    <arg line="pbjs -t json-module -r BlogStore -w --force-long --force-message --no-comments  ../../../../BlogServer/src/main/resources/proto/blog-store.proto -o ../../../www/common/config/blog-store.js"/>
+                                </exec>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
@@ -197,6 +210,9 @@
                 <artifactId>protobuf-maven-plugin</artifactId>
                 <version>0.5.0</version>
                 <configuration>
+                    <protoSourceRoot>${basedir}/src/main/resources/proto</protoSourceRoot>
+                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                    <clearOutputDirectory>false</clearOutputDirectory>
                     <protocArtifact>
                         com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}
                     </protocArtifact>
@@ -209,6 +225,7 @@
                     <execution>
                         <goals>
                             <goal>compile</goal>
+                            <goal>compile-custom</goal>
                         </goals>
                     </execution>
                 </executions>

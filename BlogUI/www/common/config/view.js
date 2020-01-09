@@ -1,4 +1,5 @@
-requirejs(["knockout"], function (ko) {
+requirejs(["knockout","BlogStore"], function (ko,BlogStore) {
+    window.BlogStore = BlogStore;
     function RootViewModel() {
         var self = this;
         self.rootTemplate = ko.observable("layout-visitor");

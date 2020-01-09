@@ -8,10 +8,11 @@ requirejs.config({
     //the paths config could be for a directory.
     paths: {
         "text": "/static/resource/require/text",
-        "css": "/static/resource/require/css"
+        "css": "/static/resource/require/css",
+        "BlogStore": "static/www/common/config/blog-store"
     },
     shim: {
-        // "bcstore": {
+        // "BlogStore": {
         //     deps: ["protobufjs/light"]
         // }
     }
@@ -21,6 +22,6 @@ define("knockout", [], function () {
     return ko;
 });
 
-// define("protobufjs/light", [], function () {
-//     return protobuf;
-// });
+define("protobufjs/light", [], function () {
+    return protobuf;
+});
