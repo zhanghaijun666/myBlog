@@ -13,7 +13,7 @@ public class UserContorller {
     @ResponseBody
     public BlogStore.UserItem getUser() {
         BlogStore.UserItem.Builder builder = BlogStore.UserItem.newBuilder();
-        builder.setFullName("setFullName");
+        builder.setNickname("setNickname");
         builder.setEmail("setEmail");
         builder.setUsername("setUsername");
         return builder.build();

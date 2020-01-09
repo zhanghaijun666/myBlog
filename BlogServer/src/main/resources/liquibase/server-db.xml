@@ -31,7 +31,7 @@
             <column name="password" type="varchar(255)" defaultValue="">
                 <constraints nullable="false"/>
             </column>
-            <column name="full_name" type="varchar(255)" defaultValue=""/>
+            <column name="nickname" type="varchar(255)" defaultValue=""/>
             <column name="email" type="varchar(255)"/>
             <column name="phone" type="varchar(255)"/>
             <column name="birthday" type="${bigint.type}"/>

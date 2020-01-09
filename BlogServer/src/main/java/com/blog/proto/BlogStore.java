@@ -288,14 +288,14 @@ public final class BlogStore {
         getUsernameBytes();
 
     /**
-     * <code>optional string full_name = 2;</code>
+     * <code>optional string nickname = 2;</code>
      */
-    java.lang.String getFullName();
+    java.lang.String getNickname();
     /**
-     * <code>optional string full_name = 2;</code>
+     * <code>optional string nickname = 2;</code>
      */
     com.google.protobuf.ByteString
-        getFullNameBytes();
+        getNicknameBytes();
 
     /**
      * <code>optional string email = 3;</code>
@@ -318,14 +318,18 @@ public final class BlogStore {
         getPhoneBytes();
 
     /**
-     * <code>optional string birthday = 5;</code>
+     * <code>optional int64 birthday = 5;</code>
      */
-    java.lang.String getBirthday();
+    long getBirthday();
+
     /**
-     * <code>optional string birthday = 5;</code>
+     * <code>optional .Status status = 20;</code>
      */
-    com.google.protobuf.ByteString
-        getBirthdayBytes();
+    int getStatusValue();
+    /**
+     * <code>optional .Status status = 20;</code>
+     */
+    com.blog.proto.BlogStore.Status getStatus();
   }
   /**
    * Protobuf type {@code UserItem}
@@ -340,10 +344,11 @@ public final class BlogStore {
     }
     private UserItem() {
       username_ = "";
-      fullName_ = "";
+      nickname_ = "";
       email_ = "";
       phone_ = "";
-      birthday_ = "";
+      birthday_ = 0L;
+      status_ = 0;
     }
 
     @java.lang.Override
@@ -380,7 +385,7 @@ public final class BlogStore {
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              fullName_ = s;
+              nickname_ = s;
               break;
             }
             case 26: {
@@ -395,10 +400,15 @@ public final class BlogStore {
               phone_ = s;
               break;
             }
-            case 42: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 40: {
 
-              birthday_ = s;
+              birthday_ = input.readInt64();
+              break;
+            }
+            case 160: {
+              int rawValue = input.readEnum();
+
+              status_ = rawValue;
               break;
             }
           }
@@ -458,34 +468,34 @@ public final class BlogStore {
       }
     }
 
-    public static final int FULL_NAME_FIELD_NUMBER = 2;
-    private volatile java.lang.Object fullName_;
+    public static final int NICKNAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object nickname_;
     /**
-     * <code>optional string full_name = 2;</code>
+     * <code>optional string nickname = 2;</code>
      */
-    public java.lang.String getFullName() {
-      java.lang.Object ref = fullName_;
+    public java.lang.String getNickname() {
+      java.lang.Object ref = nickname_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        fullName_ = s;
+        nickname_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string full_name = 2;</code>
+     * <code>optional string nickname = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getFullNameBytes() {
-      java.lang.Object ref = fullName_;
+        getNicknameBytes() {
+      java.lang.Object ref = nickname_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        fullName_ = b;
+        nickname_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -561,37 +571,28 @@ public final class BlogStore {
     }
 
     public static final int BIRTHDAY_FIELD_NUMBER = 5;
-    private volatile java.lang.Object birthday_;
+    private long birthday_;
     /**
-     * <code>optional string birthday = 5;</code>
+     * <code>optional int64 birthday = 5;</code>
      */
-    public java.lang.String getBirthday() {
-      java.lang.Object ref = birthday_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        birthday_ = s;
-        return s;
-      }
+    public long getBirthday() {
+      return birthday_;
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 20;
+    private int status_;
+    /**
+     * <code>optional .Status status = 20;</code>
+     */
+    public int getStatusValue() {
+      return status_;
     }
     /**
-     * <code>optional string birthday = 5;</code>
+     * <code>optional .Status status = 20;</code>
      */
-    public com.google.protobuf.ByteString
-        getBirthdayBytes() {
-      java.lang.Object ref = birthday_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        birthday_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.blog.proto.BlogStore.Status getStatus() {
+      com.blog.proto.BlogStore.Status result = com.blog.proto.BlogStore.Status.valueOf(status_);
+      return result == null ? com.blog.proto.BlogStore.Status.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -609,8 +610,8 @@ public final class BlogStore {
       if (!getUsernameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, username_);
       }
-      if (!getFullNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, fullName_);
+      if (!getNicknameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nickname_);
       }
       if (!getEmailBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, email_);
@@ -618,8 +619,11 @@ public final class BlogStore {
       if (!getPhoneBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, phone_);
       }
-      if (!getBirthdayBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, birthday_);
+      if (birthday_ != 0L) {
+        output.writeInt64(5, birthday_);
+      }
+      if (status_ != com.blog.proto.BlogStore.Status.StatusDefault.getNumber()) {
+        output.writeEnum(20, status_);
       }
     }
 
@@ -631,8 +635,8 @@ public final class BlogStore {
       if (!getUsernameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, username_);
       }
-      if (!getFullNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, fullName_);
+      if (!getNicknameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nickname_);
       }
       if (!getEmailBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, email_);
@@ -640,8 +644,13 @@ public final class BlogStore {
       if (!getPhoneBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, phone_);
       }
-      if (!getBirthdayBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, birthday_);
+      if (birthday_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, birthday_);
+      }
+      if (status_ != com.blog.proto.BlogStore.Status.StatusDefault.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(20, status_);
       }
       memoizedSize = size;
       return size;
@@ -661,14 +670,15 @@ public final class BlogStore {
       boolean result = true;
       result = result && getUsername()
           .equals(other.getUsername());
-      result = result && getFullName()
-          .equals(other.getFullName());
+      result = result && getNickname()
+          .equals(other.getNickname());
       result = result && getEmail()
           .equals(other.getEmail());
       result = result && getPhone()
           .equals(other.getPhone());
-      result = result && getBirthday()
-          .equals(other.getBirthday());
+      result = result && (getBirthday()
+          == other.getBirthday());
+      result = result && status_ == other.status_;
       return result;
     }
 
@@ -681,14 +691,17 @@ public final class BlogStore {
       hash = (19 * hash) + getDescriptorForType().hashCode();
       hash = (37 * hash) + USERNAME_FIELD_NUMBER;
       hash = (53 * hash) + getUsername().hashCode();
-      hash = (37 * hash) + FULL_NAME_FIELD_NUMBER;
-      hash = (53 * hash) + getFullName().hashCode();
+      hash = (37 * hash) + NICKNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getNickname().hashCode();
       hash = (37 * hash) + EMAIL_FIELD_NUMBER;
       hash = (53 * hash) + getEmail().hashCode();
       hash = (37 * hash) + PHONE_FIELD_NUMBER;
       hash = (53 * hash) + getPhone().hashCode();
       hash = (37 * hash) + BIRTHDAY_FIELD_NUMBER;
-      hash = (53 * hash) + getBirthday().hashCode();
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getBirthday());
+      hash = (37 * hash) + STATUS_FIELD_NUMBER;
+      hash = (53 * hash) + status_;
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -809,13 +822,15 @@ public final class BlogStore {
         super.clear();
         username_ = "";
 
-        fullName_ = "";
+        nickname_ = "";
 
         email_ = "";
 
         phone_ = "";
 
-        birthday_ = "";
+        birthday_ = 0L;
+
+        status_ = 0;
 
         return this;
       }
@@ -840,10 +855,11 @@ public final class BlogStore {
       public com.blog.proto.BlogStore.UserItem buildPartial() {
         com.blog.proto.BlogStore.UserItem result = new com.blog.proto.BlogStore.UserItem(this);
         result.username_ = username_;
-        result.fullName_ = fullName_;
+        result.nickname_ = nickname_;
         result.email_ = email_;
         result.phone_ = phone_;
         result.birthday_ = birthday_;
+        result.status_ = status_;
         onBuilt();
         return result;
       }
@@ -889,8 +905,8 @@ public final class BlogStore {
           username_ = other.username_;
           onChanged();
         }
-        if (!other.getFullName().isEmpty()) {
-          fullName_ = other.fullName_;
+        if (!other.getNickname().isEmpty()) {
+          nickname_ = other.nickname_;
           onChanged();
         }
         if (!other.getEmail().isEmpty()) {
@@ -901,9 +917,11 @@ public final class BlogStore {
           phone_ = other.phone_;
           onChanged();
         }
-        if (!other.getBirthday().isEmpty()) {
-          birthday_ = other.birthday_;
-          onChanged();
+        if (other.getBirthday() != 0L) {
+          setBirthday(other.getBirthday());
+        }
+        if (other.status_ != 0) {
+          setStatusValue(other.getStatusValue());
         }
         onChanged();
         return this;
@@ -1000,71 +1018,71 @@ public final class BlogStore {
         return this;
       }
 
-      private java.lang.Object fullName_ = "";
+      private java.lang.Object nickname_ = "";
       /**
-       * <code>optional string full_name = 2;</code>
+       * <code>optional string nickname = 2;</code>
        */
-      public java.lang.String getFullName() {
-        java.lang.Object ref = fullName_;
+      public java.lang.String getNickname() {
+        java.lang.Object ref = nickname_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          fullName_ = s;
+          nickname_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string full_name = 2;</code>
+       * <code>optional string nickname = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getFullNameBytes() {
-        java.lang.Object ref = fullName_;
+          getNicknameBytes() {
+        java.lang.Object ref = nickname_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          fullName_ = b;
+          nickname_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string full_name = 2;</code>
+       * <code>optional string nickname = 2;</code>
        */
-      public Builder setFullName(
+      public Builder setNickname(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        fullName_ = value;
+        nickname_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string full_name = 2;</code>
+       * <code>optional string nickname = 2;</code>
        */
-      public Builder clearFullName() {
+      public Builder clearNickname() {
         
-        fullName_ = getDefaultInstance().getFullName();
+        nickname_ = getDefaultInstance().getNickname();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string full_name = 2;</code>
+       * <code>optional string nickname = 2;</code>
        */
-      public Builder setFullNameBytes(
+      public Builder setNicknameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        fullName_ = value;
+        nickname_ = value;
         onChanged();
         return this;
       }
@@ -1207,71 +1225,72 @@ public final class BlogStore {
         return this;
       }
 
-      private java.lang.Object birthday_ = "";
+      private long birthday_ ;
       /**
-       * <code>optional string birthday = 5;</code>
+       * <code>optional int64 birthday = 5;</code>
        */
-      public java.lang.String getBirthday() {
-        java.lang.Object ref = birthday_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          birthday_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public long getBirthday() {
+        return birthday_;
       }
       /**
-       * <code>optional string birthday = 5;</code>
+       * <code>optional int64 birthday = 5;</code>
        */
-      public com.google.protobuf.ByteString
-          getBirthdayBytes() {
-        java.lang.Object ref = birthday_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          birthday_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string birthday = 5;</code>
-       */
-      public Builder setBirthday(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+      public Builder setBirthday(long value) {
+        
         birthday_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string birthday = 5;</code>
+       * <code>optional int64 birthday = 5;</code>
        */
       public Builder clearBirthday() {
         
-        birthday_ = getDefaultInstance().getBirthday();
+        birthday_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private int status_ = 0;
+      /**
+       * <code>optional .Status status = 20;</code>
+       */
+      public int getStatusValue() {
+        return status_;
+      }
+      /**
+       * <code>optional .Status status = 20;</code>
+       */
+      public Builder setStatusValue(int value) {
+        status_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string birthday = 5;</code>
+       * <code>optional .Status status = 20;</code>
        */
-      public Builder setBirthdayBytes(
-          com.google.protobuf.ByteString value) {
+      public com.blog.proto.BlogStore.Status getStatus() {
+        com.blog.proto.BlogStore.Status result = com.blog.proto.BlogStore.Status.valueOf(status_);
+        return result == null ? com.blog.proto.BlogStore.Status.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>optional .Status status = 20;</code>
+       */
+      public Builder setStatus(com.blog.proto.BlogStore.Status value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
+          throw new NullPointerException();
+        }
         
-        birthday_ = value;
+        status_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .Status status = 20;</code>
+       */
+      public Builder clearStatus() {
+        
+        status_ = 0;
         onChanged();
         return this;
       }
@@ -2078,18 +2097,19 @@ public final class BlogStore {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020blog-store.proto\"_\n\010UserItem\022\020\n\010userna" +
-      "me\030\001 \001(\t\022\021\n\tfull_name\030\002 \001(\t\022\r\n\005email\030\003 \001" +
-      "(\t\022\r\n\005phone\030\004 \001(\t\022\020\n\010birthday\030\005 \001(\t\"$\n\010U" +
-      "serList\022\030\n\005items\030\001 \003(\0132\t.UserItem*@\n\006Sta" +
-      "tus\022\021\n\rStatusDefault\020\000\022\020\n\014StatusActive\020\001" +
-      "\022\021\n\rStatusDeleted\020\002*\322\001\n\nReturnCode\022\027\n\023UN" +
-      "KNOWN_RETURN_CODE\020\000\022\r\n\tReturn_OK\020\001\022\020\n\014Re" +
-      "turn_ERROR\020\002\022\025\n\021Return_USER_EXIST\0202\022\031\n\025R" +
-      "eturn_PASSWORD_ERROR\0203\022(\n$Return_USERNAM" +
-      "E_OR_PASSWORD_IS_EMPTY\0204\022\025\n\021Return_USER_",
-      "EMPTY\0205\022\027\n\023Return_NOT_YOURSELF\0206B\033\n\016com." +
-      "blog.protoB\tBlogStoreb\006proto3"
+      "\n\020blog-store.proto\"w\n\010UserItem\022\020\n\010userna" +
+      "me\030\001 \001(\t\022\020\n\010nickname\030\002 \001(\t\022\r\n\005email\030\003 \001(" +
+      "\t\022\r\n\005phone\030\004 \001(\t\022\020\n\010birthday\030\005 \001(\003\022\027\n\006st" +
+      "atus\030\024 \001(\0162\007.Status\"$\n\010UserList\022\030\n\005items" +
+      "\030\001 \003(\0132\t.UserItem*@\n\006Status\022\021\n\rStatusDef" +
+      "ault\020\000\022\020\n\014StatusActive\020\001\022\021\n\rStatusDelete" +
+      "d\020\002*\322\001\n\nReturnCode\022\027\n\023UNKNOWN_RETURN_COD" +
+      "E\020\000\022\r\n\tReturn_OK\020\001\022\020\n\014Return_ERROR\020\002\022\025\n\021" +
+      "Return_USER_EXIST\0202\022\031\n\025Return_PASSWORD_E" +
+      "RROR\0203\022(\n$Return_USERNAME_OR_PASSWORD_IS",
+      "_EMPTY\0204\022\025\n\021Return_USER_EMPTY\0205\022\027\n\023Retur" +
+      "n_NOT_YOURSELF\0206B\033\n\016com.blog.protoB\tBlog" +
+      "Storeb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2108,7 +2128,7 @@ public final class BlogStore {
     internal_static_UserItem_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UserItem_descriptor,
-        new java.lang.String[] { "Username", "FullName", "Email", "Phone", "Birthday", });
+        new java.lang.String[] { "Username", "Nickname", "Email", "Phone", "Birthday", "Status", });
     internal_static_UserList_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_UserList_fieldAccessorTable = new

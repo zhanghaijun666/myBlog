@@ -41,7 +41,7 @@
             type: "string",
             id: 1
           },
-          fullName: {
+          nickname: {
             type: "string",
             id: 2
           },
@@ -54,8 +54,12 @@
             id: 4
           },
           birthday: {
-            type: "string",
+            type: "int64",
             id: 5
+          },
+          status: {
+            type: "Status",
+            id: 20
           }
         }
       },

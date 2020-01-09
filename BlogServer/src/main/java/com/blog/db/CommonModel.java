@@ -2,9 +2,11 @@ package com.blog.db;
 
 import java.util.Date;
 
+import com.blog.proto.BlogStore;
 import org.javalite.activejdbc.Model;
 
 public interface CommonModel {
+    public static final String STATUS = "status";
     public static final String CREATED_BY = "created_by";
     public static final String CREATED_AT = "created_at";
     public static final String UPDATED_BY = "updated_by";
@@ -13,6 +15,15 @@ public interface CommonModel {
     //model methods
     default Object getId() {
         return getLong("id");
+    }
+
+    default BlogStore.Status getStatus() {
+        Integer status = getInteger(STATUS);
+        return null == status ? BlogStore.Status.StatusDefault : BlogStore.Status.forNumber(status);
+    }
+
+    default void setStatus(BlogStore.Status status) {
+        set(STATUS, status.getNumber());
     }
 
     default int getCreatedBy() {
