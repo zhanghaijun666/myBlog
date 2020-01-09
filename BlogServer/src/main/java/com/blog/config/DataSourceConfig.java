@@ -28,6 +28,9 @@ public class DataSourceConfig {
         dataSource.setUrl(jdbcUrl);
         dataSource.setUsername(jdbcUser);
         dataSource.setPassword(jdbcPassword);
+        dataSource.setMaxActive(200);
+        dataSource.setMaxWait(100);
+        dataSource.setValidationQuery("SELECT 1 FROM dual");
         return dataSource;
     }
 }
