@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<project name="maven-antrun-" default="main"  >
-<target name="main">
-  <exec dir="../BlogUI/node_modules/protobufjs/bin" executable="node">
-    <arg line="pbjs -t json-module -r BlogStore -w --force-long --force-message --no-comments  ../../../../BlogServer/src/main/resources/proto/blog-store.proto -o ../../../www/common/config/blog-store.js"/>
-  </exec>
-</target>
-</project>
