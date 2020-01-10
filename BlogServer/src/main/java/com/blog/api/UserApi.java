@@ -13,25 +13,14 @@ import javax.ws.rs.*;
 public class UserApi {
 
     @GET
-    @Path("/{str}")
-    public String reverse(@PathParam("str") String input) {
-        return new StringBuilder(input).reverse().toString();
-    }
-
-    @GET
-    @Path("/test")
-    public BlogStore.UserItem getUser() {
-        BlogStore.UserItem.Builder builder = BlogStore.UserItem.newBuilder();
-        builder.setNickname("setNickname");
-        builder.setEmail("setEmail");
-        builder.setUsername("setUsername");
-        return builder.build();
-    }
-
-    @GET
     @Path("/all/{isShowDelete}")
     public BlogStore.UserList getUserOfNoDelete(@PathParam("isShowDelete") boolean isShowDelete) {
         return User.builderUserList(UserDao.getAllUser(isShowDelete)).build();
+    }
+
+    @POST
+    public BlogStore.Result saveUser(BlogStore.UserItem userItem) {
+        return UserDao.saveUser(userItem);
     }
 
 }

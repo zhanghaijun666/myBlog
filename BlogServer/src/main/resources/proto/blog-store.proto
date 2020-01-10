@@ -9,20 +9,32 @@ enum Status{
 }
 enum ReturnCode{
     UNKNOWN_RETURN_CODE = 0;
-    Return_OK = 1;
-    Return_ERROR = 2;
-    Return_USER_EXIST = 50;
-    Return_PASSWORD_ERROR = 51;
-    Return_USERNAME_OR_PASSWORD_IS_EMPTY = 52;
-    Return_USER_EMPTY = 53;
-    Return_NOT_YOURSELF = 54;
+    RETURN_OK = 1;
+    RETURN_ERROR = 2;
+    RETURN_USER_EXIST = 50;
+    RETURN_USER_NAME_BLANK = 51;
+    RETURN_USER_PASSWORD_BLANK = 52;
+    RETURN_USER_PHONE_EXIST = 53;
+    RETURN_USER_EMAIL_EXIST = 54;
+
+
 }
+
+message Result{
+    ReturnCode code = 1;
+    string msg = 2;
+}
+message ResultList{
+    repeated Result esult = 1;
+}
+
 message UserItem {
-    string username = 1;
-    string nickname = 2;
-    string email = 3;
-    string phone = 4;
-    int64 birthday = 5;
+    int32 userId = 1;
+    string username = 2;
+    string nickname = 3;
+    string email = 4;
+    string phone = 5;
+    int64 birthday = 6;
 
     Status status = 20;
 }

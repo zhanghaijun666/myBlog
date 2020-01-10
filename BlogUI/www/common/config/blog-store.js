@@ -26,36 +26,61 @@
       ReturnCode: {
         values: {
           UNKNOWN_RETURN_CODE: 0,
-          Return_OK: 1,
-          Return_ERROR: 2,
-          Return_USER_EXIST: 50,
-          Return_PASSWORD_ERROR: 51,
-          Return_USERNAME_OR_PASSWORD_IS_EMPTY: 52,
-          Return_USER_EMPTY: 53,
-          Return_NOT_YOURSELF: 54
+          RETURN_OK: 1,
+          RETURN_ERROR: 2,
+          RETURN_USER_EXIST: 50,
+          RETURN_USER_NAME_BLANK: 51,
+          RETURN_USER_PASSWORD_BLANK: 52,
+          RETURN_USER_PHONE_EXIST: 53,
+          RETURN_USER_EMAIL_EXIST: 54
+        }
+      },
+      Result: {
+        fields: {
+          code: {
+            type: "ReturnCode",
+            id: 1
+          },
+          msg: {
+            type: "string",
+            id: 2
+          }
+        }
+      },
+      ResultList: {
+        fields: {
+          esult: {
+            rule: "repeated",
+            type: "Result",
+            id: 1
+          }
         }
       },
       UserItem: {
         fields: {
-          username: {
-            type: "string",
+          userId: {
+            type: "int32",
             id: 1
           },
-          nickname: {
+          username: {
             type: "string",
             id: 2
           },
-          email: {
+          nickname: {
             type: "string",
             id: 3
           },
-          phone: {
+          email: {
             type: "string",
             id: 4
           },
+          phone: {
+            type: "string",
+            id: 5
+          },
           birthday: {
             type: "int64",
-            id: 5
+            id: 6
           },
           status: {
             type: "Status",

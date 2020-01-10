@@ -45,6 +45,7 @@ public class User extends Model implements CommonModel {
 
     public BlogStore.UserItem.Builder builderUserItem() {
         return BlogStore.UserItem.newBuilder()
+                .setUserId(this.getUserId())
                 .setUsername(this.getName())
                 .setNickname(this.getNickname())
                 .setEmail(this.getEmail())
