@@ -35,7 +35,7 @@
         xhr.timeout = 0; // 设置超时时间,0表示永不超时
         xhr.open(options.cmd || 'GET', url, true);
         //接受的数据类型
-        xhr.setRequestHeader('Accept', options.Accept || /^\/?api\/.*/.test(url) ? 'application/x-protobuf' : 'text/plan');
+        xhr.setRequestHeader('Accept', options.Accept || (/^\/?api\/.*/.test(url) ? 'application/x-protobuf' : 'text/plan'));
         if (options.data) {
             xhr.setRequestHeader("Content-Type", options.type || "application/octet-stream");
             xhr.send(options.data);
