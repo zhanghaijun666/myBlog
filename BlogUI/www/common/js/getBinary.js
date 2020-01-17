@@ -15,7 +15,7 @@
             switch (xhr.status) {
                 case 200:
                     if (isFunction(callback)) {
-                        callback(xhr.response || xhr.responseText);
+                        callback(xhr.response || xhr.responseText, xhr);
                     }
                     return;
                 default:
