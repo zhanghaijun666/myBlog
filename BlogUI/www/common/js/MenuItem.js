@@ -15,6 +15,7 @@
         self.childMenuItems = options.childMenuItems || [];
         self.itemClass = options.itemClass || "";
         self.targetItem =  options.targetItem || {};
+        self.click = options.click || function(){};
     }
     MenuItem.prototype.getPermit = function () {
         if (isFunction(this.disable)) {

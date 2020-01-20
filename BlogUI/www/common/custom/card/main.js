@@ -1,11 +1,11 @@
 (function (global) {
-    define(['knockout', "text!./show.html","css!./show.css"], function (ko,pageView) {
+    define(['knockout', "text!./packed-card.html","css!./show.css"], function (ko,pageView) {
         function CustomCardViewModel(params, componentInfo) {
             var defaultValue = {
                 dataList: []  /*数据*/
                 , headTemplateLarge: "custom-card-body-head"
                 , rowTemplateLarge: ""
-                , noDataHint: l10n("operate_hint.empty")  /*无数据提示*/
+                , noDataHint: '无数据提示'
                 , context: {}
                 , rightMenus: null
                 , topMenus: null
@@ -33,7 +33,7 @@
         CustomCardViewModel.prototype.getTopMenus = function (origin) {
             return this.getMenus(this.topMenus, origin);
         };
-        $.extend(CustomCardViewModel.prototype, Selector.prototype);
+        // $.extend(CustomCardViewModel.prototype, Selector.prototype);
 
         return {
             viewModel: {

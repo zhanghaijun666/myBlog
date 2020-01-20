@@ -12,15 +12,25 @@
             xhr = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xhr.onload = function () {
-            switch (xhr.status) {
-                case 200:
-                    if (isFunction(callback)) {
-                        callback(xhr.response || xhr.responseText, xhr);
-                    }
-                    return;
-                default:
-                    xhr.onerror();
-                    return;
+            if (xhr.status === 200) {
+                let result;
+                if (xhr.responseType === 'text') {
+                    result = xhr.responseText;
+                } else if (xhr.responseType === 'document') {
+                    result = xhr.responseXML;
+                } else if (xhr.responseType === "arraybuffer") {
+                    //https://www.jianshu.com/p/5c7825570351
+                    result = new Uint8Array(xhr.response);
+                } else {
+                    result = xhr.response;
+                }
+                if (isFunction(callback)) {
+                    callback(result, xhr);
+                }
+                return;
+            } else {
+                xhr.onerror();
+                return;
             }
         };
         xhr.onloadend = function () {
@@ -35,9 +45,11 @@
         xhr.timeout = 0; // 设置超时时间,0表示永不超时
         xhr.open(options.cmd || 'GET', url, true);
         //接受的数据类型
-        xhr.setRequestHeader('Accept', options.Accept || (/^\/?api\/.*/.test(url) ? 'application/x-protobuf' : 'text/plan'));
+        const accept = options.Accept || (/^\/?api\/.*/.test(url) ? 'application/x-protobuf' : 'text/plan');
+        xhr.setRequestHeader('Accept', accept);
+        xhr.responseType = accept === "application/x-protobuf" ? "arraybuffer" : (options.responseType || "text");
         if (options.data) {
-            xhr.setRequestHeader("Content-Type", options.type || "application/octet-stream");
+            xhr.setRequestHeader("Content-Type", options.type || (/^\/?api\/.*/.test(url) ? 'application/x-protobuf' : 'application/json'));
             xhr.send(options.data);
         } else {
             xhr.send();

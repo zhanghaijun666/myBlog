@@ -1,15 +1,44 @@
 define(["text!./show.html", "css!./show.css"], function (pageView) {
     function UserListModel(params, componentInfo) {
-        var self = this;
-
+        const self = this;
+        self.userList = ko.observableArray([]);
         self.getAllUser();
     }
 
     UserListModel.prototype.getAllUser = function () {
-        getBinary("/api/user/all/" + false, {cmd: 'GET', Accept: "application/x-protobuf"}, function (data) {
-            console.log(data);
-            console.log(BlogStore.UserList.decode(data));
+        const context = this;
+        getBinary("/api/user/all/" + false, {cmd: 'GET'}, function (data) {
+            context.userList(BlogStore.UserList.decode(data).items);
         });
+    };
+    UserListModel.prototype.getTopMenu = function () {
+        return [
+            new MenuItem({
+                visible: true,
+                iconText: '新建用户',
+                itemClass: 'btn btn-primary',
+                click: this.addUser.bind(this)
+            })
+        ]
+    };
+    UserListModel.prototype.getRightMenus = function () {
+        return [
+            new MenuItem({
+                visible: true,
+                iconText: '删除用户',
+                itemClass: '',
+                click: this.addUser.bind(this)
+            }),
+            new MenuItem({
+                visible: true,
+                iconText: '编辑用户',
+                itemClass: '',
+                click: this.addUser.bind(this)
+            })
+        ]
+    };
+    UserListModel.prototype.addUser = function () {
+
     };
     return {
         viewModel: {

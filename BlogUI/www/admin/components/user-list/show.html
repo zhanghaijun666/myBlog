@@ -1,6 +1,28 @@
 <div class="user-list">
-
+    <custom-card params="dataList:userList,context:$data,rowTemplateLarge:'user-card-row-template',headTemplateLarge:'user-card-header-template'"></custom-card>
 </div>
+<template id="user-card-header-template">
+    <div>
+        <span class="col-md-2" data-bind="text: '用户名称'"></span>
+        <span class="col-md-2" data-bind="text: '用户昵称'"></span>
+        <span class="col-md-2" data-bind="text: '电子邮箱'"></span>
+        <span class="col-md-1" data-bind="text: '移动电话'"></span>
+        <span class="col-md-2" data-bind="text: '出生日期'"></span>
+        <span class="col-md-1 text-center" data-bind="text: '用户状态'"></span>
+        <span class="col-md-2 text-center" data-bind="text: '操作'"></span>
+    </div>
+</template>
+<template id="user-card-row-template">
+    <div>
+        <span class="col-md-2" data-bind="text: $data.username"></span>
+        <span class="col-md-2" data-bind="text: $data.nickname"></span>
+        <span class="col-md-2" data-bind="text: $data.email"></span>
+        <span class="col-md-1" data-bind="text: $data.phone"></span>
+        <span class="col-md-2" data-bind="text: $data.birthday"></span>
+        <span class="col-md-1 text-center" data-bind="text: $data.status"></span>
+        <span class="col-md-2 text-center" data-bind="text: '操作'"></span>
+    </div>
+</template>
 
 <template id="user-list-demo-template">
     <span>用户列表</span>
