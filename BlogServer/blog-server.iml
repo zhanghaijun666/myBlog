@@ -136,7 +136,6 @@
     <orderEntry type="library" name="Maven: org.javalite:activejdbc:2.1" level="project" />
     <orderEntry type="library" name="Maven: org.javalite:javalite-common:2.1" level="project" />
     <orderEntry type="library" name="Maven: org.javalite:app-config:2.1" level="project" />
-    <orderEntry type="library" name="Maven: org.javalite:activejdbc-instrumentation:2.1" level="project" />
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java-util:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:18.0" level="project" />

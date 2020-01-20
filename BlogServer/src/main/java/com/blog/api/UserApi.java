@@ -25,7 +25,8 @@ public class UserApi {
     public BlogStore.UserList getUserOfNoDelete(@PathParam("isShowDelete") boolean isShowDelete) {
         BlogStore.UserList list = null;
         try {
-            Base.open(dataSource);
+//            Base.open(dataSource);
+            Base.open("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/blogdb", "root", "123456");
 //            Base.openTransaction();
             return User.builderUserList(UserDao.getAllUser(isShowDelete)).build();
 //            Base.commitTransaction();

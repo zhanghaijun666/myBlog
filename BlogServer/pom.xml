@@ -99,22 +99,22 @@
             <groupId>org.javalite</groupId>
             <artifactId>activejdbc</artifactId>
             <version>${activejdbc.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>opensymphony</groupId>
-                    <artifactId>oscache</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>opensymphony</groupId>-->
+<!--                    <artifactId>oscache</artifactId>-->
+<!--                </exclusion>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.slf4j</groupId>-->
+<!--                    <artifactId>slf4j-api</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
         </dependency>
-        <dependency>
-            <groupId>org.javalite</groupId>
-            <artifactId>activejdbc-instrumentation</artifactId>
-            <version>${activejdbc.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.javalite</groupId>-->
+<!--            <artifactId>activejdbc-instrumentation</artifactId>-->
+<!--            <version>${activejdbc.version}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
