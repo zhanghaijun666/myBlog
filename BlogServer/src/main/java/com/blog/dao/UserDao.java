@@ -2,7 +2,7 @@ package com.blog.dao;
 
 import com.blog.db.User;
 import com.blog.proto.BlogStore;
-import com.blog.utils.RandomUtil;
+import com.blog.utils.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
@@ -64,7 +64,7 @@ public class UserDao {
         dbUser.setString("phone", userItem.getPhone());
         dbUser.setLong("birthday", userItem.getBirthday());
         if (StringUtils.isBlank(dbUser.getPassword())) {
-            dbUser.setString("password", RandomUtil.getRandomString(8));
+            dbUser.setString("password", RandomUtils.getRandomString(8));
             JSONObject json = new JSONObject();
             json.put("password", dbUser.getPassword());
             result.setMsg(json.toString());

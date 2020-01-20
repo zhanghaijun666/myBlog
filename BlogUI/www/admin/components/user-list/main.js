@@ -6,9 +6,9 @@ define(["text!./show.html", "css!./show.css"], function (pageView) {
     }
 
     UserListModel.prototype.getAllUser = function () {
-        getBinary("/api/user/all/" + false, {cmd: 'GET', Accept: "*/*"}, function (data) {
+        getBinary("/api/user/all/" + false, {cmd: 'GET', Accept: "application/x-protobuf"}, function (data) {
             console.log(data);
-            // console.log(BlogStore.UserList.decode(data));
+            console.log(BlogStore.UserList.decode(data));
         });
     };
     return {

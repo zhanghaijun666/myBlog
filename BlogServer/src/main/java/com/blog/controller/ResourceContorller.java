@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 
 @Controller
 @RequestMapping("/")
@@ -31,7 +32,10 @@ public class ResourceContorller {
     @RequestMapping("/")
     public void rootResourceHandle() throws IOException {
         File file = new File(PathUtils.joinPath(PathUtils.getBlogServerPath(), blogSetting.getUIDir(), "/main/packed-index.html.txt"));
-        ResourceUtils.writeResource(file, response.getOutputStream());
+        try (OutputStream outputStream = response.getOutputStream()) {
+            ResourceUtils.writeResource(file, outputStream);
+        }
+
     }
 
     @RequestMapping("/test")

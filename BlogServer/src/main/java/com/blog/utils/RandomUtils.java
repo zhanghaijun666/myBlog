@@ -2,7 +2,7 @@ package com.blog.utils;
 
 import java.util.Random;
 
-public class RandomUtil {
+public class RandomUtils {
     public static String getRandomString(int length) {
         String base = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz0123456789";
         Random random = new Random();

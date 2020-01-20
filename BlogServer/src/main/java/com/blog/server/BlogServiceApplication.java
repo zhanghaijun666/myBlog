@@ -6,7 +6,8 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"com.blog.controller","com.blog.config"})
+@ComponentScan({"com.blog.controller", "com.blog.config"})
+@ServletComponentScan(basePackages = "com.blog.filter")
 public class BlogServiceApplication {
 
     public static void main(String[] args) {

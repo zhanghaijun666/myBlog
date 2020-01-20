@@ -15,8 +15,11 @@ import java.util.List;
 @Import(BlogSetting.class)
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
-    @Autowired
-    private BlogSetting blogSetting;
+    private final BlogSetting blogSetting;
+
+    public WebMvcConfiguration(BlogSetting blogSetting) {
+        this.blogSetting = blogSetting;
+    }
 
     //拦截器
     @Override
