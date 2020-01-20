@@ -19,8 +19,8 @@ public class AccessFilter implements Filter {
         response.setCharacterEncoding("UTF-8");
         filterChain.doFilter(request, response);
         log.info(
-                "IPAddress:" + RequestUtils.getIPAddress(request)
-                + ";  AccessUrl:" + RequestUtils.getAccessUrl(request)
+                "IPAddress: " + RequestUtils.getIPAddress(request)
+                + ";  AccessUrl: " + RequestUtils.getAccessUrl(request)
         );
     }
 
