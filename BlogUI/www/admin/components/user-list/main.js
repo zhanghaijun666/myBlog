@@ -10,6 +10,7 @@ define(["text!./show.html", "css!./show.css"], function (pageView) {
         return [
             new MenuItem({
                 visible: true,
+                icon: "fa fa-plus-square",
                 iconText: '新建用户',
                 itemClass: 'btn btn-primary',
                 click: this.addUser.bind(this)
@@ -20,12 +21,14 @@ define(["text!./show.html", "css!./show.css"], function (pageView) {
         return [
             new MenuItem({
                 visible: true,
+                icon: "fa fa-times",
                 iconText: '删除用户',
                 itemClass: '',
                 click: this.addUser.bind(this)
             }),
             new MenuItem({
                 visible: true,
+                icon: "fa fa-edit",
                 iconText: '编辑用户',
                 itemClass: '',
                 click: this.addUser.bind(this)

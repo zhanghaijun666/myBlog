@@ -4,7 +4,7 @@
         <button type="button" class="btn btn-danger">删除所选用户</button>
         <button type="button" class="btn btn btn-warning">禁用所选用户</button>
     </div>
-    <custom-card params="dataList:userList,context:$data,rowTemplateLarge:'user-card-row-template',headTemplateLarge:'user-card-header-template'"></custom-card>
+    <custom-card params="dataList:userList,context:$data,rightMenus:getRightMenus,rowTemplateLarge:'user-card-row-template',headTemplateLarge:'user-card-header-template'"></custom-card>
 </div>
 <template id="user-card-header-template">
     <div class="col-md-2" data-bind="text: '用户名称'"></div>
@@ -12,7 +12,7 @@
     <div class="col-md-2" data-bind="text: '电子邮箱'"></div>
     <div class="col-md-2" data-bind="text: '移动电话'"></div>
     <div class="col-md-2" data-bind="text: '出生日期'"></div>
-    <div class="col-md-2 text-center" data-bind="text: '用户状态'"></div>
+    <div class="col-md-2" data-bind="text: '用户状态'"></div>
 </template>
 <template id="user-card-row-template">
     <div class="col-md-2" data-bind="text: $data.username"></div>
@@ -20,7 +20,7 @@
     <div class="col-md-2" data-bind="text: $data.email"></div>
     <div class="col-md-2" data-bind="text: $data.phone"></div>
     <div class="col-md-2" data-bind="text: dateFormat($data.birthday)"></div>
-    <div class="col-md-2 text-center" data-bind="text: $component.getStatusStr($data.status)"></div>
+    <div class="col-md-2" data-bind="text: $component.getStatusStr($data.status)"></div>
 </template>
 
 <template id="user-list-demo-template">
