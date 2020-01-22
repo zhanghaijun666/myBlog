@@ -35,10 +35,12 @@ define(["text!./show.html", "css!./show.css"], function (pageView) {
     UserListModel.prototype.getAllUser = function () {
         const context = this;
         getBinary("/api/user/all/" + false, {cmd: 'GET'}, function (data) {
-            context.userList(BlogStore.UserList.decode(data).items);
+            const userArray = BlogStore.UserList.decode(data).items;
+            context.userList(userArray.sort(function(a,b){return a.username.localeCompare(b.username,'zh-CN')}));
         });
     };
     UserListModel.prototype.addUser = function () {
+        const context = this;
         const message = new Message("UserItem", null, true);
         const num = Math.floor(Math.random() * 10);
         message.username(num + "name");
@@ -48,7 +50,18 @@ define(["text!./show.html", "css!./show.css"], function (pageView) {
         message.birthday(953481600000);
         getBinary("/api/user", {cmd: 'POST', data: message.toArrayBuffer()}, function (data) {
             console.log(BlogStore.Result.decode(data));
+            context.getAllUser();
         });
+    };
+    UserListModel.prototype.getStatusStr = function (status) {
+        switch (status) {
+            case BlogStore.Status.StatusActive:
+                return "有效";
+            case BlogStore.Status.StatusDeleted:
+                return "删除";
+            default:
+                return "未知";
+        }
     };
     return {
         viewModel: {

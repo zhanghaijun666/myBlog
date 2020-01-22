@@ -1,5 +1,5 @@
 (function (global) {
-    define(['knockout', "text!./packed-card.html","css!./show.css"], function (ko,pageView) {
+    define(['knockout', "text!./show.html","css!./show.css"], function (ko,pageView) {
         function CustomCardViewModel(params, componentInfo) {
             var defaultValue = {
                 dataList: []  /*数据*/

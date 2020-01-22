@@ -1,3 +1,0 @@
-./show.html
-./large.html
-./small.html
