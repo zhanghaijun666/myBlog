@@ -57,12 +57,13 @@ public class UserDao {
         }
         User dbUser = User.findById(userItem.getUserId());
         if (null == dbUser) {
-            dbUser = User.create("username = ? ", userItem.getUsername());
+            dbUser = User.create("username", userItem.getUsername());
         }
         dbUser.setString("nickname", userItem.getNickname());
         dbUser.setString("email", userItem.getEmail());
         dbUser.setString("phone", userItem.getPhone());
         dbUser.setLong("birthday", userItem.getBirthday());
+        dbUser.setLong("status", BlogStore.Status.StatusActive_VALUE);
         if (StringUtils.isBlank(dbUser.getPassword())) {
             dbUser.setString("password", RandomUtils.getRandomString(8));
             JSONObject json = new JSONObject();

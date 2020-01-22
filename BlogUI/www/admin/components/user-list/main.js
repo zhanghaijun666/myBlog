@@ -5,12 +5,7 @@ define(["text!./show.html", "css!./show.css"], function (pageView) {
         self.getAllUser();
     }
 
-    UserListModel.prototype.getAllUser = function () {
-        const context = this;
-        getBinary("/api/user/all/" + false, {cmd: 'GET'}, function (data) {
-            context.userList(BlogStore.UserList.decode(data).items);
-        });
-    };
+
     UserListModel.prototype.getTopMenu = function () {
         return [
             new MenuItem({
@@ -37,8 +32,23 @@ define(["text!./show.html", "css!./show.css"], function (pageView) {
             })
         ]
     };
+    UserListModel.prototype.getAllUser = function () {
+        const context = this;
+        getBinary("/api/user/all/" + false, {cmd: 'GET'}, function (data) {
+            context.userList(BlogStore.UserList.decode(data).items);
+        });
+    };
     UserListModel.prototype.addUser = function () {
-
+        const message = new Message("UserItem", null, true);
+        const num = Math.floor(Math.random() * 10);
+        message.username(num + "name");
+        message.nickname(num + "username");
+        message.email(num + "email@163.com");
+        message.phone(num + "1234567");
+        message.birthday(953481600000);
+        getBinary("/api/user", {cmd: 'POST', data: message.toArrayBuffer()}, function (data) {
+            console.log(BlogStore.Result.decode(data));
+        });
     };
     return {
         viewModel: {
