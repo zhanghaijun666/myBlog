@@ -1,0 +1,54 @@
+<!-- {{{ --><!-- ko if: $component.getTopMenus($data).length > 0 --><!-- }}} -->
+<custom-menu
+        params="{origin: $data, menuList: $component.getTopMenus($data),menuClass:'top-menu',permitType:'disabled'}"></custom-menu>
+<!-- {{{ --><!-- /ko --><!-- }}} -->
+<div class="custom-card-body" data-bind="visible: !loading()">
+    <!-- {{{ --><!-- ko if: headTemplateLarge --><!-- }}} -->
+    <div class="custom-card-head admin-header">
+        <!-- {{{ --><!-- ko if: $component.topMenus --><!-- }}} -->
+        <div class="dl card-checkbox">
+            <custom-checkbox params="checked: $data.checkAll"></custom-checkbox>
+        </div>
+        <!-- {{{ --><!-- /ko --><!-- }}} -->
+
+        <div class="card-data" data-bind="template:{name: headTemplateLarge,data:$data}"></div>
+
+        <!-- {{{ --><!-- ko if: $component.getRightMenus($data).length > 0 --><!-- }}} -->
+        <div class="card-operate"><span data-bind="text: '操作'"></span></div>
+        <!-- {{{ --><!-- /ko --><!-- }}} -->
+    </div>
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
+
+    <!-- {{{ --><!-- ko if:  dataList().length > 0 --><!-- }}} -->
+    <!-- {{{ --><!-- ko foreach: dataList --><!-- }}} -->
+    <div class="data-item">
+        <!-- {{{ --><!-- ko if: $component.topMenus --><!-- }}} -->
+        <div class="dl card-checkbox">
+            <custom-checkbox params="checked: $data.select"></custom-checkbox>
+        </div>
+        <!-- {{{ --><!-- /ko --><!-- }}} -->
+
+        <!-- {{{ --><!-- ko let: {$component: $component.context} --><!-- }}} -->
+        <div class="card-data" data-bind="template:{name: $parent.rowTemplateLarge, data: $data}"></div>
+        <!-- {{{ --><!-- /ko --><!-- }}} -->
+
+        <!-- {{{ --><!-- ko if: $component.getRightMenus($data).length > 0 --><!-- }}} -->
+        <div class="card-operate"
+             data-bind="component:{name:'custom-menu',params:{origin: $data, menuList: $component.getRightMenus($data),permitType:'disabled'}}"></div>
+        <!-- {{{ --><!-- /ko --><!-- }}} -->
+    </div>
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
+
+    <!-- {{{ --><!-- ko if:  dataList().length == 0 --><!-- }}} -->
+    <no-data params="noDataImgCss: noDataImgCss, noDataHint: noDataHint"/>
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
+</div>
+<div data-bind="visible: loading()">
+    <center><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></center>
+    <span class="centerText" data-bind=" text: '加載中...'"></span>
+</div>
+<div class="custom-card-foot-paging"></div>
+<template id="custom-card-body-head">
+    <span data-bind="text: '部门/用户'"></span>
+</template>

@@ -17,29 +17,43 @@ define(["text!./show.html", "css!./show.css"], function (pageView) {
             })
         ]
     };
-    UserListModel.prototype.getRightMenus = function () {
+    UserListModel.prototype.getRightMenus = function (data) {
         return [
             new MenuItem({
                 visible: true,
                 icon: "fa fa-times",
                 iconText: '删除用户',
                 itemClass: '',
-                click: this.addUser.bind(this)
+                targetItem: data,
+                click: this.deleteUser.bind(this)
             }),
             new MenuItem({
                 visible: true,
                 icon: "fa fa-edit",
                 iconText: '编辑用户',
                 itemClass: '',
+                targetItem: data,
                 click: this.addUser.bind(this)
             })
         ]
+    };
+    UserListModel.prototype.getStatusStr = function (status) {
+        switch (status) {
+            case BlogStore.Status.StatusActive:
+                return "有效";
+            case BlogStore.Status.StatusDeleted:
+                return "删除";
+            default:
+                return "未知";
+        }
     };
     UserListModel.prototype.getAllUser = function () {
         const context = this;
         getBinary("/api/user/all/" + false, {cmd: 'GET'}, function (data) {
             const userArray = BlogStore.UserList.decode(data).items;
-            context.userList(userArray.sort(function(a,b){return a.username.localeCompare(b.username,'zh-CN')}));
+            context.userList(userArray.sort(function (a, b) {
+                return a.username.localeCompare(b.username, 'zh-CN')
+            }));
         });
     };
     UserListModel.prototype.addUser = function () {
@@ -52,19 +66,21 @@ define(["text!./show.html", "css!./show.css"], function (pageView) {
         message.phone(num + "1234567");
         message.birthday(953481600000);
         getBinary("/api/user", {cmd: 'POST', data: message.toArrayBuffer()}, function (data) {
-            console.log(BlogStore.Result.decode(data));
+            toastShowCode(BlogStore.Result.decode(data));
             context.getAllUser();
         });
     };
-    UserListModel.prototype.getStatusStr = function (status) {
-        switch (status) {
-            case BlogStore.Status.StatusActive:
-                return "有效";
-            case BlogStore.Status.StatusDeleted:
-                return "删除";
-            default:
-                return "未知";
+    UserListModel.prototype.deleteUser = function (data) {
+        if (!data) {
+            return;
         }
+        const context = this;
+        const req = BlogStore.UserList.create();
+        req.items.push(data);
+        getBinary("/api/user", {cmd: 'DELETE', data: BlogStore.UserList.encode(req).finish()}, function (data) {
+            toastShowCode(BlogStore.Result.decode(data));
+            context.getAllUser();
+        });
     };
     return {
         viewModel: {

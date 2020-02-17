@@ -35,6 +35,11 @@
     MenuItem.prototype.isDropdown = function () {
         return this.getChildItems().length > 0;
     };
+    MenuItem.prototype.menuClick = function () {
+        if(this.targetItem){
+            this.click(this.targetItem);
+        }
+    };
 
 
     exports.MenuItem = MenuItem;

@@ -22,6 +22,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <java.version>1.8</java.version>
         <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
         <activejdbc.version>2.1</activejdbc.version>
@@ -99,16 +100,16 @@
             <groupId>org.javalite</groupId>
             <artifactId>activejdbc</artifactId>
             <version>${activejdbc.version}</version>
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>opensymphony</groupId>-->
-<!--                    <artifactId>oscache</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.slf4j</groupId>-->
-<!--                    <artifactId>slf4j-api</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
+            <exclusions>
+            <exclusion>
+                <groupId>opensymphony</groupId>
+                <artifactId>oscache</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+            </exclusion>
+        </exclusions>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.javalite</groupId>-->
@@ -157,17 +158,16 @@
                     <excludeDevtools>false</excludeDevtools>
                 </configuration>
             </plugin>
-            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            -->
             <plugin>
                 <groupId>org.javalite</groupId>
                 <artifactId>activejdbc-instrumentation</artifactId>
@@ -202,12 +202,12 @@
                         <configuration>
                             <target>
                                 <exec executable="node">
-                                    <arg line="${project.basedir}/../BlogUI/node_modules/protobufjs/bin/pbjs" />
-                                    <arg line="-t json-module " />
-                                    <arg line="-r BlogStore " />
-                                    <arg line="--force-long --force-message --no-comments " />
-                                    <arg line="${project.basedir}/src/main/resources/proto/blog-store.proto" />
-                                    <arg line="-o ${project.basedir}/../BlogUI/www/common/config/blog-store.js" />
+                                    <arg line="${project.basedir}/../BlogUI/node_modules/protobufjs/bin/pbjs"/>
+                                    <arg line="-t json-module "/>
+                                    <arg line="-r BlogStore "/>
+                                    <arg line="--force-long --force-message --no-comments "/>
+                                    <arg line="${project.basedir}/src/main/resources/proto/blog-store.proto"/>
+                                    <arg line="-o ${project.basedir}/../BlogUI/www/common/config/blog-store.js"/>
                                 </exec>
                             </target>
                         </configuration>
@@ -277,17 +277,8 @@
             </plugin>-->
         </plugins>
     </build>
+    <!-- 依赖仓库 设置从aliyun仓库下载-->
     <repositories>
-        <repository>
-            <id>spring-releases</id>
-            <name>Spring Releases</name>
-            <url>https://repo.spring.io/libs-release</url>
-        </repository>
-        <repository>
-            <id>org.jboss.repository.releases</id>
-            <name>JBoss Maven Release Repository</name>
-            <url>https://repository.jboss.org/nexus/content/repositories/releases</url>
-        </repository>
         <repository>
             <id>alimaven</id>
             <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
@@ -299,12 +290,8 @@
             </releases>
         </repository>
     </repositories>
+    <!-- 插件依赖仓库 -->
     <pluginRepositories>
-        <pluginRepository>
-            <id>spring-releases</id>
-            <name>Spring Releases</name>
-            <url>https://repo.spring.io/libs-release</url>
-        </pluginRepository>
         <pluginRepository>
             <id>alimaven</id>
             <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>

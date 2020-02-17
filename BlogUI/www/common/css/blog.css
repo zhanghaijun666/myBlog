@@ -14,3 +14,20 @@ html,body{
 }
 a{text-decoration: none;}
 a:hover{text-decoration:none}
+
+.toast-list{
+    position: absolute;
+    margin: 0px;
+    bottom: 20px;
+    right: 10px;
+    max-height: 80%;
+    max-width: 30%;
+    overflow: auto;
+}
+.toast-div{
+    width: 180px;
+    height: 90px;
+}
+.toast-div>.panel-body{
+    text-align: center;
+}
