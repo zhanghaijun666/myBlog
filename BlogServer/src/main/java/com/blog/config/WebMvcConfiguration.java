@@ -38,6 +38,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("file:"+ PathUtils.joinPath(PathUtils.getBlogServerPath(),blogSetting.getUIDir()));
+//        registry.addResourceHandler("/404").addResourceLocations("classpath:/META-INF/resources/templates/404.html");
     }
 
     //默认静态资源处理器

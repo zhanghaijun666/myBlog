@@ -7,12 +7,14 @@ import com.blog.proto.BlogStore;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.security.RolesAllowed;
 import javax.sql.DataSource;
 import javax.ws.rs.*;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Path("/user")
+//@RolesAllowed("user")
 @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
 @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
 public class UserApi {
