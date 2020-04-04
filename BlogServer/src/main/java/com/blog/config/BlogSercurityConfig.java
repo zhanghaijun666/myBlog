@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -30,11 +31,6 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
         this.authenticationFailure = failure;
         this.detailsService = new BlogUserDetailService();
     }
-
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -59,7 +55,7 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(detailsService);//.passwordEncoder(passwordEncoder());
+        auth.userDetailsService(detailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
 //    @Beanu
@@ -74,7 +70,7 @@ class AuthenticationSuccess implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         request.getSession().setAttribute("USERSESSION", authentication.getName());
-        new DefaultRedirectStrategy().sendRedirect(request, response, "/test");
+        new DefaultRedirectStrategy().sendRedirect(request, response, "/");
     }
 }
 
@@ -82,7 +78,6 @@ class AuthenticationSuccess implements AuthenticationSuccessHandler {
 class AuthenticationFailure implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        String meg = "登录失败";
-        request.getRequestDispatcher("/template/404.html?meg=" + meg).forward(request, response);
+        request.getRequestDispatcher("/template/login.html?meg=登录失败").forward(request, response);
     }
 }
