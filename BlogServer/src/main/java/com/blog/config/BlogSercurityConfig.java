@@ -38,7 +38,8 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.cors().and().csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/static/**", "/template/**", "/login", "/logout").permitAll()
 //                .antMatchers("/user/**").hasRole("USER")
 //                .antMatchers("/admin/**").hasRole("ADMIN")
@@ -53,8 +54,7 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")//登录请求地址
                 .and().logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/template/login.html")
-                .and().csrf().disable();
+                .logoutSuccessUrl("/template/login.html");
     }
 
     @Override
@@ -64,7 +64,7 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
 
 //    @Beanu
 //    public SecurityContextRepository securityContextRepository() {
-        //设置对spring security的UserDetails进行session保存,这个必须要有，不然不会保存至session对应的缓存redis中
+    //设置对spring security的UserDetails进行session保存,这个必须要有，不然不会保存至session对应的缓存redis中
 //        return new HttpSessionSecurityContextRepository();
 //    }
 }
