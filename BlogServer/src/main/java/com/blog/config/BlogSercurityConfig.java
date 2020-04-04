@@ -1,6 +1,7 @@
 package com.blog.config;
 
 import com.blog.service.login.BlogUserDetailService;
+import com.blog.utils.ResponseUtils;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.session.SessionInformationExpiredEvent;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -37,9 +40,9 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/static/**", "/template/**", "/login", "/logout").permitAll()
-//                .antMatchers("/user/**").hasRole("USER")
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
+                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
                 .anyRequest().authenticated()
                 .and().formLogin()
                 .usernameParameter("username")
@@ -50,7 +53,11 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")//登录请求地址
                 .and().logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/template/login.html");
+                .logoutSuccessUrl("/template/login.html")
+                .and().sessionManagement()
+                .invalidSessionUrl("/template/login.html")
+                .maximumSessions(1)
+                .expiredSessionStrategy(new SessionInformationExpiredStrategyImpl());
     }
 
     @Override
@@ -79,5 +86,12 @@ class AuthenticationFailure implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         request.getRequestDispatcher("/template/login.html?meg=登录失败").forward(request, response);
+    }
+}
+
+class SessionInformationExpiredStrategyImpl implements SessionInformationExpiredStrategy {
+    @Override
+    public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException, ServletException {
+        ResponseUtils.write(event.getResponse(), "你的账号在另一地点被登录");
     }
 }
