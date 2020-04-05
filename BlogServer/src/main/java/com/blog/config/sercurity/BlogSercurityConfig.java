@@ -1,8 +1,8 @@
-package com.blog.config;
+package com.blog.config.sercurity;
 
-import com.blog.service.login.BlogUserDetailService;
 import com.blog.utils.ResponseUtils;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -39,7 +39,7 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/static/**", "/template/**", "/login", "/logout").permitAll()
+                .antMatchers("/", "/static/**", "/template/**", "/login", "/logout").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
@@ -64,12 +64,6 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(detailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
-
-//    @Beanu
-//    public SecurityContextRepository securityContextRepository() {
-    //设置对spring security的UserDetails进行session保存,这个必须要有，不然不会保存至session对应的缓存redis中
-//        return new HttpSessionSecurityContextRepository();
-//    }
 }
 
 @Component("authenticationSuccess")
