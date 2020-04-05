@@ -112,6 +112,7 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
     private class SessionInformationExpiredStrategyImpl implements SessionInformationExpiredStrategy {
         @Override
         public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException, ServletException {
+            event.getResponse().setStatus(HttpStatus.CONFLICT.value());
             ResponseUtils.write(event.getResponse(), "你的账号在另一地点被登录");
         }
     }

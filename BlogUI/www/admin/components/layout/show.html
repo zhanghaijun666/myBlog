@@ -16,7 +16,7 @@
 </div>
 <template id="user-info-template">
     <ul class="user-info">
-        <li  style="cursor:pointer;">
+        <li  style="cursor:pointer;" data-bind="click: API.UserApi.logout">
             <i class="fa fa-sign-out"></i>
             <span>退出</span>
         </li>

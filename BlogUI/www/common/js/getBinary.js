@@ -37,7 +37,10 @@
             // 请求结束
         };
         xhr.onerror = function () {
-            if (isFunction(errorCallback)) {
+            if (xhr.status === 409) {
+                toastShowMsg("你的账号在另一地点被登录");
+                location.reload();
+            } else if (isFunction(errorCallback)) {
                 errorCallback(xhr);
             }
         };

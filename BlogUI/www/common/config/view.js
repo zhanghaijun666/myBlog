@@ -22,13 +22,8 @@ requirejs(["knockout", "BlogStore"], function (ko, BlogStore) {
         if (context.loginUser()) {
             callback(context.loginUser());
         } else {
-            getBinary("/login-user", {cmd: 'GET'}, function (data) {
-                var user = JSON.parse(data);
-                if (user.name) {
-                    context.loginUser(user);
-                }
-                callback(context.loginUser());
-            }, function () {
+            API.UserApi.getLoginUser(function (user) {
+                context.loginUser(user);
                 callback(context.loginUser());
             });
         }
