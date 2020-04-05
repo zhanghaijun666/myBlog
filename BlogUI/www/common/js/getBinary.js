@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.getBinary = function (url, options, callback) {
+    exports.getBinary = function (url, options, callback, errorCallback) {
         if (!url) {
             return;
         }
@@ -37,7 +37,9 @@
             // 请求结束
         };
         xhr.onerror = function () {
-            // 请求出错
+            if (isFunction(errorCallback)) {
+                errorCallback(xhr);
+            }
         };
         xhr.ontimeout = function () {
             // 请求超时

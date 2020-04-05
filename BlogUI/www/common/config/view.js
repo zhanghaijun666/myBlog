@@ -3,7 +3,7 @@ requirejs(["knockout", "BlogStore"], function (ko, BlogStore) {
 
     function RootViewModel() {
         var self = this;
-        self.rootTemplate = ko.observable("layout-visitor");
+        self.rootTemplate = ko.observable("blog-loading-page");
         self.routeHash = ko.observable("");
         self.loginUser = ko.observable();
         self.sammyPage = new SammyPage({view: self}); /*thie last step*/
@@ -27,6 +27,8 @@ requirejs(["knockout", "BlogStore"], function (ko, BlogStore) {
                 if (user.name) {
                     context.loginUser(user);
                 }
+                callback(context.loginUser());
+            }, function () {
                 callback(context.loginUser());
             });
         }

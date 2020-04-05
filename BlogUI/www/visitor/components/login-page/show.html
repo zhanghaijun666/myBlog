@@ -1,17 +1,21 @@
-<div class="login-page">
-    <div class="login-large">
-        <div><span data-bind="text: '海军个人博客--用户登录'"></span></div>
-        <div></div>
-        <div>
-            <input type="text" class="form-control" placeholder="用户名称">
-            <input type="password" class="form-control" placeholder="用户密码">
+<form style="width: 100%;height: 100%" action="/login" method="post">
+    <div class="login-page">
+        <div class="login-large">
+            <div><span data-bind="text: '用户登录'"></span></div>
+            <div></div>
             <div>
-                <button type="button" class="btn" data-bind="click:function(){location.hash = '#user'}"><span data-bind="text: '登录'"></span></button>
-            </div>
-            <div>
-                <button type="button" class="btn btn-link pull-left"><span data-bind="text: '找回密码'"></span></button>
-                <button type="button" class="btn btn-link pull-right" data-bind="click: gotoRegister"><span data-bind="text: '注册'"></span></button>
+                <input type="text" name="username" class="form-control" placeholder="用户名称">
+                <input type="password" name="password" class="form-control" placeholder="用户密码">
+                <div>
+                    <button type="submit" class="btn"><span data-bind="text: '登录'"></span></button>
+                </div>
+                <!--
+                <div>
+                    <button type="button" class="btn btn-link pull-left"><span data-bind="text: '找回密码'"></span></button>
+                    <button type="button" class="btn btn-link pull-right" data-bind="click: gotoRegister"><span data-bind="text: '注册'"></span></button>
+                </div>
+                -->
             </div>
         </div>
     </div>
-</div>
+</form>
