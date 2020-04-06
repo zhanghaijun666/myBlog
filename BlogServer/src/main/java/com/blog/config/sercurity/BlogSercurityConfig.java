@@ -39,12 +39,13 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        //允许同源使用 iframe 处理h2控制台无法访问的情况
+        http.headers().frameOptions().sameOrigin();
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/static/**", "/template/**", "/login", "/logout").permitAll()
-                .antMatchers("/user/**").hasRole("USER")
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
+                .antMatchers("/api/**").hasRole("USER")
+                .antMatchers("/h2/**", "/druid/**").access("hasRole('ADMIN') and hasRole('DBA')")
                 .anyRequest().authenticated()
                 .and().formLogin()
                 .usernameParameter("username")
@@ -58,9 +59,7 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/template/login.html")
                 .permitAll()
-                // 未登录请求资源
-                .and()
-                .exceptionHandling()
+                .and().exceptionHandling()
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                 .accessDeniedHandler(new CustomAccessDeineHandler())
                 .and().sessionManagement()
