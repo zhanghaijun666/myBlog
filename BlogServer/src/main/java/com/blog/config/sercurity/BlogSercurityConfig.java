@@ -1,7 +1,9 @@
 package com.blog.config.sercurity;
 
+import com.blog.config.DataSourceConfig;
 import com.blog.utils.ResponseUtils;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,11 +24,18 @@ import org.springframework.security.web.session.SessionInformationExpiredStrateg
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 
 @EnableWebSecurity
 @Configuration
+@Import(DataSourceConfig.class)
 public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
+    private final DataSource dataSource;
+
+    BlogSercurityConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -62,7 +71,7 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(new BlogUserDetailService()).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(new BlogUserDetailService(dataSource)).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     /**
@@ -70,8 +79,7 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
      */
     private class CustomAccessDeineHandler implements AccessDeniedHandler {
         @Override
-        public void handle(HttpServletRequest request, HttpServletResponse response,
-                           AccessDeniedException accessDeniedException) throws IOException, ServletException {
+        public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
         }
     }
@@ -102,7 +110,8 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
     private class AuthenticationFailure implements AuthenticationFailureHandler {
         @Override
         public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-            request.getRequestDispatcher("/template/login.html?meg=登录失败").forward(request, response);
+            response.setContentType("application/json;charset=UTF-8");
+            ResponseUtils.write(response, "{error:'" + exception.getMessage() + "'}");
         }
     }
 

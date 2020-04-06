@@ -1,19 +1,14 @@
 package com.blog.filter;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
-import javax.sql.DataSource;
-
 import com.blog.config.DataSourceConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.javalite.activejdbc.Base;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.Order;
 
+import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import javax.sql.DataSource;
 import java.io.IOException;
 
 @Import(DataSourceConfig.class)

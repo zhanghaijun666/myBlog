@@ -59,7 +59,7 @@ public class UserDao {
         if (null == dbUser) {
             dbUser = User.create("username", userItem.getUsername());
         }
-        dbUser.setString("nickname", userItem.getNickname());
+        dbUser.setString("nickname", StringUtils.isBlank(userItem.getNickname()) ? userItem.getUsername() : userItem.getNickname());
         dbUser.setString("email", userItem.getEmail());
         dbUser.setString("phone", userItem.getPhone());
         dbUser.setLong("birthday", userItem.getBirthday());

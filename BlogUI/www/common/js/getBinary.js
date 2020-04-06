@@ -12,7 +12,7 @@
             xhr = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xhr.onload = function () {
-            if (xhr.status === 200) {
+            if (xhr.readyState == 4 && xhr.status === 200) {
                 let result;
                 if (xhr.responseType === 'text') {
                     result = xhr.responseText;
