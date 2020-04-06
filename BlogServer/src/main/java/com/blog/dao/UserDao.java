@@ -64,13 +64,9 @@ public class UserDao {
         dbUser.setString("phone", userItem.getPhone());
         dbUser.setLong("birthday", userItem.getBirthday());
         dbUser.setLong("status", BlogStore.Status.StatusActive_VALUE);
-        if (StringUtils.isBlank(dbUser.getPassword())) {
-            dbUser.setString("password", RandomUtils.getRandomString(8));
-            JSONObject json = new JSONObject();
-            json.put("password", dbUser.getPassword());
-            result.setMsg(json.toString());
-        }
+        dbUser.setPassword(StringUtils.isNotBlank(dbUser.getPassword()) ? dbUser.getPassword() : RandomUtils.getRandomString(8));
         dbUser.saveIt();
+        result.setMsg(new JSONObject().put("password", dbUser.getPassword()).toString());
         return result.build();
     }
 }

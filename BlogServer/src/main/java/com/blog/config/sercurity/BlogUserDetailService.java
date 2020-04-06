@@ -49,15 +49,15 @@ public class BlogUserDetailService implements UserDetailsService {
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
             List<GrantedAuthority> authList = new ArrayList<>();
-            authList.add(new SimpleGrantedAuthority("USER"));
-            authList.add(new SimpleGrantedAuthority("ADMIN"));
-            authList.add(new SimpleGrantedAuthority("DBA"));
+            authList.add(new SimpleGrantedAuthority("ROLE_USER"));
+            authList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            authList.add(new SimpleGrantedAuthority("ROLE_DBA"));
             return authList;
         }
 
         @Override
         public String getPassword() {
-            return new BCryptPasswordEncoder().encode(this.user.getPassword());
+            return this.user.getPassword();
         }
 
         @Override

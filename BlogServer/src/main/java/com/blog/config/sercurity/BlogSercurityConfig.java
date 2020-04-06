@@ -43,7 +43,7 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin();
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/static/**", "/template/**", "/login", "/logout").permitAll()
+                .antMatchers("/", "/static/**", "/template/**", "/login").permitAll()
                 .antMatchers("/api/**").hasRole("USER")
                 .antMatchers("/h2/**", "/druid/**").access("hasRole('ADMIN') and hasRole('DBA')")
                 .anyRequest().authenticated()

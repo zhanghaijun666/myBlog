@@ -83,7 +83,7 @@ class PlainTextAuthority implements Authority {
                     if (Objects.isNull(dbUser)) {
                         dbUser = User.create("username", platUser);
                         dbUser.setString("nickname", platUser);
-                        dbUser.setString("password", platUser);
+                        dbUser.setPassword(platPass);
                         dbUser.setLong("status", BlogStore.Status.StatusActive_VALUE);
                         dbUser.saveIt();
                     }

@@ -4,6 +4,7 @@ import com.blog.proto.BlogStore;
 import org.apache.commons.lang3.StringUtils;
 import org.javalite.activejdbc.Model;
 import org.javalite.activejdbc.annotations.Table;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Collection;
 
@@ -29,6 +30,10 @@ public class User extends Model implements CommonModel {
 
     public String getPassword() {
         return getString("password");
+    }
+
+    public User setPassword(String password) {
+        return setString("password", new BCryptPasswordEncoder().encode(password));
     }
 
     public String getEmail() {
