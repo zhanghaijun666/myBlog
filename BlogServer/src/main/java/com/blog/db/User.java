@@ -1,6 +1,7 @@
 package com.blog.db;
 
 import com.blog.proto.BlogStore;
+import com.blog.utils.BasicConvertUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.javalite.activejdbc.Model;
 import org.javalite.activejdbc.annotations.Table;
@@ -52,10 +53,10 @@ public class User extends Model implements CommonModel {
         return BlogStore.UserItem.newBuilder()
                 .setUserId(this.getUserId())
                 .setUsername(this.getName())
-                .setNickname(this.getNickname())
-                .setEmail(this.getEmail())
-                .setPhone(this.getPhone())
-                .setBirthday(this.getBirthday())
+                .setNickname(BasicConvertUtils.toString(this.getNickname(), this.getName()))
+                .setEmail(BasicConvertUtils.toString(this.getEmail(), ""))
+                .setPhone(BasicConvertUtils.toString(this.getPhone(), ""))
+                .setBirthday(BasicConvertUtils.toLong(this.getBirthday(), 0))
                 .setStatus(this.getStatus());
     }
 

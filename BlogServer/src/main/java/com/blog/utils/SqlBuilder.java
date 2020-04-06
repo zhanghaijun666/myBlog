@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * @author haijun
  * 简单sql builder。注意：这个不保证sql正确，sql正确是开发的责任。这个只是方便把一些sql拼接简单化
  * Example:
  * SqlBuilder sql = new SqlBuilder()
