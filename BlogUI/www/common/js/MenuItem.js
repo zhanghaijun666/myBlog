@@ -1,7 +1,7 @@
 (function (exports) {
-    function MenuItem(options){
+    function MenuItem(options) {
         options = options || {};
-        var self = $.extend(this,options);
+        var self = $.extend(this, options);
         self.visible = options.visible;
         self.disable = typeof options.disable !== "undefined" ? options.disable : function () {
             var visible = true;
@@ -14,9 +14,11 @@
         self.iconText = options.iconText;
         self.childMenuItems = options.childMenuItems || [];
         self.itemClass = options.itemClass || "";
-        self.targetItem =  options.targetItem || {};
-        self.click = options.click || function(){};
+        self.targetItem = options.targetItem || {};
+        self.click = options.click || function () {
+        };
     }
+
     MenuItem.prototype.getPermit = function () {
         if (isFunction(this.disable)) {
             return !this.disable.bind(this.targetItem || this)();
@@ -24,11 +26,11 @@
         return !this.disable;
     };
     MenuItem.prototype.getChildItems = function () {
-        if(this.childMenuItems instanceof Array){
+        if (this.childMenuItems instanceof Array) {
             return this.childMenuItems;
-        }else if(isFunction(this.childMenuItems)){
+        } else if (isFunction(this.childMenuItems)) {
             return this.childMenuItems();
-        }else{
+        } else {
             new Array();
         }
     };
@@ -36,11 +38,16 @@
         return this.getChildItems().length > 0;
     };
     MenuItem.prototype.menuClick = function () {
-        if(this.targetItem){
+        if (this.targetItem) {
             this.click(this.targetItem);
         }
     };
 
+    function RouteItem(options) {
+        options = options || {};
+        this.template = options.template;
+    }
 
     exports.MenuItem = MenuItem;
+    exports.RouteItem = RouteItem;
 })(this);

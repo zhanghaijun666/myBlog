@@ -1,0 +1,45 @@
+.route-user, .route-user > div {
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.route-user .route-user-body > div:nth-child(1) {
+    background: #f3f3f4;
+    height: 60px;
+}
+
+.route-user .route-user-body > div:nth-child(2) {
+    height: calc(100% - 60px);
+}
+
+.route-user > .user-brief {
+    background-color: #bd5d38;
+}
+
+.route-user > .user-brief > .user-head {
+    width: 160px;
+    height: 160px;
+    margin: 50px auto;
+}
+
+.route-user > .user-brief > .user-head > img {
+    content: url(profile.jpg);
+    max-width: 100%;
+    width: 144px;
+    height: auto;
+    border: .6rem solid #CA7D60;
+    border-radius: 50% !important;
+}
+
+.route-user > .user-brief > .user-menu {
+    padding: 0px 80px;
+}
+
+.route-user > .user-brief > .user-menu .vertical-menu li {
+    margin: 5px 0px;
+}
+
+.route-user > .user-brief > .user-menu i, .user-menu span {
+    color: #fff;
+}

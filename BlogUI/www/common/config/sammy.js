@@ -15,21 +15,21 @@ function SammyPage(options) {
             root.setRootTemplate('login-page');
         });
         this.get(/\#visitor(.*)/, function () {
-            root.setRootTemplate('layout-visitor');
+            root.setRootTemplate('route-visitor');
         });
         this.get(/\#user(.*)/, function () {
             if (!root.loginUser()) {
                 this.redirect('#login');
                 return;
             }
-            root.setRootTemplate('layout-user');
+            root.setRootTemplate('route-user');
         });
         this.get(/\#admin(.*)/, function () {
             if (!root.loginUser()) {
                 this.redirect('#login');
                 return;
             }
-            root.setRootTemplate('layout-admin');
+            root.setRootTemplate('route-admin');
         });
         this.get(/.+/, function () {
             this.redirect("#login");

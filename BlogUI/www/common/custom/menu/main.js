@@ -2,7 +2,7 @@
     define(['knockout', "text!./show.html", "css!./show.css"], function (ko, pageView) {
         function MenuListModel(params, componentInfo) {
             var self = this;
-            self.menuClass = params.menuClass || "right-menu"; //shrink-menu
+            self.menuClass = params.menuClass || "right-menu";
             self.menuList = params.menuList || new Array();
             self.count = isNaN(params.count) ? 4 : Number(params.count);
             self.permitType = params.permitType || "visible";

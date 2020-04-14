@@ -1,9 +1,4 @@
-<!-- {{{ --><!--  ko if: menuClass === "shrink-menu" --><!-- }}} -->
-<shrink-menu params="menuClass:menuClass,menuList:$data.getMenuList()"></shrink-menu>
-<!-- {{{ --><!-- /ko --><!-- }}} -->
-<!-- {{{ --><!--  ko ifnot: menuClass === "shrink-menu" --><!-- }}} -->
 <div class="custom-menu" data-bind="class: menuClass,template: 'menu-normal-template'"></div>
-<!-- {{{ --><!-- /ko --><!-- }}} -->
 <template id="menu-normal-template">
     <ul data-bind="with: $data.getMenuWith()">
         <!-- {{{ --><!--  ko foreach: menus  --><!-- }}} -->

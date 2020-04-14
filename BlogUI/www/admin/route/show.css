@@ -1,0 +1,19 @@
+.route-admin, .route-admin > div {
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.route-admin {
+    display: flex;
+}
+
+.route-admin > .admin-body > div:nth-child(1) {
+    background: #f3f3f4;
+    height: 60px;
+}
+
+.route-admin > .admin-body > div:nth-child(2) {
+    height: calc(100% - 60px);
+    padding: 0px 6px;
+}

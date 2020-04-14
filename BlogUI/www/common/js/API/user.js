@@ -16,5 +16,14 @@
                 location.reload();
             });
         }
+        , login: function (username, password) {
+            var data = new FormData();
+            data.append("username", username);
+            data.append("password", password);
+            getBinary("/login", {cmd: 'POST', data: data, type: "application/x-www-form-urlencoded"}, function (data) {
+                console.log(data);
+                // location.reload();
+            });
+        }
     };
 })(this);
