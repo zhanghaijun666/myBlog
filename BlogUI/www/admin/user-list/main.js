@@ -1,6 +1,7 @@
 define(["text!./show.html", "css!./show.css"], function (pageView) {
     function UserListModel(params, componentInfo) {
         const self = this;
+        BaseComponent.call(self, params, componentInfo);
         self.userList = ko.observableArray([]);
         self.getAllUser();
     }

@@ -2,6 +2,7 @@
     define(["text!./show.html", "css!./show.css"], function (pageView) {
         function ShrinkMenuModel(params, componentInfo) {
             var self = this;
+            BaseComponent.call(self, params, componentInfo);
             self.menuClass = params.menuClass || "";
             self.menuList = params.menuList || new Array();
         }

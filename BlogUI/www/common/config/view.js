@@ -4,7 +4,7 @@ requirejs(["knockout", "BlogStore"], function (ko, BlogStore) {
     function RootViewModel() {
         var self = this;
         self.rootTemplate = ko.observable("blog-loading-page");
-        self.routeHash = ko.observable("");
+        self.routeUrl = ko.observable("");
         self.loginUser = ko.observable();
         self.sammyPage = new SammyPage({view: self}); /*thie last step*/
     }

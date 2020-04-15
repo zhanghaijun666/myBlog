@@ -1,12 +1,16 @@
 define(['knockout', "text!./show.html", "css!./show.css"], function (ko, pageView) {
 
+    ko.components.register('view-file', {require: '/static/www/user/view-file/main.js'});
+
     function RouteUserModel(params, componentInfo) {
         var self = this;
         BaseComponent.call(self, params, componentInfo);
     }
 
     RouteUserModel.prototype.getContainerRoute = function (baseRoute) {
-        return [];
+        return [
+            new RouteItem({template: 'view-file'})
+        ];
     };
     RouteUserModel.prototype.getLeftParams = function () {
         return {

@@ -2,9 +2,7 @@
     <div class="col-md-2 user-brief" data-bind="template:{name: 'common-template', data: $data.getLeftParams()}"></div>
     <div class="col-md-10 route-user-body">
         <div data-bind="template:{name: 'common-template', data: $data.getHeadParams()}"></div>
-        <div>
-
-        </div>
+        <div data-bind="component:{name:'ko-route',params:{routes:$data.getContainerRoute()}}"></div>
     </div>
 </div>
 

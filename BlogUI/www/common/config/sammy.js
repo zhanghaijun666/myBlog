@@ -39,8 +39,8 @@ function SammyPage(options) {
                 this.redirect("#login");
                 return;
             }
-            root.routeHash(customDecodeURI(window.location.hash));
-            root.getLoginUser(function (user) {
+            root.routeUrl(customDecodeURI(window.location.hash));
+            root.getLoginUser(function () {
                 callback();
             });
         });

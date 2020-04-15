@@ -8,7 +8,7 @@
             if(self.routes.length > 0){
                 self.currentName(self.routes[0].template);
             }
-            self.watch(RootView.routeHash,function(value){
+            self.watch(RootView.routeUrl,function(value){
                 console.log(value);
             });
         }
