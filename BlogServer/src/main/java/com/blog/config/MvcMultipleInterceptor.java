@@ -37,8 +37,10 @@ public class MvcMultipleInterceptor implements HandlerInterceptor {
         if (!file.exists() || !file.canRead()) {
             return true;
         }
-        response.setContentType(mediaType);
-        ResourceUtils.writeResource(file, response.getOutputStream());
+        try (OutputStream outputStream = response.getOutputStream()) {
+            response.setContentType(mediaType);
+            ResourceUtils.writeResource(file, outputStream);
+        }
         return false;
     }
 }

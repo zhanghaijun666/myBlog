@@ -9,7 +9,7 @@ function SammyPage(options) {
         });
         this.get(/\#login(.*)/, function () {
             if (root.loginUser()) {
-                this.redirect('#admin');
+                this.redirect('#user');
                 return;
             }
             root.setRootTemplate('login-page');

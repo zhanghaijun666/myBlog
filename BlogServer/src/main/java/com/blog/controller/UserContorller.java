@@ -1,5 +1,6 @@
 package com.blog.controller;
 
+import com.blog.config.sercurity.BlogUserDetails;
 import com.blog.jersey.BlogMediaType;
 import com.blog.proto.BlogStore;
 import org.apache.commons.lang3.StringUtils;
@@ -27,6 +28,10 @@ public class UserContorller {
             Authentication authentication = (Authentication) principal;
             json.put("name", authentication.getName());
             json.put("authority", StringUtils.join(authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet()), ","));
+            if (authentication.getPrincipal() instanceof BlogUserDetails) {
+                BlogUserDetails userDetail = (BlogUserDetails) authentication.getPrincipal();
+                json.put("userId",userDetail.getUser().getUserId());
+            }
         }
         return json.toString();
     }

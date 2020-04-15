@@ -23,8 +23,20 @@ define(['knockout', "text!./show.html", "css!./show.css"], function (ko, pageVie
             name: "user-navbar",
             data: {
                 menus: [
-                    new MenuItem({icon: "fa fa-home fa-lg", iconText: "欢迎登录", ItemClass: "", targetItem: {}}),
-                    new MenuItem({icon: "fa fa-sign-out", iconText: "退出", ItemClass: "", targetItem: {}})
+                    new MenuItem({
+                        icon: "fa fa-home fa-lg",
+                        iconText: RootView.loginUser() ? RootView.loginUser().name : "未知",
+                        ItemClass: "",
+                        targetItem: {},
+                        visible: RootView.loginUser()
+                    }),
+                    new MenuItem({
+                        icon: "fa fa-sign-out",
+                        iconText: "退出",
+                        ItemClass: "",
+                        targetItem: {},
+                        click: API.UserApi.logout
+                    })
                 ]
             }
         };
