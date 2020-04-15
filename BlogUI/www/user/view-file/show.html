@@ -1,3 +1,12 @@
 <div class="view-file">
-    my files
+    <div data-bind="template:{name: 'common-template', data: $data.getTopMenuParams()}"></div>
+    <div data-bind="template:{name: 'common-template', data: $data.getFileCardParams()}"></div>
 </div>
+
+<template id="row-file-template">
+    <div>
+        <input type="checkbox"/>
+        <img src="/static/www/common/image/icon/folder.png" width="30px" height="30px">
+        <span data-bind="text: name"></span>
+    </div>
+</template>

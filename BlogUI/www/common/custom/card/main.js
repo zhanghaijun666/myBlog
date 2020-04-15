@@ -3,8 +3,8 @@
         function CustomCardViewModel(params, componentInfo) {
             var defaultValue = {
                 dataList: []  /*数据*/
-                , headTemplateLarge: "custom-card-body-head"
-                , rowTemplateLarge: ""
+                , headTemplate: ""
+                , rowTemplate: ""
                 , noDataHint: '无数据提示'
                 , context: {}
                 , rightMenus: null

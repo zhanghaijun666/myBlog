@@ -4,7 +4,7 @@
         <button type="button" class="btn btn-danger">删除所选用户</button>
         <button type="button" class="btn btn btn-warning">禁用所选用户</button>
     </div>
-    <custom-card params="dataList:userList,context:$data,rightMenus:getRightMenus,rowTemplateLarge:'user-card-row-template',headTemplateLarge:'user-card-header-template'"></custom-card>
+    <custom-card params="dataList:userList,context:$data,rightMenus:getRightMenus,rowTemplate:'user-card-row-template',headTemplate:'user-card-header-template'"></custom-card>
 </div>
 <template id="user-card-header-template">
     <div class="col-md-2" data-bind="text: '用户名称'"></div>
