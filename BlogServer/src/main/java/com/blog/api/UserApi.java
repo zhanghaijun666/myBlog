@@ -5,10 +5,7 @@ import com.blog.db.User;
 import com.blog.jersey.BlogMediaType;
 import com.blog.proto.BlogStore;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.security.RolesAllowed;
-import javax.sql.DataSource;
 import javax.ws.rs.*;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,9 +15,6 @@ import java.util.stream.Collectors;
 @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
 @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
 public class UserApi {
-
-    @Autowired
-    DataSource dataSource;
 
     @GET
     @Path("/all/{isShowDelete}")

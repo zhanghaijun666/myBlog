@@ -16,14 +16,14 @@
                 location.reload();
             });
         }
-        , login: function (username, password) {
+        , login: function (username, password, callback) {
             var data = new FormData();
+            if (!username || !password) {
+                return;
+            }
             data.append("username", username);
             data.append("password", password);
-            getBinary("/login", {cmd: 'POST', data: data, type: "application/x-www-form-urlencoded"}, function (data) {
-                console.log(data);
-                // location.reload();
-            });
+            getBinary("/login", {cmd: 'POST', data: data}, callback);
         }
     };
 })(this);

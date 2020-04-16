@@ -2,8 +2,12 @@ package com.blog.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+
+import javax.servlet.MultipartConfigElement;
 
 @SpringBootApplication
 @ComponentScan({"com.blog.controller", "com.blog.config"})

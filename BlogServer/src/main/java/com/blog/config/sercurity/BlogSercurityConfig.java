@@ -99,7 +99,9 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
     private class AuthenticationSuccess implements AuthenticationSuccessHandler {
         @Override
         public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-            new DefaultRedirectStrategy().sendRedirect(request, response, "/");
+            response.setContentType("application/json;charset=UTF-8");
+            ResponseUtils.write(response, "");
+            //            new DefaultRedirectStrategy().sendRedirect(request, response, "/");
         }
     }
 

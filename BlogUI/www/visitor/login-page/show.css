@@ -31,11 +31,17 @@
     background: url(./aiwrap.png);
     width: 18px;
     height: 10px;
-    margin: 0 0 20px -58px;
+    margin: 0 0 0px -58px;
     position: relative;
 }
 
-.login-page > .login-large > div:nth-child(3) input {
+.login-page > .login-large > div:nth-child(3) {
+    margin: 6px 0px;
+    text-align: center;
+    color: red;
+}
+
+.login-page > .login-large > div:nth-child(4) input {
     margin-bottom: 20px;
     height: 40px;
     vertical-align: middle;
@@ -43,12 +49,12 @@
     font-size: 14px;
 }
 
-.login-page > .login-large > div:nth-child(3) > div {
+.login-page > .login-large > div:nth-child(5) > div {
     margin-bottom: 20px;
     height: 40px;
 }
 
-.login-page > .login-large > div:nth-child(3) > div:last-child {
+.login-page > .login-large > div:nth-child(5) > div:last-child {
     margin-bottom: 0px;
 }
 
@@ -58,6 +64,7 @@
     background: #27A9E3;
     color: #fff;
 }
+
 .login-page > .login-large span {
     font-size: 16px;
 }

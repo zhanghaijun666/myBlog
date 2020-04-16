@@ -1,8 +1,12 @@
-define(["text!./show.html", "css!./show.css"], function (pageView) {
+define(["text!./show.html", "./file-util.js", "css!./show.css"], function (pageView, FileUtil) {
     function ViewFileModel(params, componentInfo) {
         const self = this;
         BaseComponent.call(self, params, componentInfo);
     }
+
+    ViewFileModel.prototype.uploadFile = function () {
+        FileUtil.uploadFile(document.getElementById("upload-file").files);
+    };
 
     ViewFileModel.prototype.getTopMenuParams = function () {
         return {

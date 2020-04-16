@@ -895,6 +895,25 @@ public final class BlogStore {
      */
     com.blog.proto.BlogStore.ResultOrBuilder getEsultOrBuilder(
         int index);
+
+    /**
+     * <code>optional .ReturnCode code = 2;</code>
+     */
+    int getCodeValue();
+    /**
+     * <code>optional .ReturnCode code = 2;</code>
+     */
+    com.blog.proto.BlogStore.ReturnCode getCode();
+
+    /**
+     * <code>optional string msg = 3;</code>
+     */
+    java.lang.String getMsg();
+    /**
+     * <code>optional string msg = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getMsgBytes();
   }
   /**
    * Protobuf type {@code ResultList}
@@ -909,6 +928,8 @@ public final class BlogStore {
     }
     private ResultList() {
       esult_ = java.util.Collections.emptyList();
+      code_ = 0;
+      msg_ = "";
     }
 
     @java.lang.Override
@@ -945,6 +966,18 @@ public final class BlogStore {
                   input.readMessage(com.blog.proto.BlogStore.Result.parser(), extensionRegistry));
               break;
             }
+            case 16: {
+              int rawValue = input.readEnum();
+
+              code_ = rawValue;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              msg_ = s;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -971,6 +1004,7 @@ public final class BlogStore {
               com.blog.proto.BlogStore.ResultList.class, com.blog.proto.BlogStore.ResultList.Builder.class);
     }
 
+    private int bitField0_;
     public static final int ESULT_FIELD_NUMBER = 1;
     private java.util.List<com.blog.proto.BlogStore.Result> esult_;
     /**
@@ -1006,6 +1040,56 @@ public final class BlogStore {
       return esult_.get(index);
     }
 
+    public static final int CODE_FIELD_NUMBER = 2;
+    private int code_;
+    /**
+     * <code>optional .ReturnCode code = 2;</code>
+     */
+    public int getCodeValue() {
+      return code_;
+    }
+    /**
+     * <code>optional .ReturnCode code = 2;</code>
+     */
+    public com.blog.proto.BlogStore.ReturnCode getCode() {
+      com.blog.proto.BlogStore.ReturnCode result = com.blog.proto.BlogStore.ReturnCode.valueOf(code_);
+      return result == null ? com.blog.proto.BlogStore.ReturnCode.UNRECOGNIZED : result;
+    }
+
+    public static final int MSG_FIELD_NUMBER = 3;
+    private volatile java.lang.Object msg_;
+    /**
+     * <code>optional string msg = 3;</code>
+     */
+    public java.lang.String getMsg() {
+      java.lang.Object ref = msg_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        msg_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string msg = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMsgBytes() {
+      java.lang.Object ref = msg_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msg_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1021,6 +1105,12 @@ public final class BlogStore {
       for (int i = 0; i < esult_.size(); i++) {
         output.writeMessage(1, esult_.get(i));
       }
+      if (code_ != com.blog.proto.BlogStore.ReturnCode.UNKNOWN_RETURN_CODE.getNumber()) {
+        output.writeEnum(2, code_);
+      }
+      if (!getMsgBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, msg_);
+      }
     }
 
     public int getSerializedSize() {
@@ -1031,6 +1121,13 @@ public final class BlogStore {
       for (int i = 0; i < esult_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, esult_.get(i));
+      }
+      if (code_ != com.blog.proto.BlogStore.ReturnCode.UNKNOWN_RETURN_CODE.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, code_);
+      }
+      if (!getMsgBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, msg_);
       }
       memoizedSize = size;
       return size;
@@ -1050,6 +1147,9 @@ public final class BlogStore {
       boolean result = true;
       result = result && getEsultList()
           .equals(other.getEsultList());
+      result = result && code_ == other.code_;
+      result = result && getMsg()
+          .equals(other.getMsg());
       return result;
     }
 
@@ -1064,6 +1164,10 @@ public final class BlogStore {
         hash = (37 * hash) + ESULT_FIELD_NUMBER;
         hash = (53 * hash) + getEsultList().hashCode();
       }
+      hash = (37 * hash) + CODE_FIELD_NUMBER;
+      hash = (53 * hash) + code_;
+      hash = (37 * hash) + MSG_FIELD_NUMBER;
+      hash = (53 * hash) + getMsg().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1189,6 +1293,10 @@ public final class BlogStore {
         } else {
           esultBuilder_.clear();
         }
+        code_ = 0;
+
+        msg_ = "";
+
         return this;
       }
 
@@ -1212,6 +1320,7 @@ public final class BlogStore {
       public com.blog.proto.BlogStore.ResultList buildPartial() {
         com.blog.proto.BlogStore.ResultList result = new com.blog.proto.BlogStore.ResultList(this);
         int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
         if (esultBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
             esult_ = java.util.Collections.unmodifiableList(esult_);
@@ -1221,6 +1330,9 @@ public final class BlogStore {
         } else {
           result.esult_ = esultBuilder_.build();
         }
+        result.code_ = code_;
+        result.msg_ = msg_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -1287,6 +1399,13 @@ public final class BlogStore {
               esultBuilder_.addAllMessages(other.esult_);
             }
           }
+        }
+        if (other.code_ != 0) {
+          setCodeValue(other.getCodeValue());
+        }
+        if (!other.getMsg().isEmpty()) {
+          msg_ = other.msg_;
+          onChanged();
         }
         onChanged();
         return this;
@@ -1553,6 +1672,119 @@ public final class BlogStore {
           esult_ = null;
         }
         return esultBuilder_;
+      }
+
+      private int code_ = 0;
+      /**
+       * <code>optional .ReturnCode code = 2;</code>
+       */
+      public int getCodeValue() {
+        return code_;
+      }
+      /**
+       * <code>optional .ReturnCode code = 2;</code>
+       */
+      public Builder setCodeValue(int value) {
+        code_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .ReturnCode code = 2;</code>
+       */
+      public com.blog.proto.BlogStore.ReturnCode getCode() {
+        com.blog.proto.BlogStore.ReturnCode result = com.blog.proto.BlogStore.ReturnCode.valueOf(code_);
+        return result == null ? com.blog.proto.BlogStore.ReturnCode.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>optional .ReturnCode code = 2;</code>
+       */
+      public Builder setCode(com.blog.proto.BlogStore.ReturnCode value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        code_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .ReturnCode code = 2;</code>
+       */
+      public Builder clearCode() {
+        
+        code_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object msg_ = "";
+      /**
+       * <code>optional string msg = 3;</code>
+       */
+      public java.lang.String getMsg() {
+        java.lang.Object ref = msg_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          msg_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string msg = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMsgBytes() {
+        java.lang.Object ref = msg_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msg_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string msg = 3;</code>
+       */
+      public Builder setMsg(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        msg_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string msg = 3;</code>
+       */
+      public Builder clearMsg() {
+        
+        msg_ = getDefaultInstance().getMsg();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string msg = 3;</code>
+       */
+      public Builder setMsgBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        msg_ = value;
+        onChanged();
+        return this;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -3501,15 +3733,16 @@ public final class BlogStore {
   static {
     java.lang.String[] descriptorData = {
       "\n\020blog-store.proto\"0\n\006Result\022\031\n\004code\030\001 \001" +
-      "(\0162\013.ReturnCode\022\013\n\003msg\030\002 \001(\t\"$\n\nResultLi" +
-      "st\022\026\n\005esult\030\001 \003(\0132\007.Result\"\207\001\n\010UserItem\022" +
+      "(\0162\013.ReturnCode\022\013\n\003msg\030\002 \001(\t\"L\n\nResultLi" +
+      "st\022\026\n\005esult\030\001 \003(\0132\007.Result\022\031\n\004code\030\002 \001(\016" +
+      "2\013.ReturnCode\022\013\n\003msg\030\003 \001(\t\"\207\001\n\010UserItem\022" +
       "\016\n\006userId\030\001 \001(\005\022\020\n\010username\030\002 \001(\t\022\020\n\010nic" +
       "kname\030\003 \001(\t\022\r\n\005email\030\004 \001(\t\022\r\n\005phone\030\005 \001(" +
       "\t\022\020\n\010birthday\030\006 \001(\003\022\027\n\006status\030\024 \001(\0162\007.St" +
       "atus\"$\n\010UserList\022\030\n\005items\030\001 \003(\0132\t.UserIt" +
       "em*@\n\006Status\022\021\n\rStatusDefault\020\000\022\020\n\014Statu" +
-      "sActive\020\001\022\021\n\rStatusDeleted\020\002*\323\001\n\nReturnC" +
-      "ode\022\027\n\023UNKNOWN_RETURN_CODE\020\000\022\r\n\tRETURN_O",
+      "sActive\020\001\022\021\n\rStatusDeleted\020\002*\323\001\n\nReturnC",
+      "ode\022\027\n\023UNKNOWN_RETURN_CODE\020\000\022\r\n\tRETURN_O" +
       "K\020\001\022\020\n\014RETURN_ERROR\020\002\022\025\n\021RETURN_USER_EXI" +
       "ST\0202\022\032\n\026RETURN_USER_NAME_BLANK\0203\022\036\n\032RETU" +
       "RN_USER_PASSWORD_BLANK\0204\022\033\n\027RETURN_USER_" +
@@ -3539,7 +3772,7 @@ public final class BlogStore {
     internal_static_ResultList_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ResultList_descriptor,
-        new java.lang.String[] { "Esult", });
+        new java.lang.String[] { "Esult", "Code", "Msg", });
     internal_static_UserItem_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_UserItem_fieldAccessorTable = new

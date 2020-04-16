@@ -26,6 +26,8 @@ message Result{
 }
 message ResultList{
     repeated Result esult = 1;
+    ReturnCode code = 2;
+    string msg = 3;
 }
 
 message UserItem {
