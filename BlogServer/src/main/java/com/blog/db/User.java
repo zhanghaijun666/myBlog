@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.Collection;
 
 @Table("user")
-public class User extends Model implements CommonModel {
+public class User extends Model implements CommonModel,Organize {
     public static final int DEFAULT_USER_ID = 0;
 
     public int getUserId() {
@@ -48,6 +48,15 @@ public class User extends Model implements CommonModel {
     public Long getBirthday() {
         return getLong("birthday");
     }
+
+    public User setFileHash(String hash) {
+        return setString("file_hash", hash);
+    }
+
+    public String getFileHash() {
+        return getString("file_hash");
+    }
+
 
     public BlogStore.UserItem.Builder builderUserItem() {
         return BlogStore.UserItem.newBuilder()

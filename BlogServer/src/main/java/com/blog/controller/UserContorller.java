@@ -1,8 +1,6 @@
 package com.blog.controller;
 
 import com.blog.config.sercurity.BlogUserDetails;
-import com.blog.jersey.BlogMediaType;
-import com.blog.proto.BlogStore;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.springframework.security.core.Authentication;
@@ -34,15 +32,5 @@ public class UserContorller {
             }
         }
         return json.toString();
-    }
-
-    @RequestMapping(value = "/user/test", method = RequestMethod.GET, produces = {BlogMediaType.APPLICATION_PROTOBUF})
-    @ResponseBody
-    public BlogStore.UserItem getUser() {
-        BlogStore.UserItem.Builder builder = BlogStore.UserItem.newBuilder();
-        builder.setNickname("setNickname");
-        builder.setEmail("setEmail");
-        builder.setUsername("setUsername");
-        return builder.build();
     }
 }

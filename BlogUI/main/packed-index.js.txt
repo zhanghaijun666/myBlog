@@ -5,5 +5,4 @@
 ../resource/lib/sammy.js
 ../resource/lib/protobuf.js
 ../resource/lib/rusha.js
-../resource/lib/Chart.min.js
 ../resource/lib/threejs/

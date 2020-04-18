@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @Import(DataSourceConfig.class)
 @Order(6) //值越小，Filter越靠前。
-@WebFilter(filterName = "activeJDBCFilter", urlPatterns = {"/api/*"})
+@WebFilter(filterName = "activeJDBCFilter", urlPatterns = {"/api/*","/file/*"})
 @Slf4j
 public class JDBCFilter implements Filter {
     private final DataSource dataSource;

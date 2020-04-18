@@ -1,6 +1,11 @@
 define(["knockout"], function (ko) {
     return {
-        uploadFile: function (files) {
+        getFile: function (filePath) {
+            getBinary("/api/file/get/" + filePath, {}, function (data) {
+                console.log(BlogStore.FileStore.StoreTree.decode(data));
+            })
+        },
+        uploadFile: function (files, filePath) {
             if (!(files instanceof FileList) || files.length === 0) {
                 console.log("没有文件");
                 return;
@@ -9,7 +14,7 @@ define(["knockout"], function (ko) {
             for (let i = 0; i < files.length; i++) {
                 data.append("file", files[i]);
             }
-            getBinary("/api/file/upload", {cmd: "POST", data: data,}, function (data) {
+            getBinary("/file/upload/" + filePath, {cmd: "POST", data: data}, function (data) {
                 console.log(data);
             })
         }

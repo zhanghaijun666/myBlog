@@ -2,10 +2,13 @@ define(["text!./show.html", "./file-util.js", "css!./show.css"], function (pageV
     function ViewFileModel(params, componentInfo) {
         const self = this;
         BaseComponent.call(self, params, componentInfo);
+        self.parentUrl = BlogStore.OwnerType.User + "/" + RootView.loginUser().userId + "/default";
+
+        FileUtil.getFile(self.parentUrl);
     }
 
     ViewFileModel.prototype.uploadFile = function () {
-        FileUtil.uploadFile(document.getElementById("upload-file").files);
+        FileUtil.uploadFile(document.getElementById("upload-file").files, this.parentUrl);
     };
 
     ViewFileModel.prototype.getTopMenuParams = function () {

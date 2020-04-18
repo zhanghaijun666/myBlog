@@ -1,9 +1,29 @@
 package com.blog.utils;
 
+import com.blog.config.sercurity.BlogUserDetails;
+import com.blog.db.User;
+import org.json.JSONObject;
+import org.springframework.security.core.Authentication;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 public class RequestUtils {
+    public static User getUser(HttpServletRequest request) {
+        JSONObject json = new JSONObject();
+        Principal principal = request.getUserPrincipal();
+        if (null != principal && principal instanceof Authentication) {
+            Authentication authentication = (Authentication) principal;
+            if (authentication.getPrincipal() instanceof BlogUserDetails) {
+                BlogUserDetails userDetail = (BlogUserDetails) authentication.getPrincipal();
+                return userDetail.getUser();
+            }
+        }
+        return null;
+    }
+
+
     public static String getAccessUrl(ServletRequest request) {
         if (request instanceof HttpServletRequest) {
             return (((HttpServletRequest) request).getRequestURI());

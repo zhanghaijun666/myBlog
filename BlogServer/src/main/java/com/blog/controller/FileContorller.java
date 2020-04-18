@@ -1,48 +1,59 @@
 package com.blog.controller;
 
+import com.blog.db.Organize;
+import com.blog.db.User;
+import com.blog.proto.BlogStore;
+import com.blog.service.File.FileUrl;
+import com.blog.service.File.StoreFileBlob;
+import com.blog.service.File.StoreFileTree;
+import com.blog.utils.PathUtils;
+import com.blog.utils.RequestUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import sun.misc.Request;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.InputStream;
 
 @Controller
 @RequestMapping("/file")
 public class FileContorller {
 
-    @PostMapping("/upload")
+    @PostMapping("/upload/**")
     @ResponseBody
-    public Map fileChunkUpload(@RequestParam("file") MultipartFile[] fileArray, HttpServletResponse response, HttpServletRequest request) {
-        HashMap<String, String> map = new HashMap();
+    public String fileChunkUpload(@RequestParam("file") MultipartFile[] fileArray, HttpServletRequest request) {
+        String originPath = request.getRequestURI().replace("/file/upload", "");
         if (fileArray.length == 0) {
-            map.put("res", "文件为空");
-            return map;
+            return "文件为空";
         }
+        User user = RequestUtils.getUser(request);
+        if (null == user) {
+            return "user is null";
+        }
+        FileUrl fileUrl = new FileUrl(originPath, user.getUserId());
         for (MultipartFile file : fileArray) {
-            File targetFile = new File("D:/Download/file/" + file.getOriginalFilename());
-            if (!targetFile.getParentFile().exists()) {
-                targetFile.getParentFile().mkdirs();
-            }
-            try {
-                file.transferTo(targetFile);
-                map.put(file.getOriginalFilename(), "{" +
-                        "ContentType:" + file.getContentType() + "," +
-                        "Name:" + file.getOriginalFilename() + "," +
-                        "Size:" + file.getSize() +
-                        "}");
+            BlogStore.FileStore.StoreTree.Builder storeTree = BlogStore.FileStore.StoreTree.newBuilder()
+                    .setOwnerType(fileUrl.getOwnerType())
+                    .setOwnerId(fileUrl.getOwnerId())
+                    .setFileName(file.getOriginalFilename())
+                    .setContentType(file.getContentType())
+                    .setFileSize(file.getSize())
+                    .setCreateTime(System.currentTimeMillis())
+                    .setUpdateTime(System.currentTimeMillis())
+                    .setCommitterId(fileUrl.getUserId());
+            try (InputStream in = file.getInputStream()) {
+                storeTree.setBlobHash(new StoreFileBlob().writeFile(IOUtils.toByteArray(in)));
+                String treeHash = new StoreFileTree().writeFile(storeTree.build());
+                User dbUser = (User) fileUrl.getOrganize();
+                dbUser.setFileHash(treeHash);
+                dbUser.saveIt();
             } catch (IOException e) {
-                e.printStackTrace();
-                map.put(file.getOriginalFilename(), "上传失败");
+                return "";
             }
         }
-        return map;
+        return "ok";
     }
 }

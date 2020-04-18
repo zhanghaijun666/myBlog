@@ -2,12 +2,17 @@ syntax = "proto3";
 option java_package = "com.blog.proto";
 option java_outer_classname = "BlogStore";
 
-enum Status{
+enum OwnerType{
+    OwnerDefault = 0;
+    User = 1;
+    Group = 2;
+}
+enum Status {
     StatusDefault = 0;
     StatusActive = 1;
     StatusDeleted = 2;
 }
-enum ReturnCode{
+enum ReturnCode {
     UNKNOWN_RETURN_CODE = 0;
     RETURN_OK = 1;
     RETURN_ERROR = 2;
@@ -20,11 +25,31 @@ enum ReturnCode{
 
 }
 
-message Result{
+message FileStore {
+    message StoreTree {
+        int32 ownerType = 1;
+        int32 ownerId = 2;
+        string fileName = 3;
+        string contentType = 4;
+        int64 fileSize = 5;
+        oneof Playload {
+            HashList treeHahs = 6;
+            HashList blobHash = 7;
+        }
+        int64 createTime = 10;
+        int64 updateTime = 11;
+        int32 committerId = 12;
+    }
+    message HashList {
+        repeated string hsah = 1;
+    }
+}
+
+message Result {
     ReturnCode code = 1;
     string msg = 2;
 }
-message ResultList{
+message ResultList {
     repeated Result esult = 1;
     ReturnCode code = 2;
     string msg = 3;
@@ -40,6 +65,6 @@ message UserItem {
 
     Status status = 20;
 }
-message UserList{
+message UserList {
     repeated UserItem items = 1;
 }

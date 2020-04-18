@@ -25,4 +25,10 @@ public class PathUtils {
         }
         return pathStr.substring(0, pathStr.length() - 1).replaceAll("\\/+", "/");
     }
+
+    public static String getFileName(String path) {
+        int index = path.lastIndexOf("/");
+        return index > 0 ? path.substring(index + 1) : path;
+    }
+
 }
