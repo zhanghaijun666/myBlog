@@ -20,7 +20,7 @@
         }
         CustomCardViewModel.prototype.getMenus = function (menus, origin) {
             if (menus instanceof Array) {
-                return Menus;
+                return menus;
             } else if (isFunction(menus)) {
                 return menus.bind(this.context,origin)();
             } else {

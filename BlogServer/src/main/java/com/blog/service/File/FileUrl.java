@@ -5,10 +5,12 @@ import com.blog.db.Organize;
 import com.blog.db.User;
 import com.blog.proto.BlogStore;
 import com.blog.utils.BasicConvertUtils;
+import com.blog.utils.PathUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,7 +52,48 @@ public class FileUrl {
         }
     }
 
+    public String getStoreHash() {
+        if (null == this.storeHash) {
+            Organize organize = this.getOrganize();
+            this.storeHash = organize == null ? null : organize.getFileHash();
+        }
+        return storeHash;
+    }
+
+    public FileUrl getParentUrl() {
+        String parentPath = this.getPath().substring(0, this.getPath().lastIndexOf("/"));
+        return new FileUrl(PathUtils.joinPath(this.getOwnerType(), this.getOwnerId(), this.getBucket(), parentPath), this.getUserId());
+    }
+
+    public String getFileName() {
+        return PathUtils.getFileName(this.getPath());
+    }
+
+    public String getFullPath() {
+        return PathUtils.joinPath(this.getOwnerType(), this.getOwnerId(), this.getBucket(), this.getPath());
+    }
+
     public Organize getOrganize() {
         return OrganizeDao.getOrganize(this.getOwnerType(), this.getOwnerId());
+    }
+
+    public BlogStore.StoreFile.StoreTree getStoreTree() {
+        List<BlogStore.StoreFile.StoreTree> list = StoreFactory.getStoreTreeList(this.getStoreHash(), this.getPath());
+        return list.isEmpty() ? null : list.get(list.size() - 1);
+    }
+
+    public String getTreeHash() {
+        List<BlogStore.StoreFile.StoreTree> list = StoreFactory.getStoreTreeList(this.getStoreHash(), this.getPath());
+        if (list.size() > 1) {
+            StoreFileTree fileTree = new StoreFileTree();
+            return list.get(list.size() - 2).getChildItemList().stream().filter((hash) -> {
+                return StringUtils.equals(fileTree.readFile(hash).getFileName(), this.getFileName());
+            }).findFirst().get();
+        }
+        return "";
+    }
+
+    public boolean isOwner() {
+        return this.getOwnerType() == BlogStore.OwnerType.User_VALUE && this.getUserId() > 0 && this.getUserId() == this.getOwnerId();
     }
 }

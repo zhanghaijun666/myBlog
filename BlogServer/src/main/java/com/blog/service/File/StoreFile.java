@@ -5,11 +5,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 
-public interface StoreFile {
+public abstract class StoreFile {
 
-    File getHashFile(String hash);
+    public abstract File getHashFile(String hash);
 
-    default String getHashDir(String hash) {
+    protected static String getHashDir(String hash) {
         if (StringUtils.isBlank(hash)) {
             return "";
         }
@@ -19,7 +19,7 @@ public interface StoreFile {
         return PathUtils.joinPath(hash.substring(0, 5), hash.substring(5, 7));
     }
 
-    default String getStorePath() {
+    protected static String getStorePath() {
         return PathUtils.joinPath(PathUtils.getBlogServerPath(), "store");
     }
 

@@ -1,21 +1,40 @@
 (function (exports) {
+    function getObjAttr(obj, attr) {
+        if (!obj || !attr) {
+            return undefined;
+        }
+        var array = attr.split(".");
+        var objAttr = obj;
+        for (var i = 0; i < array.length; i++) {
+            objAttr = objAttr[array[i]];
+            if (!objAttr) {
+                return undefined;
+            }
+        }
+        return objAttr;
+    }
+
     exports.createAutoStructure = function (storeName, data, isObservable) {
-        if (!BlogStore[storeName]) {
+        let BlogStoreAttr = getObjAttr(BlogStore, storeName);
+        if (!BlogStoreAttr) {
             throw storeName + " is not ProtocBuf data";
         }
         const map = {};
-        data = data ? BlogStore[storeName].decode(data) : {};
-        const keys = Object.keys(BlogStore[storeName].fields);
+        if (data instanceof Uint8Array) {
+            data = BlogStoreAttr.decode(data)
+        }
+        data = data ? data : {};
+        const keys = Object.keys(BlogStoreAttr.fields);
         $.each(keys, function (key, val) {
             if (/.*id.*/i.test(val)) {
                 map[val] = data[val];
                 return;
             }
-            if (BlogStore[storeName].fields[val].rule === "repeated") {
+            if (BlogStoreAttr.fields[val].rule === "repeated") {
                 map[val] = isObservable ? ko.observableArray(data[val]) : data[val];
                 return;
             }
-            switch (BlogStore[storeName].fields[val].type) {
+            switch (BlogStoreAttr.fields[val].type) {
                 case "sint32":
                 case "sint64":
                     map[val] = isObservable ? ko.observable(Number(data[val] || 0)) : Number(data[val] || 0);

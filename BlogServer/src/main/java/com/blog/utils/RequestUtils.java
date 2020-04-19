@@ -2,6 +2,7 @@ package com.blog.utils;
 
 import com.blog.config.sercurity.BlogUserDetails;
 import com.blog.db.User;
+import com.blog.service.File.FileUrl;
 import org.json.JSONObject;
 import org.springframework.security.core.Authentication;
 
@@ -10,8 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 public class RequestUtils {
+    public static int getUserId(HttpServletRequest request) {
+        User user = RequestUtils.getUser(request);
+        if (null == user) {
+            return FileUrl.DEFAULT_OWNER_ID;
+        }
+        return user.getUserId();
+    }
+
     public static User getUser(HttpServletRequest request) {
         JSONObject json = new JSONObject();
+        if(null == request){
+            return null;
+        }
         Principal principal = request.getUserPrincipal();
         if (null != principal && principal instanceof Authentication) {
             Authentication authentication = (Authentication) principal;

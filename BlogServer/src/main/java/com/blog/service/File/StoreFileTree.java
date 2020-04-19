@@ -4,37 +4,46 @@ import com.blog.proto.BlogStore;
 import com.blog.utils.EncryptUtils;
 import com.blog.utils.PathUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 
-public class StoreFileTree implements StoreFile {
+public class StoreFileTree extends StoreFile {
 
     @Override
     public File getHashFile(String hash) {
-        return new File(PathUtils.joinPath(this.getStorePath(), "tree", this.getHashDir(hash)), hash);
+        return new File(PathUtils.joinPath(StoreFileTree.getStorePath(), "tree", StoreFileTree.getHashDir(hash)), hash);
     }
 
-    public String writeFile(BlogStore.FileStore.StoreTree tree) throws IOException {
-        byte[] bytes = tree.toByteArray();
-        String hash = EncryptUtils.sha1(bytes);
-        File hashFile = this.getHashFile(hash);
-        if (!hashFile.getParentFile().exists()) {
-            hashFile.getParentFile().mkdirs();
+    public String writeFile(BlogStore.StoreFile.StoreTree tree) {
+        try {
+            byte[] bytes = tree.toByteArray();
+            String hash = EncryptUtils.sha1(bytes);
+            File hashFile = this.getHashFile(hash);
+            if (!hashFile.getParentFile().exists()) {
+                hashFile.getParentFile().mkdirs();
+            }
+            if (!hashFile.exists()) {
+
+                Files.write(hashFile.toPath(), bytes);
+
+            }
+            return hash;
+        } catch (IOException e) {
+            return "";
         }
-        if (!hashFile.exists()) {
-            Files.write(hashFile.toPath(), bytes);
-        }
-        return hash;
     }
 
-    public BlogStore.FileStore.StoreTree readFile(String hash) throws IOException {
+    public BlogStore.StoreFile.StoreTree readFile(String hash) {
+        if (StringUtils.isBlank(hash)) {
+            return null;
+        }
         File hashFile = this.getHashFile(hash);
         try (InputStream in = new FileInputStream(hashFile)) {
-            return BlogStore.FileStore.StoreTree.parseFrom(IOUtils.toByteArray(in));
+            return BlogStore.StoreFile.StoreTree.parseFrom(IOUtils.toByteArray(in));
+        } catch (Exception e) {
+            return null;
         }
     }
 }

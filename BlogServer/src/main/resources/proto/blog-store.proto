@@ -2,7 +2,7 @@ syntax = "proto3";
 option java_package = "com.blog.proto";
 option java_outer_classname = "BlogStore";
 
-enum OwnerType{
+enum OwnerType {
     OwnerDefault = 0;
     User = 1;
     Group = 2;
@@ -25,23 +25,29 @@ enum ReturnCode {
 
 }
 
-message FileStore {
-    message StoreTree {
-        int32 ownerType = 1;
-        int32 ownerId = 2;
-        string fileName = 3;
-        string contentType = 4;
-        int64 fileSize = 5;
-        oneof Playload {
-            HashList treeHahs = 6;
-            HashList blobHash = 7;
-        }
-        int64 createTime = 10;
-        int64 updateTime = 11;
-        int32 committerId = 12;
+message StoreFile {
+    enum StoreTypeEnum {
+        StoreDefault = 0;
+        Tree = 1;
+        Blob = 2;
     }
-    message HashList {
-        repeated string hsah = 1;
+    message StoreTree {
+        StoreFile.StoreTypeEnum storeType = 1;
+        repeated string childItem = 2;
+
+        int32 ownerType = 5;
+        int32 ownerId = 6;
+        string fileName = 7;
+        string contentType = 8;
+        int64 fileSize = 9;
+
+        int64 createTime = 20;
+        int64 updateTime = 21;
+        int32 committerId = 22;
+    }
+    message StoreList {
+        repeated StoreTree items = 1;
+        StoreTree parentItem = 2;
     }
 }
 
