@@ -1,19 +1,17 @@
 package com.blog.service.File;
 
-import com.blog.proto.BlogStore;
+import com.blog.proto.BlogStore.StoreFile;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class StoreFactory {
 
-    public static void addStore(FileUrl parentUrl, BlogStore.StoreFile.StoreTree newTree) {
+    public static void addStore(FileUrl parentUrl, StoreFile.StoreTree newTree) {
         String treeHash = new StoreFileTree().writeFile(newTree);
         StoreFactory.performStoreTreeUpdate(parentUrl, new Action() {
             @Override
-            public BlogStore.StoreFile.StoreTree perform(BlogStore.StoreFile.StoreTree oldStoreItem) {
+            public StoreFile.StoreTree perform(StoreFile.StoreTree oldStoreItem) {
                 return oldStoreItem.toBuilder()
                         .addChildItem(treeHash)
                         .setFileSize(oldStoreItem.getFileSize() + newTree.getFileSize())
@@ -25,7 +23,7 @@ public class StoreFactory {
     public static void rename(FileUrl fileUrl, String newName) {
         StoreFactory.performStoreTreeUpdate(fileUrl, new Action() {
             @Override
-            public BlogStore.StoreFile.StoreTree perform(BlogStore.StoreFile.StoreTree oldStoreItem) {
+            public StoreFile.StoreTree perform(StoreFile.StoreTree oldStoreItem) {
                 return oldStoreItem.toBuilder()
                         .setFileName(newName)
                         .build();
@@ -33,78 +31,88 @@ public class StoreFactory {
         });
     }
 
-    public static void deleteStore(FileUrl parentUrl, String deleteHash) {
+    public static void deleteStore(FileUrl parentUrl, Map.Entry<String, StoreFile.StoreTree> entry) {
         StoreFactory.performStoreTreeUpdate(parentUrl, new Action() {
             @Override
-            public BlogStore.StoreFile.StoreTree perform(BlogStore.StoreFile.StoreTree oldStoreItem) {
+            public StoreFile.StoreTree perform(StoreFile.StoreTree oldStoreItem) {
                 List<String> list = oldStoreItem.getChildItemList();
-                list.remove(deleteHash);
+                list.remove(entry.getKey());
                 return oldStoreItem.toBuilder()
-                        .clearChildItem()
-                        .addAllChildItem(list)
+                        .clearChildItem().addAllChildItem(list)
+                        .setFileSize(oldStoreItem.getFileSize() - entry.getValue().getFileSize())
                         .build();
             }
         });
     }
 
     interface Action {
-        public BlogStore.StoreFile.StoreTree perform(BlogStore.StoreFile.StoreTree oldStoreItem);
+        public StoreFile.StoreTree perform(StoreFile.StoreTree oldStoreItem);
     }
 
     public static String performStoreTreeUpdate(FileUrl fileUrl, Action action) {
-        List<BlogStore.StoreFile.StoreTree> list = StoreFactory.getStoreTreeList(fileUrl.getStoreHash(), fileUrl.getPath());
-        if (null == list || list.isEmpty()) {
-            list.add(BlogStore.StoreFile.StoreTree.newBuilder()
-                    .setStoreType(BlogStore.StoreFile.StoreTypeEnum.Tree)
+        LinkedHashMap<String, StoreFile.StoreTree> map = StoreFactory.getStoreTreeList(fileUrl.getStoreHash(), fileUrl.getPath());
+        if (null == map || map.isEmpty()) {
+            StoreFile.StoreTree rootTree = action.perform(StoreFile.StoreTree.newBuilder()
+                    .setStoreType(StoreFile.StoreTypeEnum.Tree)
                     .setOwnerType(fileUrl.getOwnerType())
                     .setOwnerId(fileUrl.getOwnerId())
-                    .setFileName("")
-                    .setContentType("")
-                    .setFileSize(0)
+                    .setFileName("").setContentType("").setFileSize(0)
                     .setCreateTime(System.currentTimeMillis())
                     .setUpdateTime(System.currentTimeMillis())
                     .setCommitterId(fileUrl.getUserId())
                     .build());
+            String rootHash = new StoreFileTree().writeFile(rootTree);
+            fileUrl.getOrganize().setFileHash(rootHash).saveIt();
+            return rootHash;
         }
+        //逆向便利map
+        ListIterator<Map.Entry<String, StoreFile.StoreTree>> iter = new ArrayList<>(map.entrySet()).listIterator(map.size());
+        Map.Entry<String, StoreFile.StoreTree> entry = null;
+        StoreFile.StoreTree newTree = null;
+        String newHash = "";
         StoreFileTree fileTree = new StoreFileTree();
-        BlogStore.StoreFile.StoreTree oldTree = null;
-        BlogStore.StoreFile.StoreTree newTree = null;
-        int index = list.size() - 1;
-        String treeHash = "";
-        while (index >= 0) {
-            oldTree = list.get(index);
-            if (index == list.size() - 1) {
-                newTree = action.perform(oldTree);
-            } else if (StringUtils.isNotBlank(treeHash)) {
-                newTree = oldTree.toBuilder().setFileSize(0).build();
+        while (iter.hasPrevious()) {
+            if (null == entry) {
+                entry = iter.previous();
+                newTree = action.perform(entry.getValue());
+            } else if (null != entry) {
+                String oldHash = entry.getKey();
+                long oldSize = entry.getValue().getFileSize();
+                entry = iter.previous();
+                List<String> childHash = entry.getValue().getChildItemList();
+                childHash.remove(oldHash);
+                childHash.add(newHash);
+                newTree = entry.getValue().toBuilder()
+                        .clearChildItem().addAllChildItem(childHash)
+                        .setFileSize(entry.getValue().getFileSize() - oldSize + newTree.getFileSize())
+                        .build();
             }
-            index--;
-            treeHash = fileTree.writeFile(newTree);
+            newHash = fileTree.writeFile(newTree);
         }
-        fileUrl.getOrganize().setFileHash(treeHash).saveIt();
-        return treeHash;
+        fileUrl.getOrganize().setFileHash(newHash).saveIt();
+        return newHash;
     }
 
-    public static List<BlogStore.StoreFile.StoreTree> getStoreTreeList(String storeHash, String path) {
-        List<BlogStore.StoreFile.StoreTree> list = new ArrayList<>();
+    public static LinkedHashMap<String, StoreFile.StoreTree> getStoreTreeList(String storeHash, String path) {
+        LinkedHashMap<String, StoreFile.StoreTree> map = new LinkedHashMap<>();
         StoreFileTree fileTree = new StoreFileTree();
-        BlogStore.StoreFile.StoreTree tree = fileTree.readFile(storeHash);
+        StoreFile.StoreTree tree = fileTree.readFile(storeHash);
         if (null == tree) {
-            return list;
+            return map;
         }
-        list.add(tree);
+        map.put(storeHash, tree);
         for (String fileName : path.split("/")) {
             if (StringUtils.isBlank(fileName)) {
                 continue;
             }
             for (String hash : tree.getChildItemList()) {
-                BlogStore.StoreFile.StoreTree childTree = fileTree.readFile(hash);
+                StoreFile.StoreTree childTree = fileTree.readFile(hash);
                 if (StringUtils.equals(fileName, childTree.getFileName())) {
-                    list.add(childTree);
+                    map.put(hash, childTree);
                 }
             }
-            return Collections.EMPTY_LIST;
+            return new LinkedHashMap<>();
         }
-        return list;
+        return map;
     }
 }

@@ -30,7 +30,8 @@ define(["text!./show.html", "./file-api.js", "css!./show.css"], function (pageVi
             data: {
                 rowTemplate: "row-file-template",
                 dataList: this.dataList,
-                rightMenus: this.getRightMenuParams
+                rightMenus: this.getRightMenuParams,
+                topMenus: this.getTopMenus
             }
         }
     };
@@ -56,32 +57,26 @@ define(["text!./show.html", "./file-api.js", "css!./show.css"], function (pageVi
             })
         ];
     };
-    ViewFileModel.prototype.getTopMenuParams = function () {
-        return {
-            name: "custom-menu",
-            data: {
-                count: -1,
-                menuList: [
+    ViewFileModel.prototype.getTopMenus = function () {
+        return [
+            new MenuItem({
+                icon: "fa fa-upload",
+                iconText: '上传',
+                itemClass: 'btn btn-primary',
+                childMenuItems: [
                     new MenuItem({
                         icon: "fa fa-upload",
-                        iconText: '上传',
-                        itemClass: 'btn btn-primary',
-                        childMenuItems: [
-                            new MenuItem({
-                                icon: "fa fa-upload",
-                                iconText: '上传文件',
-                                itemClass: 'btn btn-primary'
-                            })
-                        ]
-                    }),
-                    new MenuItem({
-                        icon: "fa fa-folder-open-o",
-                        iconText: '新建文件夹',
+                        iconText: '上传文件',
                         itemClass: 'btn btn-primary'
                     })
                 ]
-            }
-        }
+            }),
+            new MenuItem({
+                icon: "fa fa-folder-open-o",
+                iconText: '新建文件夹',
+                itemClass: 'btn btn-primary'
+            })
+        ]
     };
     return {
         viewModel: {

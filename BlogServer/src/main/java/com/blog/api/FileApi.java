@@ -5,6 +5,7 @@ import com.blog.proto.BlogStore;
 import com.blog.service.File.FileUrl;
 import com.blog.service.File.StoreFactory;
 import com.blog.service.File.StoreFileTree;
+import com.blog.service.File.StoreUtil;
 import com.blog.utils.RequestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -53,6 +54,9 @@ public class FileApi {
         if (!fileUrl.isOwner() || StringUtils.isBlank(folderName)) {
             return BlogStore.Result.newBuilder().setCode(BlogStore.ReturnCode.RETURN_ERROR).build();
         }
+        if (StoreUtil.getChildNameList(fileUrl).contains(folderName)) {
+            return BlogStore.Result.newBuilder().setCode(BlogStore.ReturnCode.RETURN_FILE_EXIST).build();
+        }
         BlogStore.StoreFile.StoreTree.Builder storeTree = BlogStore.StoreFile.StoreTree.newBuilder()
                 .setStoreType(BlogStore.StoreFile.StoreTypeEnum.Tree)
                 .setOwnerType(fileUrl.getOwnerType())
@@ -69,12 +73,12 @@ public class FileApi {
 
     @DELETE
     @Path("/{path:.*}")
-    public BlogStore.Result deleteFolderOrFile(@PathParam("path") String fullPath, @Context HttpServletRequest request) {
+    public BlogStore.Result deleteFile(@PathParam("path") String fullPath, @Context HttpServletRequest request) {
         FileUrl fileUrl = new FileUrl(fullPath, RequestUtils.getUserId(request));
         if (!fileUrl.isOwner()) {
             return BlogStore.Result.newBuilder().setCode(BlogStore.ReturnCode.RETURN_ERROR).build();
         }
-        StoreFactory.deleteStore(fileUrl.getParentUrl(), fileUrl.getStoreHash());
+        StoreFactory.deleteStore(fileUrl.getParentUrl(), fileUrl.getHashTree());
         return BlogStore.Result.newBuilder().setCode(BlogStore.ReturnCode.RETURN_OK).build();
     }
 
@@ -84,6 +88,9 @@ public class FileApi {
         FileUrl fileUrl = new FileUrl(fullPath, RequestUtils.getUserId(request));
         if (!fileUrl.isOwner() || StringUtils.isBlank(newName)) {
             return BlogStore.Result.newBuilder().setCode(BlogStore.ReturnCode.RETURN_ERROR).build();
+        }
+        if (StringUtils.equals(newName, fileUrl.getFileName()) || StoreUtil.getChildNameList(fileUrl).contains(newName)) {
+            return BlogStore.Result.newBuilder().setCode(BlogStore.ReturnCode.RETURN_FILE_EXIST).build();
         }
         StoreFactory.rename(fileUrl, newName);
         return BlogStore.Result.newBuilder().setCode(BlogStore.ReturnCode.RETURN_OK).build();

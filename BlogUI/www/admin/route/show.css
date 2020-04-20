@@ -6,6 +6,18 @@
 
 .route-admin {
     display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.route-admin > div:first-child {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.route-admin > div:last-child {
+    flex-grow: 1;
+    flex-shrink: 1;
 }
 
 .route-admin > .admin-body > div:nth-child(1) {

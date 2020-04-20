@@ -50,20 +50,20 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .loginPage("/template/login.html")
+                .loginPage("/")
                 .successHandler(new AuthenticationSuccess())//登陆成功处理
                 .failureHandler(new AuthenticationFailure())//登录失败的处理
                 .loginProcessingUrl("/login")//登录请求地址
                 .permitAll()
                 .and().logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/template/login.html")
+                .logoutSuccessUrl("/")
                 .permitAll()
                 .and().exceptionHandling()
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                 .accessDeniedHandler(new CustomAccessDeineHandler())
                 .and().sessionManagement()
-                .invalidSessionUrl("/template/login.html")
+                .invalidSessionUrl("/")
                 .maximumSessions(1)
                 .expiredSessionStrategy(new SessionInformationExpiredStrategyImpl());
     }

@@ -20,7 +20,7 @@
     <div class="col-md-2" data-bind="text: $data.email"></div>
     <div class="col-md-2" data-bind="text: $data.phone"></div>
     <div class="col-md-2" data-bind="text: dateFormat($data.birthday)"></div>
-    <div class="col-md-2" data-bind="text: $component.getStatusStr($data.status)"></div>
+    <div class="col-md-2" data-bind="text: context.getStatusStr($data.status)"></div>
 </template>
 
 <template id="user-list-demo-template">

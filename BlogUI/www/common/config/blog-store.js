@@ -16,6 +16,13 @@
       java_outer_classname: "BlogStore"
     })
     .addJSON({
+      OwnerType: {
+        values: {
+          OwnerDefault: 0,
+          User: 1,
+          Group: 2
+        }
+      },
       Status: {
         values: {
           StatusDefault: 0,
@@ -32,7 +39,78 @@
           RETURN_USER_NAME_BLANK: 51,
           RETURN_USER_PASSWORD_BLANK: 52,
           RETURN_USER_PHONE_EXIST: 53,
-          RETURN_USER_EMAIL_EXIST: 54
+          RETURN_USER_EMAIL_EXIST: 54,
+          RETURN_FILE_EXIST: 100
+        }
+      },
+      StoreFile: {
+        fields: {},
+        nested: {
+          StoreTypeEnum: {
+            values: {
+              StoreDefault: 0,
+              Tree: 1,
+              Blob: 2
+            }
+          },
+          StoreTree: {
+            fields: {
+              storeType: {
+                type: "StoreFile.StoreTypeEnum",
+                id: 1
+              },
+              childItem: {
+                rule: "repeated",
+                type: "string",
+                id: 2
+              },
+              ownerType: {
+                type: "int32",
+                id: 5
+              },
+              ownerId: {
+                type: "int32",
+                id: 6
+              },
+              fileName: {
+                type: "string",
+                id: 7
+              },
+              contentType: {
+                type: "string",
+                id: 8
+              },
+              fileSize: {
+                type: "int64",
+                id: 9
+              },
+              createTime: {
+                type: "int64",
+                id: 20
+              },
+              updateTime: {
+                type: "int64",
+                id: 21
+              },
+              committerId: {
+                type: "int32",
+                id: 22
+              }
+            }
+          },
+          StoreList: {
+            fields: {
+              items: {
+                rule: "repeated",
+                type: "StoreTree",
+                id: 1
+              },
+              parentItem: {
+                type: "StoreTree",
+                id: 2
+              }
+            }
+          }
         }
       },
       Result: {
@@ -53,6 +131,14 @@
             rule: "repeated",
             type: "Result",
             id: 1
+          },
+          code: {
+            type: "ReturnCode",
+            id: 2
+          },
+          msg: {
+            type: "string",
+            id: 3
           }
         }
       },

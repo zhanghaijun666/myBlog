@@ -1,50 +1,23 @@
-<!-- {{{ --><!-- ko if: $component.getTopMenus($data).length > 0 --><!-- }}} -->
-<custom-menu params="{origin: $data, menuList: $component.getTopMenus($data),menuClass:'top-menu',permitType:'disabled'}"></custom-menu>
-<!-- {{{ --><!-- /ko --><!-- }}} -->
-<div class="custom-card-body" data-bind="visible: !loading()">
-    <!-- {{{ --><!-- ko if: headTemplate --><!-- }}} -->
-    <div class="custom-card-head admin-header">
-        <!-- {{{ --><!-- ko if: $component.topMenus --><!-- }}} -->
-        <div class="dl card-checkbox">
-            <custom-checkbox params="checked: $data.checkAll"></custom-checkbox>
-        </div>
-        <!-- {{{ --><!-- /ko --><!-- }}} -->
-
-        <div class="card-data" data-bind="template:{name: headTemplate,data:$data}"></div>
-
-        <!-- {{{ --><!-- ko if: $component.getRightMenus($data).length > 0 --><!-- }}} -->
-        <div class="card-operate"><span data-bind="text: ''"></span></div>
-        <!-- {{{ --><!-- /ko --><!-- }}} -->
-    </div>
+<div class="custom-card">
+    <div class="top-menu" data-bind="template:{name: 'common-template', data: $data.getTopMenuParams()}"></div>
+    <!-- {{{ --><!-- ko if: $data.isShowHead() --><!-- }}} -->
+    <div class="card-head" data-bind="template:{name: 'common-template', data: $data.getHeadParams()}"></div>
     <!-- {{{ --><!-- /ko --><!-- }}} -->
-
-    <!-- {{{ --><!-- ko if:  dataList().length > 0 --><!-- }}} -->
+    <div class="card-body" data-bind="template:{name: 'common-template', data: $data.getBodyParams()}"></div>
+</div>
+<template id="custom-card-head">
+    <div class="row-select"><input type="checkbox"/></div>
+    <div class="row-temp" data-bind="template:{name: 'common-template', data: $data.headTemplate}"></div>
+</template>
+<template id="custom-card-body">
     <!-- {{{ --><!-- ko foreach: dataList --><!-- }}} -->
-    <div class="data-item">
-        <!-- {{{ --><!-- ko if: $component.topMenus --><!-- }}} -->
-        <div class="dl card-checkbox">
-            <custom-checkbox params="checked: $data.select"></custom-checkbox>
-        </div>
+    <div class="crad-body-row">
+        <div class="row-select"><input type="checkbox"/></div>
+        <!-- {{{ --><!-- ko let: {context: $component.context} --><!-- }}} -->
+        <div class="row-temp"
+             data-bind="template:{name: 'common-template', data: {name:$parent.rowTemplate,data:$data}}"></div>
         <!-- {{{ --><!-- /ko --><!-- }}} -->
-
-        <!-- {{{ --><!-- ko let: {$component: $component.context} --><!-- }}} -->
-        <div class="card-data" data-bind="template:{name: $parent.rowTemplate, data: $data}"></div>
-        <!-- {{{ --><!-- /ko --><!-- }}} -->
-
-        <!-- {{{ --><!-- ko if: $component.getRightMenus($data).length > 0 --><!-- }}} -->
-        <div class="card-operate"
-             data-bind="component:{name:'custom-menu',params:{origin: $data, menuList: $component.getRightMenus($data),permitType:'disabled'}}"></div>
-        <!-- {{{ --><!-- /ko --><!-- }}} -->
+        <div class="row-menu" data-bind="template:{name: 'common-template', data: $parent.rightMenu}"></div>
     </div>
     <!-- {{{ --><!-- /ko --><!-- }}} -->
-    <!-- {{{ --><!-- /ko --><!-- }}} -->
-
-    <!-- {{{ --><!-- ko if:  dataList().length == 0 --><!-- }}} -->
-    <no-data params="noDataImgCss: noDataImgCss, noDataHint: noDataHint"/>
-    <!-- {{{ --><!-- /ko --><!-- }}} -->
-</div>
-<div data-bind="visible: loading()">
-    <center><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></center>
-    <span class="centerText" data-bind=" text: '加載中...'"></span>
-</div>
-<div class="custom-card-foot-paging"></div>
+</template>

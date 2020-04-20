@@ -2,7 +2,6 @@ package com.blog.service.File;
 
 import com.blog.dao.OrganizeDao;
 import com.blog.db.Organize;
-import com.blog.db.User;
 import com.blog.proto.BlogStore;
 import com.blog.utils.BasicConvertUtils;
 import com.blog.utils.PathUtils;
@@ -10,7 +9,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -78,19 +79,23 @@ public class FileUrl {
     }
 
     public BlogStore.StoreFile.StoreTree getStoreTree() {
-        List<BlogStore.StoreFile.StoreTree> list = StoreFactory.getStoreTreeList(this.getStoreHash(), this.getPath());
-        return list.isEmpty() ? null : list.get(list.size() - 1);
+        Map.Entry<String, BlogStore.StoreFile.StoreTree> entry = this.getHashTree();
+        return null == entry ? null:entry.getValue();
     }
 
-    public String getTreeHash() {
-        List<BlogStore.StoreFile.StoreTree> list = StoreFactory.getStoreTreeList(this.getStoreHash(), this.getPath());
-        if (list.size() > 1) {
-            StoreFileTree fileTree = new StoreFileTree();
-            return list.get(list.size() - 2).getChildItemList().stream().filter((hash) -> {
-                return StringUtils.equals(fileTree.readFile(hash).getFileName(), this.getFileName());
-            }).findFirst().get();
+    public Map.Entry<String, BlogStore.StoreFile.StoreTree> getHashTree() {
+        LinkedHashMap<String, BlogStore.StoreFile.StoreTree> map = StoreFactory.getStoreTreeList(this.getStoreHash(), this.getPath());
+        if (map.isEmpty()) {
+            return null;
         }
-        return "";
+        Iterator<Map.Entry<String, BlogStore.StoreFile.StoreTree>> iterator = map.entrySet().iterator();
+        Map.Entry<String, BlogStore.StoreFile.StoreTree> tail = null;
+        while (iterator.hasNext()) {
+            tail = iterator.next();
+        }
+        return tail;
+        //通过反射获取LinkedHashMap中的末尾元素
+//        return map.isEmpty() ? null : map.getClass().getDeclaredField("tail").setAccessible(true).get(map);
     }
 
     public boolean isOwner() {

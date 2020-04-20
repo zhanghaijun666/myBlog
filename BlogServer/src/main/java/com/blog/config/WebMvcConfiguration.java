@@ -32,7 +32,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
 //        registry.addViewController("/404.html").setViewName("404");
-//        registry.addViewController("/login.html").setViewName("login");
         registry.addRedirectViewController("/index", "/static/main/packed-index.html");
     }
 
@@ -40,7 +39,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("file:"+ PathUtils.joinPath(PathUtils.getBlogServerPath(),blogSetting.getUIDir()));
-        registry.addResourceHandler("/template/**").addResourceLocations("classpath:/templates/");
+//        registry.addResourceHandler("/template/**").addResourceLocations("classpath:/templates/");
     }
 
     //默认静态资源处理器

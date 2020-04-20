@@ -15,6 +15,113 @@ public final class BlogStore {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   /**
+   * Protobuf enum {@code OwnerType}
+   */
+  public enum OwnerType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>OwnerDefault = 0;</code>
+     */
+    OwnerDefault(0),
+    /**
+     * <code>User = 1;</code>
+     */
+    User(1),
+    /**
+     * <code>Group = 2;</code>
+     */
+    Group(2),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>OwnerDefault = 0;</code>
+     */
+    public static final int OwnerDefault_VALUE = 0;
+    /**
+     * <code>User = 1;</code>
+     */
+    public static final int User_VALUE = 1;
+    /**
+     * <code>Group = 2;</code>
+     */
+    public static final int Group_VALUE = 2;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static OwnerType valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static OwnerType forNumber(int value) {
+      switch (value) {
+        case 0: return OwnerDefault;
+        case 1: return User;
+        case 2: return Group;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<OwnerType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        OwnerType> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<OwnerType>() {
+            public OwnerType findValueByNumber(int number) {
+              return OwnerType.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.blog.proto.BlogStore.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final OwnerType[] VALUES = values();
+
+    public static OwnerType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private OwnerType(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:OwnerType)
+  }
+
+  /**
    * Protobuf enum {@code Status}
    */
   public enum Status
@@ -95,7 +202,7 @@ public final class BlogStore {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.blog.proto.BlogStore.getDescriptor().getEnumTypes().get(0);
+      return com.blog.proto.BlogStore.getDescriptor().getEnumTypes().get(1);
     }
 
     private static final Status[] VALUES = values();
@@ -158,6 +265,10 @@ public final class BlogStore {
      * <code>RETURN_USER_EMAIL_EXIST = 54;</code>
      */
     RETURN_USER_EMAIL_EXIST(54),
+    /**
+     * <code>RETURN_FILE_EXIST = 100;</code>
+     */
+    RETURN_FILE_EXIST(100),
     UNRECOGNIZED(-1),
     ;
 
@@ -193,6 +304,10 @@ public final class BlogStore {
      * <code>RETURN_USER_EMAIL_EXIST = 54;</code>
      */
     public static final int RETURN_USER_EMAIL_EXIST_VALUE = 54;
+    /**
+     * <code>RETURN_FILE_EXIST = 100;</code>
+     */
+    public static final int RETURN_FILE_EXIST_VALUE = 100;
 
 
     public final int getNumber() {
@@ -221,6 +336,7 @@ public final class BlogStore {
         case 52: return RETURN_USER_PASSWORD_BLANK;
         case 53: return RETURN_USER_PHONE_EXIST;
         case 54: return RETURN_USER_EMAIL_EXIST;
+        case 100: return RETURN_FILE_EXIST;
         default: return null;
       }
     }
@@ -247,7 +363,7 @@ public final class BlogStore {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.blog.proto.BlogStore.getDescriptor().getEnumTypes().get(1);
+      return com.blog.proto.BlogStore.getDescriptor().getEnumTypes().get(2);
     }
 
     private static final ReturnCode[] VALUES = values();
@@ -271,6 +387,2717 @@ public final class BlogStore {
     }
 
     // @@protoc_insertion_point(enum_scope:ReturnCode)
+  }
+
+  public interface StoreFileOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:StoreFile)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code StoreFile}
+   */
+  public  static final class StoreFile extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:StoreFile)
+      StoreFileOrBuilder {
+    // Use StoreFile.newBuilder() to construct.
+    private StoreFile(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private StoreFile() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private StoreFile(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.blog.proto.BlogStore.internal_static_StoreFile_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.blog.proto.BlogStore.internal_static_StoreFile_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.blog.proto.BlogStore.StoreFile.class, com.blog.proto.BlogStore.StoreFile.Builder.class);
+    }
+
+    /**
+     * Protobuf enum {@code StoreFile.StoreTypeEnum}
+     */
+    public enum StoreTypeEnum
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>StoreDefault = 0;</code>
+       */
+      StoreDefault(0),
+      /**
+       * <code>Tree = 1;</code>
+       */
+      Tree(1),
+      /**
+       * <code>Blob = 2;</code>
+       */
+      Blob(2),
+      UNRECOGNIZED(-1),
+      ;
+
+      /**
+       * <code>StoreDefault = 0;</code>
+       */
+      public static final int StoreDefault_VALUE = 0;
+      /**
+       * <code>Tree = 1;</code>
+       */
+      public static final int Tree_VALUE = 1;
+      /**
+       * <code>Blob = 2;</code>
+       */
+      public static final int Blob_VALUE = 2;
+
+
+      public final int getNumber() {
+        if (this == UNRECOGNIZED) {
+          throw new java.lang.IllegalArgumentException(
+              "Can't get the number of an unknown enum value.");
+        }
+        return value;
+      }
+
+      /**
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
+      public static StoreTypeEnum valueOf(int value) {
+        return forNumber(value);
+      }
+
+      public static StoreTypeEnum forNumber(int value) {
+        switch (value) {
+          case 0: return StoreDefault;
+          case 1: return Tree;
+          case 2: return Blob;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<StoreTypeEnum>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static final com.google.protobuf.Internal.EnumLiteMap<
+          StoreTypeEnum> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<StoreTypeEnum>() {
+              public StoreTypeEnum findValueByNumber(int number) {
+                return StoreTypeEnum.forNumber(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(ordinal());
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.blog.proto.BlogStore.StoreFile.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final StoreTypeEnum[] VALUES = values();
+
+      public static StoreTypeEnum valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        if (desc.getIndex() == -1) {
+          return UNRECOGNIZED;
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int value;
+
+      private StoreTypeEnum(int value) {
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:StoreFile.StoreTypeEnum)
+    }
+
+    public interface StoreTreeOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:StoreFile.StoreTree)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>optional .StoreFile.StoreTypeEnum storeType = 1;</code>
+       */
+      int getStoreTypeValue();
+      /**
+       * <code>optional .StoreFile.StoreTypeEnum storeType = 1;</code>
+       */
+      com.blog.proto.BlogStore.StoreFile.StoreTypeEnum getStoreType();
+
+      /**
+       * <code>repeated string childItem = 2;</code>
+       */
+      java.util.List<java.lang.String>
+          getChildItemList();
+      /**
+       * <code>repeated string childItem = 2;</code>
+       */
+      int getChildItemCount();
+      /**
+       * <code>repeated string childItem = 2;</code>
+       */
+      java.lang.String getChildItem(int index);
+      /**
+       * <code>repeated string childItem = 2;</code>
+       */
+      com.google.protobuf.ByteString
+          getChildItemBytes(int index);
+
+      /**
+       * <code>optional int32 ownerType = 5;</code>
+       */
+      int getOwnerType();
+
+      /**
+       * <code>optional int32 ownerId = 6;</code>
+       */
+      int getOwnerId();
+
+      /**
+       * <code>optional string fileName = 7;</code>
+       */
+      java.lang.String getFileName();
+      /**
+       * <code>optional string fileName = 7;</code>
+       */
+      com.google.protobuf.ByteString
+          getFileNameBytes();
+
+      /**
+       * <code>optional string contentType = 8;</code>
+       */
+      java.lang.String getContentType();
+      /**
+       * <code>optional string contentType = 8;</code>
+       */
+      com.google.protobuf.ByteString
+          getContentTypeBytes();
+
+      /**
+       * <code>optional int64 fileSize = 9;</code>
+       */
+      long getFileSize();
+
+      /**
+       * <code>optional int64 createTime = 20;</code>
+       */
+      long getCreateTime();
+
+      /**
+       * <code>optional int64 updateTime = 21;</code>
+       */
+      long getUpdateTime();
+
+      /**
+       * <code>optional int32 committerId = 22;</code>
+       */
+      int getCommitterId();
+    }
+    /**
+     * Protobuf type {@code StoreFile.StoreTree}
+     */
+    public  static final class StoreTree extends
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:StoreFile.StoreTree)
+        StoreTreeOrBuilder {
+      // Use StoreTree.newBuilder() to construct.
+      private StoreTree(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
+      }
+      private StoreTree() {
+        storeType_ = 0;
+        childItem_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        ownerType_ = 0;
+        ownerId_ = 0;
+        fileName_ = "";
+        contentType_ = "";
+        fileSize_ = 0L;
+        createTime_ = 0L;
+        updateTime_ = 0L;
+        committerId_ = 0;
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      }
+      private StoreTree(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        int mutable_bitField0_ = 0;
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!input.skipField(tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 8: {
+                int rawValue = input.readEnum();
+
+                storeType_ = rawValue;
+                break;
+              }
+              case 18: {
+                java.lang.String s = input.readStringRequireUtf8();
+                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                  childItem_ = new com.google.protobuf.LazyStringArrayList();
+                  mutable_bitField0_ |= 0x00000002;
+                }
+                childItem_.add(s);
+                break;
+              }
+              case 40: {
+
+                ownerType_ = input.readInt32();
+                break;
+              }
+              case 48: {
+
+                ownerId_ = input.readInt32();
+                break;
+              }
+              case 58: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                fileName_ = s;
+                break;
+              }
+              case 66: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                contentType_ = s;
+                break;
+              }
+              case 72: {
+
+                fileSize_ = input.readInt64();
+                break;
+              }
+              case 160: {
+
+                createTime_ = input.readInt64();
+                break;
+              }
+              case 168: {
+
+                updateTime_ = input.readInt64();
+                break;
+              }
+              case 176: {
+
+                committerId_ = input.readInt32();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e).setUnfinishedMessage(this);
+        } finally {
+          if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+            childItem_ = childItem_.getUnmodifiableView();
+          }
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.blog.proto.BlogStore.internal_static_StoreFile_StoreTree_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.blog.proto.BlogStore.internal_static_StoreFile_StoreTree_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.blog.proto.BlogStore.StoreFile.StoreTree.class, com.blog.proto.BlogStore.StoreFile.StoreTree.Builder.class);
+      }
+
+      private int bitField0_;
+      public static final int STORETYPE_FIELD_NUMBER = 1;
+      private int storeType_;
+      /**
+       * <code>optional .StoreFile.StoreTypeEnum storeType = 1;</code>
+       */
+      public int getStoreTypeValue() {
+        return storeType_;
+      }
+      /**
+       * <code>optional .StoreFile.StoreTypeEnum storeType = 1;</code>
+       */
+      public com.blog.proto.BlogStore.StoreFile.StoreTypeEnum getStoreType() {
+        com.blog.proto.BlogStore.StoreFile.StoreTypeEnum result = com.blog.proto.BlogStore.StoreFile.StoreTypeEnum.valueOf(storeType_);
+        return result == null ? com.blog.proto.BlogStore.StoreFile.StoreTypeEnum.UNRECOGNIZED : result;
+      }
+
+      public static final int CHILDITEM_FIELD_NUMBER = 2;
+      private com.google.protobuf.LazyStringList childItem_;
+      /**
+       * <code>repeated string childItem = 2;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getChildItemList() {
+        return childItem_;
+      }
+      /**
+       * <code>repeated string childItem = 2;</code>
+       */
+      public int getChildItemCount() {
+        return childItem_.size();
+      }
+      /**
+       * <code>repeated string childItem = 2;</code>
+       */
+      public java.lang.String getChildItem(int index) {
+        return childItem_.get(index);
+      }
+      /**
+       * <code>repeated string childItem = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getChildItemBytes(int index) {
+        return childItem_.getByteString(index);
+      }
+
+      public static final int OWNERTYPE_FIELD_NUMBER = 5;
+      private int ownerType_;
+      /**
+       * <code>optional int32 ownerType = 5;</code>
+       */
+      public int getOwnerType() {
+        return ownerType_;
+      }
+
+      public static final int OWNERID_FIELD_NUMBER = 6;
+      private int ownerId_;
+      /**
+       * <code>optional int32 ownerId = 6;</code>
+       */
+      public int getOwnerId() {
+        return ownerId_;
+      }
+
+      public static final int FILENAME_FIELD_NUMBER = 7;
+      private volatile java.lang.Object fileName_;
+      /**
+       * <code>optional string fileName = 7;</code>
+       */
+      public java.lang.String getFileName() {
+        java.lang.Object ref = fileName_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          fileName_ = s;
+          return s;
+        }
+      }
+      /**
+       * <code>optional string fileName = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFileNameBytes() {
+        java.lang.Object ref = fileName_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fileName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int CONTENTTYPE_FIELD_NUMBER = 8;
+      private volatile java.lang.Object contentType_;
+      /**
+       * <code>optional string contentType = 8;</code>
+       */
+      public java.lang.String getContentType() {
+        java.lang.Object ref = contentType_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          contentType_ = s;
+          return s;
+        }
+      }
+      /**
+       * <code>optional string contentType = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+          getContentTypeBytes() {
+        java.lang.Object ref = contentType_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          contentType_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int FILESIZE_FIELD_NUMBER = 9;
+      private long fileSize_;
+      /**
+       * <code>optional int64 fileSize = 9;</code>
+       */
+      public long getFileSize() {
+        return fileSize_;
+      }
+
+      public static final int CREATETIME_FIELD_NUMBER = 20;
+      private long createTime_;
+      /**
+       * <code>optional int64 createTime = 20;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+
+      public static final int UPDATETIME_FIELD_NUMBER = 21;
+      private long updateTime_;
+      /**
+       * <code>optional int64 updateTime = 21;</code>
+       */
+      public long getUpdateTime() {
+        return updateTime_;
+      }
+
+      public static final int COMMITTERID_FIELD_NUMBER = 22;
+      private int committerId_;
+      /**
+       * <code>optional int32 committerId = 22;</code>
+       */
+      public int getCommitterId() {
+        return committerId_;
+      }
+
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (storeType_ != com.blog.proto.BlogStore.StoreFile.StoreTypeEnum.StoreDefault.getNumber()) {
+          output.writeEnum(1, storeType_);
+        }
+        for (int i = 0; i < childItem_.size(); i++) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 2, childItem_.getRaw(i));
+        }
+        if (ownerType_ != 0) {
+          output.writeInt32(5, ownerType_);
+        }
+        if (ownerId_ != 0) {
+          output.writeInt32(6, ownerId_);
+        }
+        if (!getFileNameBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 7, fileName_);
+        }
+        if (!getContentTypeBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 8, contentType_);
+        }
+        if (fileSize_ != 0L) {
+          output.writeInt64(9, fileSize_);
+        }
+        if (createTime_ != 0L) {
+          output.writeInt64(20, createTime_);
+        }
+        if (updateTime_ != 0L) {
+          output.writeInt64(21, updateTime_);
+        }
+        if (committerId_ != 0) {
+          output.writeInt32(22, committerId_);
+        }
+      }
+
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (storeType_ != com.blog.proto.BlogStore.StoreFile.StoreTypeEnum.StoreDefault.getNumber()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeEnumSize(1, storeType_);
+        }
+        {
+          int dataSize = 0;
+          for (int i = 0; i < childItem_.size(); i++) {
+            dataSize += computeStringSizeNoTag(childItem_.getRaw(i));
+          }
+          size += dataSize;
+          size += 1 * getChildItemList().size();
+        }
+        if (ownerType_ != 0) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(5, ownerType_);
+        }
+        if (ownerId_ != 0) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(6, ownerId_);
+        }
+        if (!getFileNameBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, fileName_);
+        }
+        if (!getContentTypeBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, contentType_);
+        }
+        if (fileSize_ != 0L) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(9, fileSize_);
+        }
+        if (createTime_ != 0L) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(20, createTime_);
+        }
+        if (updateTime_ != 0L) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(21, updateTime_);
+        }
+        if (committerId_ != 0) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(22, committerId_);
+        }
+        memoizedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof com.blog.proto.BlogStore.StoreFile.StoreTree)) {
+          return super.equals(obj);
+        }
+        com.blog.proto.BlogStore.StoreFile.StoreTree other = (com.blog.proto.BlogStore.StoreFile.StoreTree) obj;
+
+        boolean result = true;
+        result = result && storeType_ == other.storeType_;
+        result = result && getChildItemList()
+            .equals(other.getChildItemList());
+        result = result && (getOwnerType()
+            == other.getOwnerType());
+        result = result && (getOwnerId()
+            == other.getOwnerId());
+        result = result && getFileName()
+            .equals(other.getFileName());
+        result = result && getContentType()
+            .equals(other.getContentType());
+        result = result && (getFileSize()
+            == other.getFileSize());
+        result = result && (getCreateTime()
+            == other.getCreateTime());
+        result = result && (getUpdateTime()
+            == other.getUpdateTime());
+        result = result && (getCommitterId()
+            == other.getCommitterId());
+        return result;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (37 * hash) + STORETYPE_FIELD_NUMBER;
+        hash = (53 * hash) + storeType_;
+        if (getChildItemCount() > 0) {
+          hash = (37 * hash) + CHILDITEM_FIELD_NUMBER;
+          hash = (53 * hash) + getChildItemList().hashCode();
+        }
+        hash = (37 * hash) + OWNERTYPE_FIELD_NUMBER;
+        hash = (53 * hash) + getOwnerType();
+        hash = (37 * hash) + OWNERID_FIELD_NUMBER;
+        hash = (53 * hash) + getOwnerId();
+        hash = (37 * hash) + FILENAME_FIELD_NUMBER;
+        hash = (53 * hash) + getFileName().hashCode();
+        hash = (37 * hash) + CONTENTTYPE_FIELD_NUMBER;
+        hash = (53 * hash) + getContentType().hashCode();
+        hash = (37 * hash) + FILESIZE_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getFileSize());
+        hash = (37 * hash) + CREATETIME_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getCreateTime());
+        hash = (37 * hash) + UPDATETIME_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getUpdateTime());
+        hash = (37 * hash) + COMMITTERID_FIELD_NUMBER;
+        hash = (53 * hash) + getCommitterId();
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static com.blog.proto.BlogStore.StoreFile.StoreTree parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreTree parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreTree parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreTree parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreTree parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreTree parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreTree parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreTree parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreTree parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreTree parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(com.blog.proto.BlogStore.StoreFile.StoreTree prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code StoreFile.StoreTree}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:StoreFile.StoreTree)
+          com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.blog.proto.BlogStore.internal_static_StoreFile_StoreTree_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.blog.proto.BlogStore.internal_static_StoreFile_StoreTree_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.blog.proto.BlogStore.StoreFile.StoreTree.class, com.blog.proto.BlogStore.StoreFile.StoreTree.Builder.class);
+        }
+
+        // Construct using com.blog.proto.BlogStore.StoreFile.StoreTree.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessageV3
+                  .alwaysUseFieldBuilders) {
+          }
+        }
+        public Builder clear() {
+          super.clear();
+          storeType_ = 0;
+
+          childItem_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          ownerType_ = 0;
+
+          ownerId_ = 0;
+
+          fileName_ = "";
+
+          contentType_ = "";
+
+          fileSize_ = 0L;
+
+          createTime_ = 0L;
+
+          updateTime_ = 0L;
+
+          committerId_ = 0;
+
+          return this;
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.blog.proto.BlogStore.internal_static_StoreFile_StoreTree_descriptor;
+        }
+
+        public com.blog.proto.BlogStore.StoreFile.StoreTree getDefaultInstanceForType() {
+          return com.blog.proto.BlogStore.StoreFile.StoreTree.getDefaultInstance();
+        }
+
+        public com.blog.proto.BlogStore.StoreFile.StoreTree build() {
+          com.blog.proto.BlogStore.StoreFile.StoreTree result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.blog.proto.BlogStore.StoreFile.StoreTree buildPartial() {
+          com.blog.proto.BlogStore.StoreFile.StoreTree result = new com.blog.proto.BlogStore.StoreFile.StoreTree(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          result.storeType_ = storeType_;
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            childItem_ = childItem_.getUnmodifiableView();
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.childItem_ = childItem_;
+          result.ownerType_ = ownerType_;
+          result.ownerId_ = ownerId_;
+          result.fileName_ = fileName_;
+          result.contentType_ = contentType_;
+          result.fileSize_ = fileSize_;
+          result.createTime_ = createTime_;
+          result.updateTime_ = updateTime_;
+          result.committerId_ = committerId_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder clone() {
+          return (Builder) super.clone();
+        }
+        public Builder setField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            Object value) {
+          return (Builder) super.setField(field, value);
+        }
+        public Builder clearField(
+            com.google.protobuf.Descriptors.FieldDescriptor field) {
+          return (Builder) super.clearField(field);
+        }
+        public Builder clearOneof(
+            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+          return (Builder) super.clearOneof(oneof);
+        }
+        public Builder setRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            int index, Object value) {
+          return (Builder) super.setRepeatedField(field, index, value);
+        }
+        public Builder addRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            Object value) {
+          return (Builder) super.addRepeatedField(field, value);
+        }
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.blog.proto.BlogStore.StoreFile.StoreTree) {
+            return mergeFrom((com.blog.proto.BlogStore.StoreFile.StoreTree)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.blog.proto.BlogStore.StoreFile.StoreTree other) {
+          if (other == com.blog.proto.BlogStore.StoreFile.StoreTree.getDefaultInstance()) return this;
+          if (other.storeType_ != 0) {
+            setStoreTypeValue(other.getStoreTypeValue());
+          }
+          if (!other.childItem_.isEmpty()) {
+            if (childItem_.isEmpty()) {
+              childItem_ = other.childItem_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureChildItemIsMutable();
+              childItem_.addAll(other.childItem_);
+            }
+            onChanged();
+          }
+          if (other.getOwnerType() != 0) {
+            setOwnerType(other.getOwnerType());
+          }
+          if (other.getOwnerId() != 0) {
+            setOwnerId(other.getOwnerId());
+          }
+          if (!other.getFileName().isEmpty()) {
+            fileName_ = other.fileName_;
+            onChanged();
+          }
+          if (!other.getContentType().isEmpty()) {
+            contentType_ = other.contentType_;
+            onChanged();
+          }
+          if (other.getFileSize() != 0L) {
+            setFileSize(other.getFileSize());
+          }
+          if (other.getCreateTime() != 0L) {
+            setCreateTime(other.getCreateTime());
+          }
+          if (other.getUpdateTime() != 0L) {
+            setUpdateTime(other.getUpdateTime());
+          }
+          if (other.getCommitterId() != 0) {
+            setCommitterId(other.getCommitterId());
+          }
+          onChanged();
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.blog.proto.BlogStore.StoreFile.StoreTree parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.blog.proto.BlogStore.StoreFile.StoreTree) e.getUnfinishedMessage();
+            throw e.unwrapIOException();
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        private int storeType_ = 0;
+        /**
+         * <code>optional .StoreFile.StoreTypeEnum storeType = 1;</code>
+         */
+        public int getStoreTypeValue() {
+          return storeType_;
+        }
+        /**
+         * <code>optional .StoreFile.StoreTypeEnum storeType = 1;</code>
+         */
+        public Builder setStoreTypeValue(int value) {
+          storeType_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional .StoreFile.StoreTypeEnum storeType = 1;</code>
+         */
+        public com.blog.proto.BlogStore.StoreFile.StoreTypeEnum getStoreType() {
+          com.blog.proto.BlogStore.StoreFile.StoreTypeEnum result = com.blog.proto.BlogStore.StoreFile.StoreTypeEnum.valueOf(storeType_);
+          return result == null ? com.blog.proto.BlogStore.StoreFile.StoreTypeEnum.UNRECOGNIZED : result;
+        }
+        /**
+         * <code>optional .StoreFile.StoreTypeEnum storeType = 1;</code>
+         */
+        public Builder setStoreType(com.blog.proto.BlogStore.StoreFile.StoreTypeEnum value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          
+          storeType_ = value.getNumber();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional .StoreFile.StoreTypeEnum storeType = 1;</code>
+         */
+        public Builder clearStoreType() {
+          
+          storeType_ = 0;
+          onChanged();
+          return this;
+        }
+
+        private com.google.protobuf.LazyStringList childItem_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        private void ensureChildItemIsMutable() {
+          if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+            childItem_ = new com.google.protobuf.LazyStringArrayList(childItem_);
+            bitField0_ |= 0x00000002;
+           }
+        }
+        /**
+         * <code>repeated string childItem = 2;</code>
+         */
+        public com.google.protobuf.ProtocolStringList
+            getChildItemList() {
+          return childItem_.getUnmodifiableView();
+        }
+        /**
+         * <code>repeated string childItem = 2;</code>
+         */
+        public int getChildItemCount() {
+          return childItem_.size();
+        }
+        /**
+         * <code>repeated string childItem = 2;</code>
+         */
+        public java.lang.String getChildItem(int index) {
+          return childItem_.get(index);
+        }
+        /**
+         * <code>repeated string childItem = 2;</code>
+         */
+        public com.google.protobuf.ByteString
+            getChildItemBytes(int index) {
+          return childItem_.getByteString(index);
+        }
+        /**
+         * <code>repeated string childItem = 2;</code>
+         */
+        public Builder setChildItem(
+            int index, java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureChildItemIsMutable();
+          childItem_.set(index, value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string childItem = 2;</code>
+         */
+        public Builder addChildItem(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureChildItemIsMutable();
+          childItem_.add(value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string childItem = 2;</code>
+         */
+        public Builder addAllChildItem(
+            java.lang.Iterable<java.lang.String> values) {
+          ensureChildItemIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, childItem_);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string childItem = 2;</code>
+         */
+        public Builder clearChildItem() {
+          childItem_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string childItem = 2;</code>
+         */
+        public Builder addChildItemBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          ensureChildItemIsMutable();
+          childItem_.add(value);
+          onChanged();
+          return this;
+        }
+
+        private int ownerType_ ;
+        /**
+         * <code>optional int32 ownerType = 5;</code>
+         */
+        public int getOwnerType() {
+          return ownerType_;
+        }
+        /**
+         * <code>optional int32 ownerType = 5;</code>
+         */
+        public Builder setOwnerType(int value) {
+          
+          ownerType_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 ownerType = 5;</code>
+         */
+        public Builder clearOwnerType() {
+          
+          ownerType_ = 0;
+          onChanged();
+          return this;
+        }
+
+        private int ownerId_ ;
+        /**
+         * <code>optional int32 ownerId = 6;</code>
+         */
+        public int getOwnerId() {
+          return ownerId_;
+        }
+        /**
+         * <code>optional int32 ownerId = 6;</code>
+         */
+        public Builder setOwnerId(int value) {
+          
+          ownerId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 ownerId = 6;</code>
+         */
+        public Builder clearOwnerId() {
+          
+          ownerId_ = 0;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object fileName_ = "";
+        /**
+         * <code>optional string fileName = 7;</code>
+         */
+        public java.lang.String getFileName() {
+          java.lang.Object ref = fileName_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            fileName_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string fileName = 7;</code>
+         */
+        public com.google.protobuf.ByteString
+            getFileNameBytes() {
+          java.lang.Object ref = fileName_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            fileName_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string fileName = 7;</code>
+         */
+        public Builder setFileName(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          fileName_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string fileName = 7;</code>
+         */
+        public Builder clearFileName() {
+          
+          fileName_ = getDefaultInstance().getFileName();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string fileName = 7;</code>
+         */
+        public Builder setFileNameBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          fileName_ = value;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object contentType_ = "";
+        /**
+         * <code>optional string contentType = 8;</code>
+         */
+        public java.lang.String getContentType() {
+          java.lang.Object ref = contentType_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            contentType_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string contentType = 8;</code>
+         */
+        public com.google.protobuf.ByteString
+            getContentTypeBytes() {
+          java.lang.Object ref = contentType_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            contentType_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string contentType = 8;</code>
+         */
+        public Builder setContentType(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          contentType_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string contentType = 8;</code>
+         */
+        public Builder clearContentType() {
+          
+          contentType_ = getDefaultInstance().getContentType();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string contentType = 8;</code>
+         */
+        public Builder setContentTypeBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          contentType_ = value;
+          onChanged();
+          return this;
+        }
+
+        private long fileSize_ ;
+        /**
+         * <code>optional int64 fileSize = 9;</code>
+         */
+        public long getFileSize() {
+          return fileSize_;
+        }
+        /**
+         * <code>optional int64 fileSize = 9;</code>
+         */
+        public Builder setFileSize(long value) {
+          
+          fileSize_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int64 fileSize = 9;</code>
+         */
+        public Builder clearFileSize() {
+          
+          fileSize_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        private long createTime_ ;
+        /**
+         * <code>optional int64 createTime = 20;</code>
+         */
+        public long getCreateTime() {
+          return createTime_;
+        }
+        /**
+         * <code>optional int64 createTime = 20;</code>
+         */
+        public Builder setCreateTime(long value) {
+          
+          createTime_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int64 createTime = 20;</code>
+         */
+        public Builder clearCreateTime() {
+          
+          createTime_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        private long updateTime_ ;
+        /**
+         * <code>optional int64 updateTime = 21;</code>
+         */
+        public long getUpdateTime() {
+          return updateTime_;
+        }
+        /**
+         * <code>optional int64 updateTime = 21;</code>
+         */
+        public Builder setUpdateTime(long value) {
+          
+          updateTime_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int64 updateTime = 21;</code>
+         */
+        public Builder clearUpdateTime() {
+          
+          updateTime_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        private int committerId_ ;
+        /**
+         * <code>optional int32 committerId = 22;</code>
+         */
+        public int getCommitterId() {
+          return committerId_;
+        }
+        /**
+         * <code>optional int32 committerId = 22;</code>
+         */
+        public Builder setCommitterId(int value) {
+          
+          committerId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int32 committerId = 22;</code>
+         */
+        public Builder clearCommitterId() {
+          
+          committerId_ = 0;
+          onChanged();
+          return this;
+        }
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:StoreFile.StoreTree)
+      }
+
+      // @@protoc_insertion_point(class_scope:StoreFile.StoreTree)
+      private static final com.blog.proto.BlogStore.StoreFile.StoreTree DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new com.blog.proto.BlogStore.StoreFile.StoreTree();
+      }
+
+      public static com.blog.proto.BlogStore.StoreFile.StoreTree getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<StoreTree>
+          PARSER = new com.google.protobuf.AbstractParser<StoreTree>() {
+        public StoreTree parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+            return new StoreTree(input, extensionRegistry);
+        }
+      };
+
+      public static com.google.protobuf.Parser<StoreTree> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<StoreTree> getParserForType() {
+        return PARSER;
+      }
+
+      public com.blog.proto.BlogStore.StoreFile.StoreTree getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
+    }
+
+    public interface StoreListOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:StoreFile.StoreList)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>repeated .StoreFile.StoreTree items = 1;</code>
+       */
+      java.util.List<com.blog.proto.BlogStore.StoreFile.StoreTree> 
+          getItemsList();
+      /**
+       * <code>repeated .StoreFile.StoreTree items = 1;</code>
+       */
+      com.blog.proto.BlogStore.StoreFile.StoreTree getItems(int index);
+      /**
+       * <code>repeated .StoreFile.StoreTree items = 1;</code>
+       */
+      int getItemsCount();
+      /**
+       * <code>repeated .StoreFile.StoreTree items = 1;</code>
+       */
+      java.util.List<? extends com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder> 
+          getItemsOrBuilderList();
+      /**
+       * <code>repeated .StoreFile.StoreTree items = 1;</code>
+       */
+      com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder getItemsOrBuilder(
+          int index);
+
+      /**
+       * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+       */
+      boolean hasParentItem();
+      /**
+       * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+       */
+      com.blog.proto.BlogStore.StoreFile.StoreTree getParentItem();
+      /**
+       * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+       */
+      com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder getParentItemOrBuilder();
+    }
+    /**
+     * Protobuf type {@code StoreFile.StoreList}
+     */
+    public  static final class StoreList extends
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:StoreFile.StoreList)
+        StoreListOrBuilder {
+      // Use StoreList.newBuilder() to construct.
+      private StoreList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
+      }
+      private StoreList() {
+        items_ = java.util.Collections.emptyList();
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      }
+      private StoreList(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        int mutable_bitField0_ = 0;
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!input.skipField(tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                  items_ = new java.util.ArrayList<com.blog.proto.BlogStore.StoreFile.StoreTree>();
+                  mutable_bitField0_ |= 0x00000001;
+                }
+                items_.add(
+                    input.readMessage(com.blog.proto.BlogStore.StoreFile.StoreTree.parser(), extensionRegistry));
+                break;
+              }
+              case 18: {
+                com.blog.proto.BlogStore.StoreFile.StoreTree.Builder subBuilder = null;
+                if (parentItem_ != null) {
+                  subBuilder = parentItem_.toBuilder();
+                }
+                parentItem_ = input.readMessage(com.blog.proto.BlogStore.StoreFile.StoreTree.parser(), extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(parentItem_);
+                  parentItem_ = subBuilder.buildPartial();
+                }
+
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e).setUnfinishedMessage(this);
+        } finally {
+          if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+            items_ = java.util.Collections.unmodifiableList(items_);
+          }
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.blog.proto.BlogStore.internal_static_StoreFile_StoreList_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.blog.proto.BlogStore.internal_static_StoreFile_StoreList_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.blog.proto.BlogStore.StoreFile.StoreList.class, com.blog.proto.BlogStore.StoreFile.StoreList.Builder.class);
+      }
+
+      private int bitField0_;
+      public static final int ITEMS_FIELD_NUMBER = 1;
+      private java.util.List<com.blog.proto.BlogStore.StoreFile.StoreTree> items_;
+      /**
+       * <code>repeated .StoreFile.StoreTree items = 1;</code>
+       */
+      public java.util.List<com.blog.proto.BlogStore.StoreFile.StoreTree> getItemsList() {
+        return items_;
+      }
+      /**
+       * <code>repeated .StoreFile.StoreTree items = 1;</code>
+       */
+      public java.util.List<? extends com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder> 
+          getItemsOrBuilderList() {
+        return items_;
+      }
+      /**
+       * <code>repeated .StoreFile.StoreTree items = 1;</code>
+       */
+      public int getItemsCount() {
+        return items_.size();
+      }
+      /**
+       * <code>repeated .StoreFile.StoreTree items = 1;</code>
+       */
+      public com.blog.proto.BlogStore.StoreFile.StoreTree getItems(int index) {
+        return items_.get(index);
+      }
+      /**
+       * <code>repeated .StoreFile.StoreTree items = 1;</code>
+       */
+      public com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder getItemsOrBuilder(
+          int index) {
+        return items_.get(index);
+      }
+
+      public static final int PARENTITEM_FIELD_NUMBER = 2;
+      private com.blog.proto.BlogStore.StoreFile.StoreTree parentItem_;
+      /**
+       * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+       */
+      public boolean hasParentItem() {
+        return parentItem_ != null;
+      }
+      /**
+       * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+       */
+      public com.blog.proto.BlogStore.StoreFile.StoreTree getParentItem() {
+        return parentItem_ == null ? com.blog.proto.BlogStore.StoreFile.StoreTree.getDefaultInstance() : parentItem_;
+      }
+      /**
+       * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+       */
+      public com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder getParentItemOrBuilder() {
+        return getParentItem();
+      }
+
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        for (int i = 0; i < items_.size(); i++) {
+          output.writeMessage(1, items_.get(i));
+        }
+        if (parentItem_ != null) {
+          output.writeMessage(2, getParentItem());
+        }
+      }
+
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        for (int i = 0; i < items_.size(); i++) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(1, items_.get(i));
+        }
+        if (parentItem_ != null) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(2, getParentItem());
+        }
+        memoizedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof com.blog.proto.BlogStore.StoreFile.StoreList)) {
+          return super.equals(obj);
+        }
+        com.blog.proto.BlogStore.StoreFile.StoreList other = (com.blog.proto.BlogStore.StoreFile.StoreList) obj;
+
+        boolean result = true;
+        result = result && getItemsList()
+            .equals(other.getItemsList());
+        result = result && (hasParentItem() == other.hasParentItem());
+        if (hasParentItem()) {
+          result = result && getParentItem()
+              .equals(other.getParentItem());
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptorForType().hashCode();
+        if (getItemsCount() > 0) {
+          hash = (37 * hash) + ITEMS_FIELD_NUMBER;
+          hash = (53 * hash) + getItemsList().hashCode();
+        }
+        if (hasParentItem()) {
+          hash = (37 * hash) + PARENTITEM_FIELD_NUMBER;
+          hash = (53 * hash) + getParentItem().hashCode();
+        }
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static com.blog.proto.BlogStore.StoreFile.StoreList parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreList parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreList parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreList parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreList parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreList parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreList parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreList parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreList parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.blog.proto.BlogStore.StoreFile.StoreList parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(com.blog.proto.BlogStore.StoreFile.StoreList prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code StoreFile.StoreList}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:StoreFile.StoreList)
+          com.blog.proto.BlogStore.StoreFile.StoreListOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.blog.proto.BlogStore.internal_static_StoreFile_StoreList_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.blog.proto.BlogStore.internal_static_StoreFile_StoreList_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.blog.proto.BlogStore.StoreFile.StoreList.class, com.blog.proto.BlogStore.StoreFile.StoreList.Builder.class);
+        }
+
+        // Construct using com.blog.proto.BlogStore.StoreFile.StoreList.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessageV3
+                  .alwaysUseFieldBuilders) {
+            getItemsFieldBuilder();
+          }
+        }
+        public Builder clear() {
+          super.clear();
+          if (itemsBuilder_ == null) {
+            items_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            itemsBuilder_.clear();
+          }
+          if (parentItemBuilder_ == null) {
+            parentItem_ = null;
+          } else {
+            parentItem_ = null;
+            parentItemBuilder_ = null;
+          }
+          return this;
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.blog.proto.BlogStore.internal_static_StoreFile_StoreList_descriptor;
+        }
+
+        public com.blog.proto.BlogStore.StoreFile.StoreList getDefaultInstanceForType() {
+          return com.blog.proto.BlogStore.StoreFile.StoreList.getDefaultInstance();
+        }
+
+        public com.blog.proto.BlogStore.StoreFile.StoreList build() {
+          com.blog.proto.BlogStore.StoreFile.StoreList result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.blog.proto.BlogStore.StoreFile.StoreList buildPartial() {
+          com.blog.proto.BlogStore.StoreFile.StoreList result = new com.blog.proto.BlogStore.StoreFile.StoreList(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (itemsBuilder_ == null) {
+            if (((bitField0_ & 0x00000001) == 0x00000001)) {
+              items_ = java.util.Collections.unmodifiableList(items_);
+              bitField0_ = (bitField0_ & ~0x00000001);
+            }
+            result.items_ = items_;
+          } else {
+            result.items_ = itemsBuilder_.build();
+          }
+          if (parentItemBuilder_ == null) {
+            result.parentItem_ = parentItem_;
+          } else {
+            result.parentItem_ = parentItemBuilder_.build();
+          }
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder clone() {
+          return (Builder) super.clone();
+        }
+        public Builder setField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            Object value) {
+          return (Builder) super.setField(field, value);
+        }
+        public Builder clearField(
+            com.google.protobuf.Descriptors.FieldDescriptor field) {
+          return (Builder) super.clearField(field);
+        }
+        public Builder clearOneof(
+            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+          return (Builder) super.clearOneof(oneof);
+        }
+        public Builder setRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            int index, Object value) {
+          return (Builder) super.setRepeatedField(field, index, value);
+        }
+        public Builder addRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            Object value) {
+          return (Builder) super.addRepeatedField(field, value);
+        }
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.blog.proto.BlogStore.StoreFile.StoreList) {
+            return mergeFrom((com.blog.proto.BlogStore.StoreFile.StoreList)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.blog.proto.BlogStore.StoreFile.StoreList other) {
+          if (other == com.blog.proto.BlogStore.StoreFile.StoreList.getDefaultInstance()) return this;
+          if (itemsBuilder_ == null) {
+            if (!other.items_.isEmpty()) {
+              if (items_.isEmpty()) {
+                items_ = other.items_;
+                bitField0_ = (bitField0_ & ~0x00000001);
+              } else {
+                ensureItemsIsMutable();
+                items_.addAll(other.items_);
+              }
+              onChanged();
+            }
+          } else {
+            if (!other.items_.isEmpty()) {
+              if (itemsBuilder_.isEmpty()) {
+                itemsBuilder_.dispose();
+                itemsBuilder_ = null;
+                items_ = other.items_;
+                bitField0_ = (bitField0_ & ~0x00000001);
+                itemsBuilder_ = 
+                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                     getItemsFieldBuilder() : null;
+              } else {
+                itemsBuilder_.addAllMessages(other.items_);
+              }
+            }
+          }
+          if (other.hasParentItem()) {
+            mergeParentItem(other.getParentItem());
+          }
+          onChanged();
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.blog.proto.BlogStore.StoreFile.StoreList parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.blog.proto.BlogStore.StoreFile.StoreList) e.getUnfinishedMessage();
+            throw e.unwrapIOException();
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        private java.util.List<com.blog.proto.BlogStore.StoreFile.StoreTree> items_ =
+          java.util.Collections.emptyList();
+        private void ensureItemsIsMutable() {
+          if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+            items_ = new java.util.ArrayList<com.blog.proto.BlogStore.StoreFile.StoreTree>(items_);
+            bitField0_ |= 0x00000001;
+           }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+            com.blog.proto.BlogStore.StoreFile.StoreTree, com.blog.proto.BlogStore.StoreFile.StoreTree.Builder, com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder> itemsBuilder_;
+
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public java.util.List<com.blog.proto.BlogStore.StoreFile.StoreTree> getItemsList() {
+          if (itemsBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(items_);
+          } else {
+            return itemsBuilder_.getMessageList();
+          }
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public int getItemsCount() {
+          if (itemsBuilder_ == null) {
+            return items_.size();
+          } else {
+            return itemsBuilder_.getCount();
+          }
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public com.blog.proto.BlogStore.StoreFile.StoreTree getItems(int index) {
+          if (itemsBuilder_ == null) {
+            return items_.get(index);
+          } else {
+            return itemsBuilder_.getMessage(index);
+          }
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public Builder setItems(
+            int index, com.blog.proto.BlogStore.StoreFile.StoreTree value) {
+          if (itemsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureItemsIsMutable();
+            items_.set(index, value);
+            onChanged();
+          } else {
+            itemsBuilder_.setMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public Builder setItems(
+            int index, com.blog.proto.BlogStore.StoreFile.StoreTree.Builder builderForValue) {
+          if (itemsBuilder_ == null) {
+            ensureItemsIsMutable();
+            items_.set(index, builderForValue.build());
+            onChanged();
+          } else {
+            itemsBuilder_.setMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public Builder addItems(com.blog.proto.BlogStore.StoreFile.StoreTree value) {
+          if (itemsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureItemsIsMutable();
+            items_.add(value);
+            onChanged();
+          } else {
+            itemsBuilder_.addMessage(value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public Builder addItems(
+            int index, com.blog.proto.BlogStore.StoreFile.StoreTree value) {
+          if (itemsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureItemsIsMutable();
+            items_.add(index, value);
+            onChanged();
+          } else {
+            itemsBuilder_.addMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public Builder addItems(
+            com.blog.proto.BlogStore.StoreFile.StoreTree.Builder builderForValue) {
+          if (itemsBuilder_ == null) {
+            ensureItemsIsMutable();
+            items_.add(builderForValue.build());
+            onChanged();
+          } else {
+            itemsBuilder_.addMessage(builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public Builder addItems(
+            int index, com.blog.proto.BlogStore.StoreFile.StoreTree.Builder builderForValue) {
+          if (itemsBuilder_ == null) {
+            ensureItemsIsMutable();
+            items_.add(index, builderForValue.build());
+            onChanged();
+          } else {
+            itemsBuilder_.addMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public Builder addAllItems(
+            java.lang.Iterable<? extends com.blog.proto.BlogStore.StoreFile.StoreTree> values) {
+          if (itemsBuilder_ == null) {
+            ensureItemsIsMutable();
+            com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                values, items_);
+            onChanged();
+          } else {
+            itemsBuilder_.addAllMessages(values);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public Builder clearItems() {
+          if (itemsBuilder_ == null) {
+            items_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000001);
+            onChanged();
+          } else {
+            itemsBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public Builder removeItems(int index) {
+          if (itemsBuilder_ == null) {
+            ensureItemsIsMutable();
+            items_.remove(index);
+            onChanged();
+          } else {
+            itemsBuilder_.remove(index);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public com.blog.proto.BlogStore.StoreFile.StoreTree.Builder getItemsBuilder(
+            int index) {
+          return getItemsFieldBuilder().getBuilder(index);
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder getItemsOrBuilder(
+            int index) {
+          if (itemsBuilder_ == null) {
+            return items_.get(index);  } else {
+            return itemsBuilder_.getMessageOrBuilder(index);
+          }
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public java.util.List<? extends com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder> 
+             getItemsOrBuilderList() {
+          if (itemsBuilder_ != null) {
+            return itemsBuilder_.getMessageOrBuilderList();
+          } else {
+            return java.util.Collections.unmodifiableList(items_);
+          }
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public com.blog.proto.BlogStore.StoreFile.StoreTree.Builder addItemsBuilder() {
+          return getItemsFieldBuilder().addBuilder(
+              com.blog.proto.BlogStore.StoreFile.StoreTree.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public com.blog.proto.BlogStore.StoreFile.StoreTree.Builder addItemsBuilder(
+            int index) {
+          return getItemsFieldBuilder().addBuilder(
+              index, com.blog.proto.BlogStore.StoreFile.StoreTree.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .StoreFile.StoreTree items = 1;</code>
+         */
+        public java.util.List<com.blog.proto.BlogStore.StoreFile.StoreTree.Builder> 
+             getItemsBuilderList() {
+          return getItemsFieldBuilder().getBuilderList();
+        }
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+            com.blog.proto.BlogStore.StoreFile.StoreTree, com.blog.proto.BlogStore.StoreFile.StoreTree.Builder, com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder> 
+            getItemsFieldBuilder() {
+          if (itemsBuilder_ == null) {
+            itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+                com.blog.proto.BlogStore.StoreFile.StoreTree, com.blog.proto.BlogStore.StoreFile.StoreTree.Builder, com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder>(
+                    items_,
+                    ((bitField0_ & 0x00000001) == 0x00000001),
+                    getParentForChildren(),
+                    isClean());
+            items_ = null;
+          }
+          return itemsBuilder_;
+        }
+
+        private com.blog.proto.BlogStore.StoreFile.StoreTree parentItem_ = null;
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.blog.proto.BlogStore.StoreFile.StoreTree, com.blog.proto.BlogStore.StoreFile.StoreTree.Builder, com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder> parentItemBuilder_;
+        /**
+         * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+         */
+        public boolean hasParentItem() {
+          return parentItemBuilder_ != null || parentItem_ != null;
+        }
+        /**
+         * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+         */
+        public com.blog.proto.BlogStore.StoreFile.StoreTree getParentItem() {
+          if (parentItemBuilder_ == null) {
+            return parentItem_ == null ? com.blog.proto.BlogStore.StoreFile.StoreTree.getDefaultInstance() : parentItem_;
+          } else {
+            return parentItemBuilder_.getMessage();
+          }
+        }
+        /**
+         * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+         */
+        public Builder setParentItem(com.blog.proto.BlogStore.StoreFile.StoreTree value) {
+          if (parentItemBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            parentItem_ = value;
+            onChanged();
+          } else {
+            parentItemBuilder_.setMessage(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+         */
+        public Builder setParentItem(
+            com.blog.proto.BlogStore.StoreFile.StoreTree.Builder builderForValue) {
+          if (parentItemBuilder_ == null) {
+            parentItem_ = builderForValue.build();
+            onChanged();
+          } else {
+            parentItemBuilder_.setMessage(builderForValue.build());
+          }
+
+          return this;
+        }
+        /**
+         * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+         */
+        public Builder mergeParentItem(com.blog.proto.BlogStore.StoreFile.StoreTree value) {
+          if (parentItemBuilder_ == null) {
+            if (parentItem_ != null) {
+              parentItem_ =
+                com.blog.proto.BlogStore.StoreFile.StoreTree.newBuilder(parentItem_).mergeFrom(value).buildPartial();
+            } else {
+              parentItem_ = value;
+            }
+            onChanged();
+          } else {
+            parentItemBuilder_.mergeFrom(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+         */
+        public Builder clearParentItem() {
+          if (parentItemBuilder_ == null) {
+            parentItem_ = null;
+            onChanged();
+          } else {
+            parentItem_ = null;
+            parentItemBuilder_ = null;
+          }
+
+          return this;
+        }
+        /**
+         * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+         */
+        public com.blog.proto.BlogStore.StoreFile.StoreTree.Builder getParentItemBuilder() {
+          
+          onChanged();
+          return getParentItemFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+         */
+        public com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder getParentItemOrBuilder() {
+          if (parentItemBuilder_ != null) {
+            return parentItemBuilder_.getMessageOrBuilder();
+          } else {
+            return parentItem_ == null ?
+                com.blog.proto.BlogStore.StoreFile.StoreTree.getDefaultInstance() : parentItem_;
+          }
+        }
+        /**
+         * <code>optional .StoreFile.StoreTree parentItem = 2;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.blog.proto.BlogStore.StoreFile.StoreTree, com.blog.proto.BlogStore.StoreFile.StoreTree.Builder, com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder> 
+            getParentItemFieldBuilder() {
+          if (parentItemBuilder_ == null) {
+            parentItemBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                com.blog.proto.BlogStore.StoreFile.StoreTree, com.blog.proto.BlogStore.StoreFile.StoreTree.Builder, com.blog.proto.BlogStore.StoreFile.StoreTreeOrBuilder>(
+                    getParentItem(),
+                    getParentForChildren(),
+                    isClean());
+            parentItem_ = null;
+          }
+          return parentItemBuilder_;
+        }
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:StoreFile.StoreList)
+      }
+
+      // @@protoc_insertion_point(class_scope:StoreFile.StoreList)
+      private static final com.blog.proto.BlogStore.StoreFile.StoreList DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new com.blog.proto.BlogStore.StoreFile.StoreList();
+      }
+
+      public static com.blog.proto.BlogStore.StoreFile.StoreList getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<StoreList>
+          PARSER = new com.google.protobuf.AbstractParser<StoreList>() {
+        public StoreList parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+            return new StoreList(input, extensionRegistry);
+        }
+      };
+
+      public static com.google.protobuf.Parser<StoreList> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<StoreList> getParserForType() {
+        return PARSER;
+      }
+
+      public com.blog.proto.BlogStore.StoreFile.StoreList getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.blog.proto.BlogStore.StoreFile)) {
+        return super.equals(obj);
+      }
+      com.blog.proto.BlogStore.StoreFile other = (com.blog.proto.BlogStore.StoreFile) obj;
+
+      boolean result = true;
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.blog.proto.BlogStore.StoreFile parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.blog.proto.BlogStore.StoreFile parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.blog.proto.BlogStore.StoreFile parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.blog.proto.BlogStore.StoreFile parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.blog.proto.BlogStore.StoreFile parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.blog.proto.BlogStore.StoreFile parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.blog.proto.BlogStore.StoreFile parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.blog.proto.BlogStore.StoreFile parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.blog.proto.BlogStore.StoreFile parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.blog.proto.BlogStore.StoreFile parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.blog.proto.BlogStore.StoreFile prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code StoreFile}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:StoreFile)
+        com.blog.proto.BlogStore.StoreFileOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.blog.proto.BlogStore.internal_static_StoreFile_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.blog.proto.BlogStore.internal_static_StoreFile_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.blog.proto.BlogStore.StoreFile.class, com.blog.proto.BlogStore.StoreFile.Builder.class);
+      }
+
+      // Construct using com.blog.proto.BlogStore.StoreFile.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.blog.proto.BlogStore.internal_static_StoreFile_descriptor;
+      }
+
+      public com.blog.proto.BlogStore.StoreFile getDefaultInstanceForType() {
+        return com.blog.proto.BlogStore.StoreFile.getDefaultInstance();
+      }
+
+      public com.blog.proto.BlogStore.StoreFile build() {
+        com.blog.proto.BlogStore.StoreFile result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.blog.proto.BlogStore.StoreFile buildPartial() {
+        com.blog.proto.BlogStore.StoreFile result = new com.blog.proto.BlogStore.StoreFile(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.blog.proto.BlogStore.StoreFile) {
+          return mergeFrom((com.blog.proto.BlogStore.StoreFile)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.blog.proto.BlogStore.StoreFile other) {
+        if (other == com.blog.proto.BlogStore.StoreFile.getDefaultInstance()) return this;
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.blog.proto.BlogStore.StoreFile parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.blog.proto.BlogStore.StoreFile) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:StoreFile)
+    }
+
+    // @@protoc_insertion_point(class_scope:StoreFile)
+    private static final com.blog.proto.BlogStore.StoreFile DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.blog.proto.BlogStore.StoreFile();
+    }
+
+    public static com.blog.proto.BlogStore.StoreFile getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<StoreFile>
+        PARSER = new com.google.protobuf.AbstractParser<StoreFile>() {
+      public StoreFile parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new StoreFile(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<StoreFile> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<StoreFile> getParserForType() {
+      return PARSER;
+    }
+
+    public com.blog.proto.BlogStore.StoreFile getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
   }
 
   public interface ResultOrBuilder extends
@@ -3704,6 +6531,21 @@ public final class BlogStore {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_StoreFile_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_StoreFile_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_StoreFile_StoreTree_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_StoreFile_StoreTree_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_StoreFile_StoreList_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_StoreFile_StoreList_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Result_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -3732,22 +6574,34 @@ public final class BlogStore {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020blog-store.proto\"0\n\006Result\022\031\n\004code\030\001 \001" +
-      "(\0162\013.ReturnCode\022\013\n\003msg\030\002 \001(\t\"L\n\nResultLi" +
-      "st\022\026\n\005esult\030\001 \003(\0132\007.Result\022\031\n\004code\030\002 \001(\016" +
-      "2\013.ReturnCode\022\013\n\003msg\030\003 \001(\t\"\207\001\n\010UserItem\022" +
-      "\016\n\006userId\030\001 \001(\005\022\020\n\010username\030\002 \001(\t\022\020\n\010nic" +
-      "kname\030\003 \001(\t\022\r\n\005email\030\004 \001(\t\022\r\n\005phone\030\005 \001(" +
-      "\t\022\020\n\010birthday\030\006 \001(\003\022\027\n\006status\030\024 \001(\0162\007.St" +
-      "atus\"$\n\010UserList\022\030\n\005items\030\001 \003(\0132\t.UserIt" +
-      "em*@\n\006Status\022\021\n\rStatusDefault\020\000\022\020\n\014Statu" +
-      "sActive\020\001\022\021\n\rStatusDeleted\020\002*\323\001\n\nReturnC",
-      "ode\022\027\n\023UNKNOWN_RETURN_CODE\020\000\022\r\n\tRETURN_O" +
-      "K\020\001\022\020\n\014RETURN_ERROR\020\002\022\025\n\021RETURN_USER_EXI" +
-      "ST\0202\022\032\n\026RETURN_USER_NAME_BLANK\0203\022\036\n\032RETU" +
-      "RN_USER_PASSWORD_BLANK\0204\022\033\n\027RETURN_USER_" +
-      "PHONE_EXIST\0205\022\033\n\027RETURN_USER_EMAIL_EXIST" +
-      "\0206B\033\n\016com.blog.protoB\tBlogStoreb\006proto3"
+      "\n\020blog-store.proto\"\206\003\n\tStoreFile\032\345\001\n\tSto" +
+      "reTree\022+\n\tstoreType\030\001 \001(\0162\030.StoreFile.St" +
+      "oreTypeEnum\022\021\n\tchildItem\030\002 \003(\t\022\021\n\townerT" +
+      "ype\030\005 \001(\005\022\017\n\007ownerId\030\006 \001(\005\022\020\n\010fileName\030\007" +
+      " \001(\t\022\023\n\013contentType\030\010 \001(\t\022\020\n\010fileSize\030\t " +
+      "\001(\003\022\022\n\ncreateTime\030\024 \001(\003\022\022\n\nupdateTime\030\025 " +
+      "\001(\003\022\023\n\013committerId\030\026 \001(\005\032Z\n\tStoreList\022#\n" +
+      "\005items\030\001 \003(\0132\024.StoreFile.StoreTree\022(\n\npa" +
+      "rentItem\030\002 \001(\0132\024.StoreFile.StoreTree\"5\n\r" +
+      "StoreTypeEnum\022\020\n\014StoreDefault\020\000\022\010\n\004Tree\020",
+      "\001\022\010\n\004Blob\020\002\"0\n\006Result\022\031\n\004code\030\001 \001(\0162\013.Re" +
+      "turnCode\022\013\n\003msg\030\002 \001(\t\"L\n\nResultList\022\026\n\005e" +
+      "sult\030\001 \003(\0132\007.Result\022\031\n\004code\030\002 \001(\0162\013.Retu" +
+      "rnCode\022\013\n\003msg\030\003 \001(\t\"\207\001\n\010UserItem\022\016\n\006user" +
+      "Id\030\001 \001(\005\022\020\n\010username\030\002 \001(\t\022\020\n\010nickname\030\003" +
+      " \001(\t\022\r\n\005email\030\004 \001(\t\022\r\n\005phone\030\005 \001(\t\022\020\n\010bi" +
+      "rthday\030\006 \001(\003\022\027\n\006status\030\024 \001(\0162\007.Status\"$\n" +
+      "\010UserList\022\030\n\005items\030\001 \003(\0132\t.UserItem*2\n\tO" +
+      "wnerType\022\020\n\014OwnerDefault\020\000\022\010\n\004User\020\001\022\t\n\005" +
+      "Group\020\002*@\n\006Status\022\021\n\rStatusDefault\020\000\022\020\n\014",
+      "StatusActive\020\001\022\021\n\rStatusDeleted\020\002*\352\001\n\nRe" +
+      "turnCode\022\027\n\023UNKNOWN_RETURN_CODE\020\000\022\r\n\tRET" +
+      "URN_OK\020\001\022\020\n\014RETURN_ERROR\020\002\022\025\n\021RETURN_USE" +
+      "R_EXIST\0202\022\032\n\026RETURN_USER_NAME_BLANK\0203\022\036\n" +
+      "\032RETURN_USER_PASSWORD_BLANK\0204\022\033\n\027RETURN_" +
+      "USER_PHONE_EXIST\0205\022\033\n\027RETURN_USER_EMAIL_" +
+      "EXIST\0206\022\025\n\021RETURN_FILE_EXIST\020dB\033\n\016com.bl" +
+      "og.protoB\tBlogStoreb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3761,26 +6615,44 @@ public final class BlogStore {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_Result_descriptor =
+    internal_static_StoreFile_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_StoreFile_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_StoreFile_descriptor,
+        new java.lang.String[] { });
+    internal_static_StoreFile_StoreTree_descriptor =
+      internal_static_StoreFile_descriptor.getNestedTypes().get(0);
+    internal_static_StoreFile_StoreTree_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_StoreFile_StoreTree_descriptor,
+        new java.lang.String[] { "StoreType", "ChildItem", "OwnerType", "OwnerId", "FileName", "ContentType", "FileSize", "CreateTime", "UpdateTime", "CommitterId", });
+    internal_static_StoreFile_StoreList_descriptor =
+      internal_static_StoreFile_descriptor.getNestedTypes().get(1);
+    internal_static_StoreFile_StoreList_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_StoreFile_StoreList_descriptor,
+        new java.lang.String[] { "Items", "ParentItem", });
+    internal_static_Result_descriptor =
+      getDescriptor().getMessageTypes().get(1);
     internal_static_Result_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Result_descriptor,
         new java.lang.String[] { "Code", "Msg", });
     internal_static_ResultList_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_ResultList_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ResultList_descriptor,
         new java.lang.String[] { "Esult", "Code", "Msg", });
     internal_static_UserItem_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_UserItem_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UserItem_descriptor,
         new java.lang.String[] { "UserId", "Username", "Nickname", "Email", "Phone", "Birthday", "Status", });
     internal_static_UserList_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_UserList_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UserList_descriptor,
