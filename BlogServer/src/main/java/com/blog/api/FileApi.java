@@ -20,7 +20,7 @@ import javax.ws.rs.core.Context;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.UUID;
+import java.util.*;
 
 @Path("/file")
 @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
@@ -31,20 +31,22 @@ public class FileApi {
     @Path("/{path:.*}")
     public BlogStore.StoreFile.StoreList getFile(@PathParam("path") String fullPath, @Context HttpServletRequest request) {
         FileUrl url = new FileUrl(fullPath, RequestUtils.getUserId(request));
-        BlogStore.StoreFile.StoreList.Builder list = BlogStore.StoreFile.StoreList.newBuilder();
         if (!url.isOwner()) {
-            return list.build();
+            return BlogStore.StoreFile.StoreList.getDefaultInstance();
         }
         BlogStore.StoreFile.StoreTree tree = url.getStoreTree();
         if (null == tree) {
-            return list.build();
+            return BlogStore.StoreFile.StoreList.getDefaultInstance();
         }
-        list.setParentItem(tree.toBuilder().clearChildItem().build());
+        List<BlogStore.StoreFile.StoreTree> list = new ArrayList<>();
         StoreFileTree fileTree = new StoreFileTree();
         for (String hash : tree.getChildItemList()) {
-            list.addItems(fileTree.readFile(hash).toBuilder().clearChildItem().build());
+            list.add(fileTree.readFile(hash).toBuilder().clearChildItem().build());
         }
-        return list.build();
+        return BlogStore.StoreFile.StoreList.newBuilder()
+                .setParentItem(tree.toBuilder().clearChildItem().build())
+                .addAllItems(list)
+                .build();
     }
 
     @PUT

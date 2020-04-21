@@ -6,23 +6,28 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
         self.parentUrl = BlogStore.OwnerType.User + "/" + RootView.loginUser().userId + "/default/";
 
 
+        let fileUpload = document.getElementById("uploadFile");
+        fileUpload.addEventListener("change", function () {
+            FileAPI.uploadFile(this.files, self.parentUrl, self.getFileList.bind(self));
+        });
         self.getFileList();
     }
 
     ViewFileModel.prototype.getFileList = function () {
-        var context = this;
+        const context = this;
         FileAPI.getFile(context.parentUrl, function (data) {
             var storeList = BlogStore.StoreFile.StoreList.decode(data);
             var array = [];
             for (var i = 0; i < storeList.items.length; i++) {
                 array.push(new Message("StoreFile.StoreTree", storeList.items[i]));
             }
+            array.sort(function (v1, v2) {
+                const storeType = v1.storeType - v2.storeType;
+                return 0 === storeType ? v1.fileName.localeCompare(v2.fileName, "zh") : storeType;
+            });
             // console.log(storeList.parentItem);
             context.dataList(array);
         });
-    };
-    ViewFileModel.prototype.uploadFile = function () {
-        FileAPI.uploadFile(document.getElementById("upload-file").files, this.parentUrl, this.getFileList.bind(this));
     };
     ViewFileModel.prototype.getFileCardParams = function () {
         return {
@@ -70,7 +75,10 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
                     new MenuItem({
                         icon: "fa fa-upload",
                         iconText: '上传文件',
-                        itemClass: 'btn btn-primary'
+                        itemClass: 'btn btn-primary',
+                        click: function () {
+                            document.getElementById('uploadFile').click();
+                        }
                     })
                 ]
             }),

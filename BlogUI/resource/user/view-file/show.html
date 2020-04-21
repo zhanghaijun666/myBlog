@@ -1,13 +1,11 @@
+<!--<input type="file" id="licenseUpload" accept=".lic" class="transparency"/>-->
 <div class="view-file">
-    <div>
-        <input id="upload-file" type="file" name="file" multiple="multiple">
-        <button type="button" data-bind="text:'上传',click:$data.uploadFile"></button>
-    </div>
+    <input type="file" id="uploadFile" multiple="multiple"/>
     <div data-bind="template:{name: 'common-template', data: $data.getFileCardParams()}"></div>
 </div>
 
 <template id="row-file-template">
-    <div class="row-file" style="height: 100%;line-height: 50px">
+    <div class="row-file">
         <head-image params="data:$data"></head-image>
         <span data-bind="text: fileName,attr:{title:context.renderSize(fileSize)}"></span>
     </div>

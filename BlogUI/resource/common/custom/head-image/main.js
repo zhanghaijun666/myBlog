@@ -30,8 +30,9 @@ define(["text!./show.html", "css!./show.css"], function (pageView) {
     HeadImageModel.prototype.getFileIcon = function () {
         return {
             "doc": ["text/xml", "application/msword",],
-            "image": ["image/png", "image/gif", "application/x-img"],
-            "music": ["audio/mp3", "video/x-mpg", "video/x-mpeg", "video/mpg"],
+            "image": ["image/png", "image/gif", "application/x-img", "image/jpeg"],
+            "music": ["audio/mp3"],
+            "video": ["video/x-mpg", "video/x-mpeg", "video/mpg", "video/mp4"],
             "pdf": ["application/pdf"],
             "ppt": ["application/vnd.ms-powerpoint"],
             "txt": ["text/plain", "text/xml"],

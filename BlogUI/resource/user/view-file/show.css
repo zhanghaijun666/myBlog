@@ -1,0 +1,6 @@
+.view-file input[type="file"]{
+    display: none;
+}
+.view-file .custom-card .row-file{
+    height: 100%;line-height: 50px
+}

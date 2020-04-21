@@ -45,7 +45,7 @@
         return this.getChildItems().length > 0;
     };
     MenuItem.prototype.menuClick = function () {
-        if (this.targetItem) {
+        if (isFunction(this.click) && this.targetItem) {
             this.click.call(this.context || this, this.targetItem);
         }
     };
