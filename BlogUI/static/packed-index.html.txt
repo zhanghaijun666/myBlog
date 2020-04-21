@@ -1,3 +1,0 @@
-index-start.html
-../resource/common/templates/
-index-end.html
