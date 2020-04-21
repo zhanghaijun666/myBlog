@@ -12,10 +12,14 @@
     ko.components.register('custom-menu', {require: '/resource/common/custom/menu/main.js'});
     ko.components.register('custom-card', {require: '/resource/common/custom/card/main.js'});
     ko.components.register('custom-tree', {require: '/resource/common/custom/tree/main.js'});
+    ko.components.register('head-image', {require: '/resource/common/custom/head-image/main.js'});
+
 
     //特效组件
     ko.components.register('canvas-three', {require: '/resource/visitor/canvas/three/main.js'});
     ko.components.register('bongo-cat', {require: '/resource/visitor/plugin/bongo-cat/main.js'});
+
+
 
     //系统管理组件
 })(this, ko);

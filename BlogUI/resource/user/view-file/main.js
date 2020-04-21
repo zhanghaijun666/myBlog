@@ -1,6 +1,6 @@
-define(["text!./show.html", "./file-api.js", "css!./show.css"], function (pageView, FileAPI) {
+define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"], function (pageView, FileAPI, FileUtil) {
     function ViewFileModel(params, componentInfo) {
-        const self = this;
+        const self = $.extend(this, FileUtil);
         BaseComponent.call(self, params, componentInfo);
         self.dataList = ko.observableArray([]);
         self.parentUrl = BlogStore.OwnerType.User + "/" + RootView.loginUser().userId + "/default";
@@ -28,6 +28,7 @@ define(["text!./show.html", "./file-api.js", "css!./show.css"], function (pageVi
         return {
             name: "custom-card",
             data: {
+                context: this,
                 rowTemplate: "row-file-template",
                 dataList: this.dataList,
                 rightMenus: this.getRightMenuParams,

@@ -19,12 +19,6 @@ body > div {
     height: 100%;
 }
 
-input[type=checkbox] {
-}
-
-input[type=checkbox] :before {
-}
-
 a {
     text-decoration: none;
 }

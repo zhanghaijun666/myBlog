@@ -57,7 +57,7 @@
     flex-shrink: 0;
     width: 38px;
     height: 100%;
-    line-height: 50px;
+    line-height: 42px;
     text-align: center;
     vertical-align: center;
 }
@@ -73,4 +73,41 @@
     flex-shrink: 0;
     width: 200px;
     height: 100%;
+}
+
+.custom-card .row-select input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 15px;
+    position: relative;
+    cursor: pointer;
+}
+
+.custom-card .row-select input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+}
+
+.custom-card .row-select input[type="checkbox"]:checked::before {
+    content: "\2713";
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 1px solid #7D7D7D;
+    border-radius: 4px;
+    color: #7D7D7D;
+    font-size: 16px;
+    font-weight: bold;
 }

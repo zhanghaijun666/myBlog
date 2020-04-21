@@ -12,7 +12,9 @@
 <template id="custom-card-body">
     <!-- {{{ --><!-- ko foreach: dataList --><!-- }}} -->
     <div class="crad-body-row">
-        <div class="row-select"><input type="checkbox"/></div>
+        <div class="row-select">
+            <label><input type="checkbox"></label>
+        </div>
         <!-- {{{ --><!-- ko let: {context: $component.context} --><!-- }}} -->
         <div class="row-temp"
              data-bind="template:{name: 'common-template', data: {name:$parent.rowTemplate,data:$data}}"></div>

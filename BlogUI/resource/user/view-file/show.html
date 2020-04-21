@@ -7,9 +7,8 @@
 </div>
 
 <template id="row-file-template">
-    <div style="height: 100%;line-height: 50px">
-        <img src="/static/images/file/folder.png" width="30px" height="30px">
-        <span data-bind="text: fileName"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-        <span data-bind="text: fileSize"></span>
+    <div class="row-file" style="height: 100%;line-height: 50px">
+        <head-image params="data:$data"></head-image>
+        <span data-bind="text: fileName,attr:{title:context.renderSize(fileSize)}"></span>
     </div>
 </template>
