@@ -37,7 +37,7 @@ public class ResourceContorller {
 
     @RequestMapping("/")
     public void rootResourceHandle() throws IOException {
-        File file = new File(PathUtils.joinPath(PathUtils.getBlogServerPath(), blogSetting.getUIDir(), "/static/packed-index.html.txt"));
+        File file = new File(PathUtils.joinPath(PathUtils.getBlogServerPath(), blogSetting.getUIDir(), "/packed-index.html.txt"));
         try (OutputStream outputStream = response.getOutputStream()) {
             response.setContentType("text/html;charset=utf-8");
             ResourceUtils.writeResource(file, outputStream);
