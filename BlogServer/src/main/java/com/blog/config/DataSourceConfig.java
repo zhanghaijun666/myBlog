@@ -61,7 +61,7 @@ public class DataSourceConfig {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new WebStatFilter());
         filterRegistrationBean.addUrlPatterns("/*");
-        filterRegistrationBean.addInitParameter("exclusions", "/static/*,/h2/*,/druid/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico");
+        filterRegistrationBean.addInitParameter("exclusions", "/static/*,/resource/*,/h2/*,/druid/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico");
         filterRegistrationBean.addInitParameter("profileEnable", "true");
         return filterRegistrationBean;
     }

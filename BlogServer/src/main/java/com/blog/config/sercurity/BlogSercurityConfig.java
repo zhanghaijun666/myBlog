@@ -43,7 +43,7 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin();
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/static/**", "/template/**", "/login").permitAll()
+                .antMatchers("/", "/static/**","/resource/**", "/template/**", "/login").permitAll()
                 .antMatchers("/api/**").hasRole("USER")
                 .antMatchers("/h2/**", "/druid/**").access("hasRole('ADMIN') and hasRole('DBA')")
                 .anyRequest().authenticated()
@@ -101,7 +101,6 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
         public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
             response.setContentType("application/json;charset=UTF-8");
             ResponseUtils.write(response, "");
-            //            new DefaultRedirectStrategy().sendRedirect(request, response, "/");
         }
     }
 

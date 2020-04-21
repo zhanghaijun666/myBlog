@@ -219,7 +219,7 @@
                                     <arg line="-r BlogStore "/>
                                     <arg line="--force-long --force-message --no-comments "/>
                                     <arg line="${project.basedir}/src/main/resources/proto/blog-store.proto"/>
-                                    <arg line="-o ${project.basedir}/../BlogUI/www/common/config/blog-store.js"/>
+                                    <arg line="-o ${project.basedir}/../BlogUI/resource/common/config/blog-store.js"/>
                                 </exec>
                             </target>
                         </configuration>

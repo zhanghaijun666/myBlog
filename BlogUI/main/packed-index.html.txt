@@ -1,3 +1,0 @@
-index-start.html
-../www/common/templates/
-index-end.html

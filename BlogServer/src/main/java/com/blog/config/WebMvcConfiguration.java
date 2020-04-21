@@ -24,21 +24,23 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     //拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new MvcMultipleInterceptor(blogSetting.getUIDir(),"application/x-javascript;charset=utf-8")).addPathPatterns("/static/**/packed-**.js");
-        registry.addInterceptor(new MvcMultipleInterceptor(blogSetting.getUIDir(),"text/html;charset=utf-8")).addPathPatterns("/static/**/packed-**.html");
+        registry.addInterceptor(new MvcMultipleInterceptor(PathUtils.joinPath(blogSetting.getUIDir(), "static"), "application/x-javascript;charset=utf-8")).addPathPatterns("/static/**/packed-**.js");
+        registry.addInterceptor(new MvcMultipleInterceptor(PathUtils.joinPath(blogSetting.getUIDir(), "static"), "text/html;charset=utf-8")).addPathPatterns("/static/**/packed-**.html");
+        registry.addInterceptor(new MvcMultipleInterceptor(PathUtils.joinPath(blogSetting.getUIDir(), "resource"), "application/x-javascript;charset=utf-8")).addPathPatterns("/resource/**/packed-**.js");
+        registry.addInterceptor(new MvcMultipleInterceptor(PathUtils.joinPath(blogSetting.getUIDir(), "resource"), "text/html;charset=utf-8")).addPathPatterns("/resource/**/packed-**.html");
     }
 
     //页面跳转
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/404.html").setViewName("404");
-        registry.addRedirectViewController("/index", "/static/main/packed-index.html");
+        registry.addRedirectViewController("/index", "/");
     }
 
     //静态资源
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("file:"+ PathUtils.joinPath(PathUtils.getBlogServerPath(),blogSetting.getUIDir()));
+        registry.addResourceHandler("/static/**").addResourceLocations("file:" + PathUtils.joinPath(PathUtils.getBlogServerPath(), blogSetting.getUIDir(), "static/"));
+        registry.addResourceHandler("/resource/**").addResourceLocations("file:" + PathUtils.joinPath(PathUtils.getBlogServerPath(), blogSetting.getUIDir(), "resource/"));
 //        registry.addResourceHandler("/template/**").addResourceLocations("classpath:/templates/");
     }
 
@@ -56,27 +58,5 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedOrigins("*").allowCredentials(true).allowedMethods("GET").maxAge(3600 * 24);
-    }
-
-    //信息转换器
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-    }
-
-    @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-/*
-        /* 是否通过请求Url的扩展名来决定media type * /
-        configurer.favorPathExtension(true)
-                /* 不检查Accept请求头 * /
-                .ignoreAcceptHeader(true)
-                .parameterName("mediaType")
-                /* 设置默认的media yype * /
-                .defaultContentType(MediaType.TEXT_HTML)
-                /* 请求以.html结尾的会被当成MediaType.TEXT_HTML* /
-                .mediaType("html", MediaType.TEXT_HTML)
-                /* 请求以.json结尾的会被当成MediaType.APPLICATION_JSON* /
-                .mediaType("json", MediaType.APPLICATION_JSON);
-*/
     }
 }
