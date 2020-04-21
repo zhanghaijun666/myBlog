@@ -1,35 +1,42 @@
 (function (exports) {
+    function getValue(value, options) {
+        if (typeof visible === "undefined") {
+            return true;
+        }
+        if (ko.isObservable(value)) {
+            return ko.unwrap(value);
+        }
+        if (isFunction(value)) {
+            value.call(this, options);
+        }
+        return value;
+    }
+
     function MenuItem(options) {
         options = options || {};
         var self = $.extend(this, options);
+        self.context = options.context;
         self.visible = options.visible;
-        self.disable = typeof options.disable !== "undefined" ? options.disable : function () {
-            var visible = true;
-            if (typeof options.visible !== "undefined") {
-                visible = typeof options.visible === "function" ? options.visible.bind(self.targetItem || this)() : options.visible;
-            }
-            return !visible;
-        };
+        self.enable = options.enable;
         self.icon = options.icon;
         self.iconText = options.iconText;
         self.childMenuItems = options.childMenuItems || [];
         self.itemClass = options.itemClass || "";
         self.targetItem = options.targetItem || {};
-        self.click = options.click || function () {
-        };
+        self.click = options.click;
     }
 
-    MenuItem.prototype.getPermit = function () {
-        if (isFunction(this.disable)) {
-            return !this.disable.bind(this.targetItem || this)();
-        }
-        return !this.disable;
+    MenuItem.prototype.isVisible = function () {
+        return getValue.call(this.context, this.visible, this.targetItem);
+    };
+    MenuItem.prototype.isEnable = function () {
+        return getValue.call(this.context, this.enable, this.targetItem);
     };
     MenuItem.prototype.getChildItems = function () {
         if (this.childMenuItems instanceof Array) {
             return this.childMenuItems;
         } else if (isFunction(this.childMenuItems)) {
-            return this.childMenuItems();
+            return this.childMenuItems.call(this.context, this.targetItem)
         } else {
             new Array();
         }
@@ -39,7 +46,7 @@
     };
     MenuItem.prototype.menuClick = function () {
         if (this.targetItem) {
-            this.click(this.targetItem);
+            this.click.call(this.context || this, this.targetItem);
         }
     };
 

@@ -32,10 +32,13 @@ public class StoreFactory {
     }
 
     public static void deleteStore(FileUrl parentUrl, Map.Entry<String, StoreFile.StoreTree> entry) {
+        if (null == entry) {
+            return;
+        }
         StoreFactory.performStoreTreeUpdate(parentUrl, new Action() {
             @Override
             public StoreFile.StoreTree perform(StoreFile.StoreTree oldStoreItem) {
-                List<String> list = oldStoreItem.getChildItemList();
+                List<String> list = new ArrayList<>(oldStoreItem.getChildItemList());
                 list.remove(entry.getKey());
                 return oldStoreItem.toBuilder()
                         .clearChildItem().addAllChildItem(list)
@@ -79,7 +82,7 @@ public class StoreFactory {
                 String oldHash = entry.getKey();
                 long oldSize = entry.getValue().getFileSize();
                 entry = iter.previous();
-                List<String> childHash = entry.getValue().getChildItemList();
+                List<String> childHash = new ArrayList<>(entry.getValue().getChildItemList());
                 childHash.remove(oldHash);
                 childHash.add(newHash);
                 newTree = entry.getValue().toBuilder()
@@ -105,13 +108,18 @@ public class StoreFactory {
             if (StringUtils.isBlank(fileName)) {
                 continue;
             }
+            boolean existChild = false;
             for (String hash : tree.getChildItemList()) {
                 StoreFile.StoreTree childTree = fileTree.readFile(hash);
                 if (StringUtils.equals(fileName, childTree.getFileName())) {
                     map.put(hash, childTree);
+                    existChild = true;
+                    break;
                 }
             }
-            return new LinkedHashMap<>();
+            if (!existChild) {
+                return new LinkedHashMap<>();
+            }
         }
         return map;
     }

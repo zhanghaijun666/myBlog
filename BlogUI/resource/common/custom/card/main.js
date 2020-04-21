@@ -47,21 +47,23 @@
                     context: this.context,
                     dataList: this.dataList,
                     rowTemplate: this.rowTemplate,
-                    rightMenu: {
-                        name: "custom-menu",
-                        data: {
-                            menuList: this.getMenus(this.rightMenus),
-                            count: 4,
+                    rightMenu: function (data) {
+                        return {
+                            name: "custom-menu",
+                            data: {
+                                menuList: this.getMenus(this.rightMenus, data),
+                                count: 4,
+                            }
                         }
-                    }
+                    }.bind(this)
                 }
             }
         };
-        CustomCardViewModel.prototype.getMenus = function (menus) {
+        CustomCardViewModel.prototype.getMenus = function (menus, rowData) {
             if (menus instanceof Array) {
                 return menus;
             } else if (isFunction(menus)) {
-                return menus.bind(this.context)();
+                return menus.bind(this.context, rowData)();
             } else {
                 return new Array();
             }

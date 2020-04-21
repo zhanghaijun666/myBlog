@@ -3,7 +3,7 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
         const self = $.extend(this, FileUtil);
         BaseComponent.call(self, params, componentInfo);
         self.dataList = ko.observableArray([]);
-        self.parentUrl = BlogStore.OwnerType.User + "/" + RootView.loginUser().userId + "/default";
+        self.parentUrl = BlogStore.OwnerType.User + "/" + RootView.loginUser().userId + "/default/";
 
 
         self.getFileList();
@@ -39,15 +39,17 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
     ViewFileModel.prototype.getRightMenuParams = function (data) {
         return [
             new MenuItem({
+                context: this,
                 targetItem: data,
                 icon: "fa fa-remove",
                 iconText: '删除',
                 itemClass: 'btn btn-default',
                 click: function (data) {
-                    console.log(data);
+                    FileAPI.deleteFile(this.parentUrl + data.fileName, this.getFileList.bind(this));
                 }
             }),
             new MenuItem({
+                context: this,
                 targetItem: data,
                 icon: "fa fa-wrench",
                 iconText: '重命名',

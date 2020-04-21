@@ -14,7 +14,7 @@
             }
             var list = new Array();
             ko.unwrap(this.menuList).forEach(function (item) {
-                if (item.getPermit()) {
+                if (item.isVisible()) {
                     list.push(item);
                 }
             });

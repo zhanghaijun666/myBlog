@@ -19,7 +19,7 @@
         <div class="row-temp"
              data-bind="template:{name: 'common-template', data: {name:$parent.rowTemplate,data:$data}}"></div>
         <!-- {{{ --><!-- /ko --><!-- }}} -->
-        <div class="row-menu" data-bind="template:{name: 'common-template', data: $parent.rightMenu}"></div>
+        <div class="row-menu" data-bind="template:{name: 'common-template', data: $parent.rightMenu($data)}"></div>
     </div>
     <!-- {{{ --><!-- /ko --><!-- }}} -->
 </template>

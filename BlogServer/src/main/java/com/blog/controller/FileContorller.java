@@ -51,7 +51,7 @@ public class FileContorller {
                     .setCommitterId(fileUrl.getUserId());
             try (InputStream in = file.getInputStream()) {
                 storeTree.addAllChildItem(new StoreFileBlob().writeFile(IOUtils.toByteArray(in)));
-                StoreFactory.addStore(fileUrl, storeTree.build());
+                StoreFactory.addStore(new FileUrl(originPath, RequestUtils.getUserId(request)), storeTree.build());
             } catch (IOException e) {
                 return "";
             }
