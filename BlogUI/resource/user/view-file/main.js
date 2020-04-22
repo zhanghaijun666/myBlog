@@ -60,7 +60,12 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
                 iconText: '重命名',
                 itemClass: 'btn btn-default',
                 click: function (data) {
-                    console.log(data);
+                    const context = this;
+                    showInputDailog({
+                        success: function (dialog, container) {
+                            FileAPI.renameFile(context.parentUrl + data.fileName, ko.unwrap(dialog.inputValue), context.getFileList.bind(context));
+                        }
+                    });
                 }
             })
         ];
@@ -68,6 +73,7 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
     ViewFileModel.prototype.getTopMenus = function () {
         return [
             new MenuItem({
+                context: this,
                 icon: "fa fa-upload",
                 iconText: '上传',
                 itemClass: 'btn btn-primary',
@@ -83,9 +89,18 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
                 ]
             }),
             new MenuItem({
+                context: this,
                 icon: "fa fa-folder-open-o",
                 iconText: '新建文件夹',
-                itemClass: 'btn btn-primary'
+                itemClass: 'btn btn-primary',
+                click: function () {
+                    const context = this;
+                    showInputDailog({
+                        success: function (dialog, container) {
+                            FileAPI.addFolder(context.parentUrl, ko.unwrap(dialog.inputValue), context.getFileList.bind(context));
+                        }
+                    });
+                }
             })
         ]
     };

@@ -2,7 +2,6 @@
 ./knockout-components.js
 ./sammy.js
 ./view.js
-./return-code.js
 ./lang.js
 ../local/
 ../js/
