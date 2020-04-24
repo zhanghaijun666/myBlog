@@ -113,6 +113,7 @@ public class StoreFactory {
                 StoreFile.StoreTree childTree = fileTree.readFile(hash);
                 if (StringUtils.equals(fileName, childTree.getFileName())) {
                     map.put(hash, childTree);
+                    tree = childTree;
                     existChild = true;
                     break;
                 }

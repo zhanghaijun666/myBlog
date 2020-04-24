@@ -7,10 +7,13 @@ define(['knockout', "text!./show.html", "css!./show.css"], function (ko, pageVie
         BaseComponent.call(self, params, componentInfo);
     }
 
-    RouteUserModel.prototype.getContainerRoute = function (baseRoute) {
-        return [
-            new RouteItem({template: 'view-file'})
-        ];
+    RouteUserModel.prototype.getRouteParams = function (baseRoute) {
+        return {
+            baseRoute:"#user",
+            routes: [
+                new RouteItem({template: 'view-file'})
+            ]
+        };
     };
     RouteUserModel.prototype.getLeftParams = function () {
         return {

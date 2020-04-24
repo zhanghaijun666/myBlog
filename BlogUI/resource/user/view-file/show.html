@@ -4,9 +4,12 @@
     <div data-bind="template:{name: 'common-template', data: $data.getFileCardParams()}"></div>
 </div>
 
+<template id="file-header-template">
+    <entry params="url:context.parentUrl,routeBase:context.routeBase,refresh:context.getFileList.bind(context)"></entry>
+</template>
 <template id="row-file-template">
     <div class="row-file">
         <head-image params="data:$data"></head-image>
-        <span data-bind="text: fileName,attr:{title:context.renderSize(fileSize)}"></span>
+        <span style="cursor: pointer" data-bind="text: fileName,click:context.openFile.bind(context),attr:{title:context.renderSize(fileSize)}"></span>
     </div>
 </template>

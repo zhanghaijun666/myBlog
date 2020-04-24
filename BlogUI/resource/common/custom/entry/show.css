@@ -1,0 +1,16 @@
+.entry {
+    color: #09aaff;
+}
+
+.entry > span {
+    cursor: pointer;
+    color: #09aaff;
+}
+
+.entry > span:hover {
+    color: #337ab7;
+}
+
+.entry .ban-clcik {
+    cursor: not-allowed;
+}

@@ -9,7 +9,9 @@
         }
 
         self.watch = function (subscribable, subscriber, callbackTarget) {
-            subscriptions.push(subscribable.subscribe(subscriber, callbackTarget));
+            if (ko.isObservable(subscribable)) {
+                subscriptions.push(subscribable.subscribe(subscriber, callbackTarget));
+            }
         };
 
         //component销毁时自动调用

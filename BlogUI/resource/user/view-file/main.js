@@ -1,21 +1,31 @@
 define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"], function (pageView, FileAPI, FileUtil) {
     function ViewFileModel(params, componentInfo) {
+        params = params || {};
         const self = $.extend(this, FileUtil);
         BaseComponent.call(self, params, componentInfo);
+        self.routeBase = params.routeBase;
         self.dataList = ko.observableArray([]);
-        self.parentUrl = BlogStore.OwnerType.User + "/" + RootView.loginUser().userId + "/default/";
-
-
+        self.parentUrl = ko.observable(self.getFileUrl(params.routePath));
+        self.watch(params.routePath, function (path) {
+            self.parentUrl(self.getFileUrl(path));
+            self.getFileList();
+        });
         let fileUpload = document.getElementById("uploadFile");
         fileUpload.addEventListener("change", function () {
-            FileAPI.uploadFile(this.files, self.parentUrl, self.getFileList.bind(self));
+            FileAPI.uploadFile(this.files, self.getParentFullPath(), self.getFileList.bind(self));
         });
         self.getFileList();
     }
 
+    ViewFileModel.prototype.getFileUrl = function (path) {
+        return FileUrl.decodeFileUrlPath(ko.unwrap(path)) || new FileUrl(BlogStore.OwnerType.User, RootView.loginUser().userId);
+    };
+    ViewFileModel.prototype.getParentFullPath = function () {
+        return ko.unwrap(this.parentUrl).getFullPath();
+    };
     ViewFileModel.prototype.getFileList = function () {
         const context = this;
-        FileAPI.getFile(context.parentUrl, function (data) {
+        FileAPI.getFile(context.getParentFullPath(), function (data) {
             var storeList = BlogStore.StoreFile.StoreList.decode(data);
             var array = [];
             for (var i = 0; i < storeList.items.length; i++) {
@@ -34,6 +44,7 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
             name: "custom-card",
             data: {
                 context: this,
+                headTemplate: "file-header-template",
                 rowTemplate: "row-file-template",
                 dataList: this.dataList,
                 rightMenus: this.getRightMenuParams,
@@ -50,7 +61,7 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
                 iconText: '删除',
                 itemClass: 'btn btn-default',
                 click: function (data) {
-                    FileAPI.deleteFile(this.parentUrl + data.fileName, this.getFileList.bind(this));
+                    FileAPI.deleteFile(this.getParentFullPath() + data.fileName, this.getFileList.bind(this));
                 }
             }),
             new MenuItem({
@@ -63,7 +74,7 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
                     const context = this;
                     showInputDailog({
                         success: function (dialog, container) {
-                            FileAPI.renameFile(context.parentUrl + data.fileName, ko.unwrap(dialog.inputValue), context.getFileList.bind(context));
+                            FileAPI.renameFile(context.getParentFullPath() + "/" + data.fileName, ko.unwrap(dialog.inputValue), context.getFileList.bind(context));
                         }
                     });
                 }
@@ -97,7 +108,7 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
                     const context = this;
                     showInputDailog({
                         success: function (dialog, container) {
-                            FileAPI.addFolder(context.parentUrl, ko.unwrap(dialog.inputValue), context.getFileList.bind(context));
+                            FileAPI.addFolder(context.getParentFullPath(), ko.unwrap(dialog.inputValue), context.getFileList.bind(context));
                         }
                     });
                 }

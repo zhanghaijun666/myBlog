@@ -10,9 +10,32 @@
                 , rightMenus: null
                 , topMenus: null
                 , noDataImgCss: ""
+                , loading: false
             };
             var self = $.extend(this, defaultValue, params);
             BaseComponent.call(self, params, componentInfo);
+            self.chosenItems = ko.observableArray();
+            //https://www.tutorialsplane.com/knockoutjs-select-unselect-all-checkbox-list/
+            self.chosenAll = ko.pureComputed({
+                read: function () {
+                    return self.chosenItems().length === ko.unwrap(self.dataList).length;
+                },
+                write: function (value) {
+                    this.chosenItems(value ? ko.unwrap(self.dataList).slice(0) : []);
+                },
+                owner: this
+            });
+
+
+            self.isChosenAll = ko.observable(false);
+            self.watch(self.isChosenAll, function (value) {
+                console.log(self.chosenItems.isSelected);
+                // if (value) {
+                //     self.chosenItems.push.apply(self.chosenItems,self.dataList());
+                // } else {
+                //     self.chosenItems.removeAll();
+                // }
+            });
         }
 
         CustomCardViewModel.prototype.getTopMenuParams = function () {
@@ -42,7 +65,7 @@
         };
         CustomCardViewModel.prototype.getBodyParams = function () {
             return {
-                name: "custom-card-body",
+                name: ko.unwrap(this.loading) ? "custom-card-loading" : "custom-card-body",
                 data: {
                     context: this.context,
                     dataList: this.dataList,

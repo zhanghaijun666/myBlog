@@ -11,6 +11,11 @@ define(["knockout"], function (ko) {
             let size = srcsize / Math.pow(1024, index);
             size = size.toFixed(2);
             return size + unitArr[index];
+        },
+        openFile: function (data) {
+            if (data instanceof Message && data.storeName === "StoreFile.StoreTree" && data.storeType === BlogStore.StoreFile.StoreTypeEnum.Tree) {
+                window.location.hash = ("user/" + this.getParentFullPath() + "/" + data.fileName).replace(/\/+/g, "/");
+            }
         }
     }
 });

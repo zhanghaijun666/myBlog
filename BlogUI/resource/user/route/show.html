@@ -1,8 +1,8 @@
 <div class="route-user row">
-    <div class="col-md-2 user-brief" data-bind="template:{name: 'common-template', data: $data.getLeftParams()}"></div>
+    <div class="col-md-2 user-brief visible-lg visible-md" data-bind="template:{name: 'common-template', data: $data.getLeftParams()}"></div>
     <div class="col-md-10 route-user-body">
         <div data-bind="template:{name: 'common-template', data: $data.getHeadParams()}"></div>
-        <div style="overflow: auto" data-bind="component:{name:'ko-route',params:{routes:$data.getContainerRoute()}}"></div>
+        <div style="overflow: auto" data-bind="component:{name:'ko-route',params:$data.getRouteParams()}    "></div>
     </div>
 </div>
 

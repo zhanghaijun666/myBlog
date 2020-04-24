@@ -32,7 +32,7 @@ function SammyPage(options) {
             root.setRootTemplate('route-admin');
         });
         this.get(/.+/, function () {
-            this.redirect("#login");
+            root.setRootTemplate('page-404');
         });
         this.around(function (callback) {
             if (!location.hash) {

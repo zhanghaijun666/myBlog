@@ -91,7 +91,7 @@ public class FileApi {
         if (!fileUrl.isOwner() || StringUtils.isBlank(newName)) {
             return BlogStore.Result.newBuilder().setCode(BlogStore.ReturnCode.RETURN_ERROR).build();
         }
-        if (StringUtils.equals(newName, fileUrl.getFileName()) || StoreUtil.getChildNameList(fileUrl).contains(newName)) {
+        if (StringUtils.equals(newName, fileUrl.getFileName()) || StoreUtil.getChildNameList(fileUrl.getParentUrl()).contains(newName)) {
             return BlogStore.Result.newBuilder().setCode(BlogStore.ReturnCode.RETURN_FILE_EXIST).build();
         }
         StoreFactory.rename(fileUrl, newName);

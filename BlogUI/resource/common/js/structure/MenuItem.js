@@ -52,7 +52,8 @@
 
     function RouteItem(options) {
         options = options || {};
-        this.template = options.template;
+        this.template = options.template || "";
+        this.route = options.route || "";
     }
 
     exports.MenuItem = MenuItem;

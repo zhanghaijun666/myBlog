@@ -1,24 +1,33 @@
 <div class="custom-card">
+    <!-- {{{ --><!-- ko let: {context: $data.context,cardContext:$data} --><!-- }}} -->
     <div class="top-menu" data-bind="template:{name: 'common-template', data: $data.getTopMenuParams()}"></div>
     <!-- {{{ --><!-- ko if: $data.isShowHead() --><!-- }}} -->
     <div class="card-head" data-bind="template:{name: 'common-template', data: $data.getHeadParams()}"></div>
     <!-- {{{ --><!-- /ko --><!-- }}} -->
     <div class="card-body" data-bind="template:{name: 'common-template', data: $data.getBodyParams()}"></div>
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
 </div>
+<template id="custom-card-loading">
+    <div class="loading">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</template>
 <template id="custom-card-head">
-    <div class="row-select"><input type="checkbox"/></div>
+    <div class="row-select"><input type="checkbox" data-bind="checked:cardContext.chosenAll"/></div>
     <div class="row-temp" data-bind="template:{name: 'common-template', data: $data.headTemplate}"></div>
 </template>
 <template id="custom-card-body">
     <!-- {{{ --><!-- ko foreach: dataList --><!-- }}} -->
     <div class="crad-body-row">
         <div class="row-select">
-            <label><input type="checkbox"></label>
+            <label><input type="checkbox" data-bind="checkedValue: $data, checked: cardContext.chosenItems"></label>
         </div>
-        <!-- {{{ --><!-- ko let: {context: $component.context} --><!-- }}} -->
         <div class="row-temp"
              data-bind="template:{name: 'common-template', data: {name:$parent.rowTemplate,data:$data}}"></div>
-        <!-- {{{ --><!-- /ko --><!-- }}} -->
         <div class="row-menu" data-bind="template:{name: 'common-template', data: $parent.rightMenu($data)}"></div>
     </div>
     <!-- {{{ --><!-- /ko --><!-- }}} -->

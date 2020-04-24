@@ -1,10 +1,9 @@
 (function (exports) {
-
-
     exports.getBinary = function (url, options, callback, errorCallback) {
         if (!url) {
             return;
         }
+        url = url.replace(/\/+/g,"/")
         var ot;
         var oloaded = 0;
         options = options || {};
