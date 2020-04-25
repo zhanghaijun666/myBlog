@@ -1,6 +1,5 @@
 package com.blog.service.File;
 
-import com.blog.proto.BlogStore;
 import com.blog.utils.EncryptUtils;
 import com.blog.utils.PathUtils;
 
@@ -13,12 +12,11 @@ import java.util.List;
 public class StoreFileBlob extends StoreFile {
     private static final int MAX_BLOB_SIZE = 1 * 1024 * 1024;
 
-    @Override
-    public File getHashFile(String hash) {
+    private static File getHashFile(String hash) {
         return new File(PathUtils.joinPath(StoreFileBlob.getStorePath(), "blob", StoreFileBlob.getHashDir(hash)), hash);
     }
 
-    public List<String> writeFile(byte[] bytes) throws IOException {
+    public static List<String> writeFile(byte[] bytes) throws IOException {
         List<String> hashList = new ArrayList<>();
         int totalSize = bytes.length;
         int indexSize = 0;
@@ -27,7 +25,7 @@ public class StoreFileBlob extends StoreFile {
             indexSize += StoreFileBlob.MAX_BLOB_SIZE;
             String hash = EncryptUtils.sha1(blobBytes);
             hashList.add(hash);
-            File hashFile = this.getHashFile(hash);
+            File hashFile = StoreFileBlob.getHashFile(hash);
             if (!hashFile.getParentFile().exists()) {
                 hashFile.getParentFile().mkdirs();
             }
@@ -39,9 +37,9 @@ public class StoreFileBlob extends StoreFile {
         return hashList;
     }
 
-    public void readFile(List<String> list, OutputStream out) {
+    public static void readFile(List<String> list, OutputStream out) {
         for (String hash : list) {
-            File hashFile = this.getHashFile(hash);
+            File hashFile = StoreFileBlob.getHashFile(hash);
             try (InputStream in = new FileInputStream(hashFile)) {
                 int len = -1;
                 byte[] bytes = new byte[1 * 1024 * 1024];

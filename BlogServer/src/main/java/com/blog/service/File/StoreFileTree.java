@@ -6,21 +6,23 @@ import com.blog.utils.PathUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 
 public class StoreFileTree extends StoreFile {
 
-    @Override
-    public File getHashFile(String hash) {
+    private static File getHashFile(String hash) {
         return new File(PathUtils.joinPath(StoreFileTree.getStorePath(), "tree", StoreFileTree.getHashDir(hash)), hash);
     }
 
-    public String writeFile(BlogStore.StoreFile.StoreTree tree) {
+    public static String writeFile(BlogStore.StoreFile.StoreTree tree) {
         try {
             byte[] bytes = tree.toByteArray();
             String hash = EncryptUtils.sha1(bytes);
-            File hashFile = this.getHashFile(hash);
+            File hashFile = StoreFileTree.getHashFile(hash);
             if (!hashFile.getParentFile().exists()) {
                 hashFile.getParentFile().mkdirs();
             }
@@ -35,11 +37,11 @@ public class StoreFileTree extends StoreFile {
         }
     }
 
-    public BlogStore.StoreFile.StoreTree readFile(String hash) {
+    public static BlogStore.StoreFile.StoreTree readFile(String hash) {
         if (StringUtils.isBlank(hash)) {
             return null;
         }
-        File hashFile = this.getHashFile(hash);
+        File hashFile = StoreFileTree.getHashFile(hash);
         try (InputStream in = new FileInputStream(hashFile)) {
             return BlogStore.StoreFile.StoreTree.parseFrom(IOUtils.toByteArray(in));
         } catch (Exception e) {

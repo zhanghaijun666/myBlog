@@ -1,6 +1,21 @@
-.view-file input[type="file"]{
+.view-file, .view-file > div {
+    width: 100%;
+    height: 100%;
+}
+.view-file input[type="file"] {
     display: none;
 }
-.view-file .custom-card .row-file{
-    height: 100%;line-height: 50px
+
+.view-file .custom-card .row-file {
+    height: 100%;
+    line-height: 50px
+}
+
+.view-file .custom-card .file-entry {
+    height: 100%;
+    width: 100%;
+}
+
+.view-file .custom-card .file-entry > .entry {
+    line-height: 22px;
 }

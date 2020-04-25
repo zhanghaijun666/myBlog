@@ -12,7 +12,7 @@ define(["knockout"], function (ko) {
             })
         },
         addFolder: function (filePath, newName, callback) {
-            getBinary("/api/file/addfolder/" + newName + "/" + filePath, {cmd: "PUT"}, function (data) {
+            getBinary(FileUrl.join("/api/file/addfolder/", newName, filePath), {cmd: "PUT"}, function (data) {
                 console.log(BlogStore.Result.decode(data));
                 if (isFunction(callback)) {
                     callback(BlogStore.Result.decode(data))
@@ -20,7 +20,7 @@ define(["knockout"], function (ko) {
             })
         },
         renameFile: function (filePath, newName, callback) {
-            getBinary("/api/file/rename/" + newName + "/" + filePath, {cmd: "POST"}, function (data) {
+            getBinary(FileUrl.join("/api/file/rename/", newName, filePath), {cmd: "POST"}, function (data) {
                 console.log(BlogStore.Result.decode(data));
                 if (isFunction(callback)) {
                     callback(BlogStore.Result.decode(data))
@@ -37,6 +37,9 @@ define(["knockout"], function (ko) {
                 data.append("file", files[i]);
             }
             getBinary("/file/upload/" + filePath, {cmd: "POST", data: data}, callback)
+        },
+        downloadFile: function (filePath) {
+            window.open(window.location.origin + FileUrl.join("/api/file/download/", filePath), '_blank');
         }
     }
 });

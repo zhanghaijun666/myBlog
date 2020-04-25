@@ -4,6 +4,7 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
         const self = $.extend(this, FileUtil);
         BaseComponent.call(self, params, componentInfo);
         self.routeBase = params.routeBase;
+        self.loading = ko.observable(false);
         self.dataList = ko.observableArray([]);
         self.parentUrl = ko.observable(self.getFileUrl(params.routePath));
         self.watch(params.routePath, function (path) {
@@ -25,7 +26,9 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
     };
     ViewFileModel.prototype.getFileList = function () {
         const context = this;
+        context.loading(true);
         FileAPI.getFile(context.getParentFullPath(), function (data) {
+            context.loading(false);
             var storeList = BlogStore.StoreFile.StoreList.decode(data);
             var array = [];
             for (var i = 0; i < storeList.items.length; i++) {
@@ -44,6 +47,7 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
             name: "custom-card",
             data: {
                 context: this,
+                loading: this.loading,
                 headTemplate: "file-header-template",
                 rowTemplate: "row-file-template",
                 dataList: this.dataList,
@@ -52,8 +56,29 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
             }
         }
     };
+    ViewFileModel.prototype.getEntryParams = function () {
+        return {
+            name: "entry",
+            data: {
+                url: this.parentUrl,
+                routeBase: this.routeBase,
+                refresh: this.getFileList.bind(this),
+                loadind: this.loading
+            }
+        }
+    };
     ViewFileModel.prototype.getRightMenuParams = function (data) {
         return [
+            new MenuItem({
+                context: this,
+                targetItem: data,
+                icon: "fa fa-download",
+                iconText: '下载',
+                itemClass: 'btn btn-default',
+                click: function (data) {
+                    FileAPI.downloadFile(FileUrl.join(this.getParentFullPath(), data.fileName));
+                }
+            }),
             new MenuItem({
                 context: this,
                 targetItem: data,
@@ -63,22 +88,23 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
                 click: function (data) {
                     FileAPI.deleteFile(this.getParentFullPath() + data.fileName, this.getFileList.bind(this));
                 }
-            }),
-            new MenuItem({
-                context: this,
-                targetItem: data,
-                icon: "fa fa-wrench",
-                iconText: '重命名',
-                itemClass: 'btn btn-default',
-                click: function (data) {
-                    const context = this;
-                    showInputDailog({
-                        success: function (dialog, container) {
-                            FileAPI.renameFile(context.getParentFullPath() + "/" + data.fileName, ko.unwrap(dialog.inputValue), context.getFileList.bind(context));
-                        }
-                    });
-                }
             })
+            // ,
+            // new MenuItem({
+            //     context: this,
+            //     targetItem: data,
+            //     icon: "fa fa-wrench",
+            //     iconText: '重命名',
+            //     itemClass: 'btn btn-default',
+            //     click: function (data) {
+            //         const context = this;
+            //         showInputDailog({
+            //             success: function (dialog, container) {
+            //                 FileAPI.renameFile(FileUrl.join(context.getParentFullPath(), data.fileName), ko.unwrap(dialog.inputValue), context.getFileList.bind(context));
+            //             }
+            //         });
+            //     }
+            // })
         ];
     };
     ViewFileModel.prototype.getTopMenus = function () {

@@ -7,10 +7,10 @@
     }
 
     FileUrl.prototype.getPathPrefix = function () {
-        return "/" + this.ownerType + "/" + this.ownerId + "/" + this.alias;
+        return FileUrl.join(this.ownerType, this.ownerId, this.alias);
     };
     FileUrl.prototype.getFullPath = function () {
-        return "/" + this.ownerType + "/" + this.ownerId + "/" + this.alias + "/" + this.path;
+        return FileUrl.join(this.ownerType, this.ownerId, this.alias, this.path);
     };
 
     FileUrl.decodeFileUrlPath = function (url) {

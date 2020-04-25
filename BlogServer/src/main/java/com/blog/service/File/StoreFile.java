@@ -5,9 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 
-public abstract class StoreFile {
-
-    public abstract File getHashFile(String hash);
+public class StoreFile {
 
     protected static String getHashDir(String hash) {
         if (StringUtils.isBlank(hash)) {

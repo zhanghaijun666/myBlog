@@ -2,25 +2,20 @@ package com.blog.api;
 
 import com.blog.jersey.BlogMediaType;
 import com.blog.proto.BlogStore;
-import com.blog.service.File.FileUrl;
-import com.blog.service.File.StoreFactory;
-import com.blog.service.File.StoreFileTree;
-import com.blog.service.File.StoreUtil;
+import com.blog.service.File.*;
 import com.blog.utils.RequestUtils;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
-import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
+import javax.ws.rs.core.Response;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Path("/file")
 @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
@@ -39,9 +34,8 @@ public class FileApi {
             return BlogStore.StoreFile.StoreList.getDefaultInstance();
         }
         List<BlogStore.StoreFile.StoreTree> list = new ArrayList<>();
-        StoreFileTree fileTree = new StoreFileTree();
         for (String hash : tree.getChildItemList()) {
-            list.add(fileTree.readFile(hash).toBuilder().clearChildItem().build());
+            list.add(StoreFileTree.readFile(hash).toBuilder().clearChildItem().build());
         }
         return BlogStore.StoreFile.StoreList.newBuilder()
                 .setParentItem(tree.toBuilder().clearChildItem().build())
@@ -100,34 +94,56 @@ public class FileApi {
 
 
     @GET
-    @Path("/download/{filename}")
+    @Path("/download/{path:.*}")
     @Produces(BlogMediaType.WILDCARD)
     @Consumes(BlogMediaType.WILDCARD)
-    public void down(@PathParam("filename") String filename, @Context HttpServletResponse response) throws Exception {
-        response.setHeader("Content-disposition", "attachment;filename=" + filename);
-        response.setHeader("Cache-Control", "no-cache");
-        File file = new File("D:\\", filename);
-        FileUtils.copyFile(file, response.getOutputStream());
-    }
-
-
-    /**
-     * curl -X POST -F "file=@111.txt" http://localhost:8080/api/file/upload
-     */
-    @POST
-    @Path("/upload")
-    @Produces(BlogMediaType.TEXT_PLAIN)
-    @Consumes(BlogMediaType.MULTIPART_FORM_DATA)
-    public String upload(@FormDataParam("file") InputStream fileInputStream, @FormDataParam("file") FormDataContentDisposition disposition) throws Exception {
-        File upload = new File("D:/files/", UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(disposition.getFileName()));
-        if (!upload.getParentFile().exists()) {
-            upload.getParentFile().mkdirs();
+    public void down(@PathParam("path") String fullPath, @Context HttpServletRequest request, @Context HttpServletResponse response) throws Exception {
+        FileUrl fileUrl = new FileUrl(fullPath, RequestUtils.getUserId(request));
+        if (!fileUrl.isOwner() || null == fileUrl.getStoreTree()) {
+            response.setContentType("text/html;charset=utf-8");
+            response.sendError(Response.Status.UNAUTHORIZED.getStatusCode(), "UNAUTHORIZED");
+            return;
         }
-        try {
-            FileUtils.copyInputStreamToFile(fileInputStream, upload);
-        } catch (IOException e) {
-            return "上传文件失败";
+        BlogStore.StoreFile.StoreTree tree = fileUrl.getStoreTree();
+        response.setContentType("application/force-download");
+        response.setCharacterEncoding("UTF-8");
+        String userAgent = request.getHeader("User-Agent");
+        String formFileName;
+        if (userAgent.contains("MSIE") || userAgent.contains("Trident")) {
+            // 针对IE或者以IE为内核的浏览器：
+            formFileName = URLEncoder.encode(tree.getFileName(), "UTF-8");
+        } else {
+            // 非IE浏览器的处理：
+            formFileName = new String(tree.getFileName().getBytes("UTF-8"), "ISO-8859-1");
         }
-        return "upload success!";
+
+        try (OutputStream out = response.getOutputStream()) {
+            if (fileUrl.isFolder()) {
+                response.addHeader("Content-Disposition", "attachment;fileName=" + formFileName + ".zip");
+                StoreUtil.toZip(Collections.singletonList(tree), out);
+            } else {
+                response.addHeader("Content-Disposition", "attachment;fileName=" + formFileName);
+                StoreFileBlob.readFile(tree.getChildItemList(), out);
+            }
+        }
     }
+//    /**
+//     * curl -X POST -F "file=@111.txt" http://localhost:8080/api/file/upload
+//     */
+//    @POST
+//    @Path("/upload")
+//    @Produces(BlogMediaType.TEXT_PLAIN)
+//    @Consumes(BlogMediaType.MULTIPART_FORM_DATA)
+//    public String upload(@FormDataParam("file") InputStream fileInputStream, @FormDataParam("file") FormDataContentDisposition disposition) throws Exception {
+//        File upload = new File("D:/files/", UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(disposition.getFileName()));
+//        if (!upload.getParentFile().exists()) {
+//            upload.getParentFile().mkdirs();
+//        }
+//        try {
+//            FileUtils.copyInputStreamToFile(fileInputStream, upload);
+//        } catch (IOException e) {
+//            return "上传文件失败";
+//        }
+//        return "upload success!";
+//    }
 }

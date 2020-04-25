@@ -30,6 +30,7 @@ public class FileUrl {
     private int userId = FileUrl.DEFAULT_OWNER_ID;
 
     private String storeHash = null;    //文件库的真是hash
+    Map.Entry<String, BlogStore.StoreFile.StoreTree> treeEntry = null;
 
     public FileUrl(String originPath, int userId) {
         this.userId = userId;
@@ -80,20 +81,25 @@ public class FileUrl {
 
     public BlogStore.StoreFile.StoreTree getStoreTree() {
         Map.Entry<String, BlogStore.StoreFile.StoreTree> entry = this.getHashTree();
-        return null == entry ? null:entry.getValue();
+        return null == entry ? null : entry.getValue();
+    }
+
+    public boolean isFolder() {
+        return null != this.getStoreTree() && this.getStoreTree().getStoreType() == BlogStore.StoreFile.StoreTypeEnum.Tree;
     }
 
     public Map.Entry<String, BlogStore.StoreFile.StoreTree> getHashTree() {
-        LinkedHashMap<String, BlogStore.StoreFile.StoreTree> map = StoreFactory.getStoreTreeList(this.getStoreHash(), this.getPath());
-        if (map.isEmpty()) {
-            return null;
+        if (null == treeEntry) {
+            LinkedHashMap<String, BlogStore.StoreFile.StoreTree> map = StoreFactory.getStoreTreeList(this.getStoreHash(), this.getPath());
+            if (map.isEmpty()) {
+                return null;
+            }
+            Iterator<Map.Entry<String, BlogStore.StoreFile.StoreTree>> iterator = map.entrySet().iterator();
+            while (iterator.hasNext()) {
+                treeEntry = iterator.next();
+            }
         }
-        Iterator<Map.Entry<String, BlogStore.StoreFile.StoreTree>> iterator = map.entrySet().iterator();
-        Map.Entry<String, BlogStore.StoreFile.StoreTree> tail = null;
-        while (iterator.hasNext()) {
-            tail = iterator.next();
-        }
-        return tail;
+        return treeEntry;
         //通过反射获取LinkedHashMap中的末尾元素
 //        return map.isEmpty() ? null : map.getClass().getDeclaredField("tail").setAccessible(true).get(map);
     }

@@ -5,4 +5,5 @@
 ./lib/sammy.js
 ./lib/protobuf.js
 ./lib/rusha.js
+./lib/jtopo-0.4.8-min.js
 #./lib/threejs/

@@ -18,26 +18,21 @@
             //https://www.tutorialsplane.com/knockoutjs-select-unselect-all-checkbox-list/
             self.chosenAll = ko.pureComputed({
                 read: function () {
-                    return self.chosenItems().length === ko.unwrap(self.dataList).length;
+                    return this.chosenItems().length > 0 && this.chosenItems().length === ko.unwrap(this.dataList).length;
                 },
                 write: function (value) {
-                    this.chosenItems(value ? ko.unwrap(self.dataList).slice(0) : []);
+                    this.chosenItems(value ? ko.unwrap(this.dataList).slice(0) : []);
                 },
-                owner: this
-            });
-
-
-            self.isChosenAll = ko.observable(false);
-            self.watch(self.isChosenAll, function (value) {
-                console.log(self.chosenItems.isSelected);
-                // if (value) {
-                //     self.chosenItems.push.apply(self.chosenItems,self.dataList());
-                // } else {
-                //     self.chosenItems.removeAll();
-                // }
+                owner: self
             });
         }
 
+        CustomCardViewModel.prototype.getChosenOrAll = function () {
+            return this.chosenItems().length + "/" + ko.unwrap(this.dataList).length;
+        };
+        CustomCardViewModel.prototype.isShowTopMenu = function () {
+            return this.getMenus(this.topMenus).length > 0;
+        };
         CustomCardViewModel.prototype.getTopMenuParams = function () {
             return {
                 name: "custom-menu",

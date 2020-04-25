@@ -5,7 +5,7 @@
 </div>
 
 <template id="file-header-template">
-    <entry params="url:context.parentUrl,routeBase:context.routeBase,refresh:context.getFileList.bind(context)"></entry>
+    <div class="file-entry" data-bind="template:{name: 'common-template', data: context.getEntryParams.call(context)}"></div>
 </template>
 <template id="row-file-template">
     <div class="row-file">

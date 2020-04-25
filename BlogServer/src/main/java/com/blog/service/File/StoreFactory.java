@@ -8,7 +8,7 @@ import java.util.*;
 public class StoreFactory {
 
     public static void addStore(FileUrl parentUrl, StoreFile.StoreTree newTree) {
-        String treeHash = new StoreFileTree().writeFile(newTree);
+        String treeHash = StoreFileTree.writeFile(newTree);
         StoreFactory.performStoreTreeUpdate(parentUrl, new Action() {
             @Override
             public StoreFile.StoreTree perform(StoreFile.StoreTree oldStoreItem) {
@@ -64,7 +64,7 @@ public class StoreFactory {
                     .setUpdateTime(System.currentTimeMillis())
                     .setCommitterId(fileUrl.getUserId())
                     .build());
-            String rootHash = new StoreFileTree().writeFile(rootTree);
+            String rootHash = StoreFileTree.writeFile(rootTree);
             fileUrl.getOrganize().setFileHash(rootHash).saveIt();
             return rootHash;
         }
@@ -73,7 +73,6 @@ public class StoreFactory {
         Map.Entry<String, StoreFile.StoreTree> entry = null;
         StoreFile.StoreTree newTree = null;
         String newHash = "";
-        StoreFileTree fileTree = new StoreFileTree();
         while (iter.hasPrevious()) {
             if (null == entry) {
                 entry = iter.previous();
@@ -90,7 +89,7 @@ public class StoreFactory {
                         .setFileSize(entry.getValue().getFileSize() - oldSize + newTree.getFileSize())
                         .build();
             }
-            newHash = fileTree.writeFile(newTree);
+            newHash = StoreFileTree.writeFile(newTree);
         }
         fileUrl.getOrganize().setFileHash(newHash).saveIt();
         return newHash;
@@ -98,8 +97,7 @@ public class StoreFactory {
 
     public static LinkedHashMap<String, StoreFile.StoreTree> getStoreTreeList(String storeHash, String path) {
         LinkedHashMap<String, StoreFile.StoreTree> map = new LinkedHashMap<>();
-        StoreFileTree fileTree = new StoreFileTree();
-        StoreFile.StoreTree tree = fileTree.readFile(storeHash);
+        StoreFile.StoreTree tree = StoreFileTree.readFile(storeHash);
         if (null == tree) {
             return map;
         }
@@ -110,7 +108,7 @@ public class StoreFactory {
             }
             boolean existChild = false;
             for (String hash : tree.getChildItemList()) {
-                StoreFile.StoreTree childTree = fileTree.readFile(hash);
+                StoreFile.StoreTree childTree = StoreFileTree.readFile(hash);
                 if (StringUtils.equals(fileName, childTree.getFileName())) {
                     map.put(hash, childTree);
                     tree = childTree;
