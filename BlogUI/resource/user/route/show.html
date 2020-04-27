@@ -11,9 +11,9 @@
         <img alt="头像">
     </div>
     <div class="user-menu">
-        <custom-menu params="menuList:$data,count:-1,menuClass:'vertical-menu'"></custom-menu>
+        <custom-menu params="menuList:$data,count:-1,menuClass:'vertical-nav'"></custom-menu>
     </div>
 </template>
 <template id="user-navbar">
-    <div style="float: right" data-bind="component:{name:'custom-menu',params:{menuList:menus,count:-1,menuClass:'right-menu'}}"></div>
+    <div style="float: right" data-bind="component:{name:'custom-menu',params:{menuList:menus,count:-1,menuClass:'horizontal'}}"></div>
 </template>

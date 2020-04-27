@@ -14,22 +14,6 @@
             };
             return this;
         };
-        //http://stackoverflow.com/questions/17983118/change-observable-but-dont-notify-subscribers-in-knockout-js
-        ko.observable.fn.withPausing = function () {
-            this.notifySubscribers = function () {
-                if (!this.pauseNotifications) {
-                    ko.subscribable.fn.notifySubscribers.apply(this, arguments);
-                }
-            };
-            this.sneakyUpdate = function (newValue) {
-                this.pauseNotifications = true;
-                this(newValue);
-                this.pauseNotifications = false;
-            };
-
-            return this;
-        };
-
         function KoRouteModel(params, componentInfo) {
             var self = this;
             BaseComponent.call(self, params, componentInfo);
@@ -49,15 +33,15 @@
             if (routeItem && ko.unwrap(this.templateName) == routeItem.item.template) {
                 this.templateData().routePath(routeItem.path);
             } else if (routeItem) {
-                this.templateName.sneakyUpdate(routeItem.item.template);
-                this.templateData.sneakyUpdate({
-                    routeBase: this.baseRoute,
+                this.templateName(routeItem.item.template);
+                this.templateData({
+                    routeBase: FileUrl.join(this.baseRoute, routeItem.item.route),
                     route: routeItem.item,
                     routePath: ko.observable(routeItem.path)
                 });
             } else {
-                this.templateName.sneakyUpdate("route-404");
-                this.templateData.sneakyUpdate({});
+                this.templateName("route-404");
+                this.templateData({});
             }
         };
         KoRouteModel.prototype.getCurrentRouteItem = function (hash) {
@@ -70,7 +54,7 @@
                 if (hash && this.baseRoute && hash.indexOf(this.baseRoute) === 0) {
                     currentPath = hash.substring(this.baseRoute.length)
                 }
-                if (!item.route) {
+                if (!item.route || !currentPath) {
                     return {item: item, path: currentPath};
                 }
                 if (!item.route || (currentPath && currentPath.indexOf(item.route) === 0)) {

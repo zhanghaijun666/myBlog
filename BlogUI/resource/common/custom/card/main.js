@@ -14,6 +14,9 @@
             };
             var self = $.extend(this, defaultValue, params);
             BaseComponent.call(self, params, componentInfo);
+            if (ko.isObservable(self.loading)) {
+                self.loading.extend({rateLimit: 50});
+            }
             self.chosenItems = ko.observableArray();
             //https://www.tutorialsplane.com/knockoutjs-select-unselect-all-checkbox-list/
             self.chosenAll = ko.pureComputed({

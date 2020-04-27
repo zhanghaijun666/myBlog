@@ -1,6 +1,7 @@
 define(['knockout', "text!./show.html", "css!./show.css"], function (ko, pageView) {
 
     ko.components.register('view-file', {require: '/resource/user/view-file/main.js'});
+    ko.components.register('message', {require: '/resource/user/message/main.js'});
 
     function RouteUserModel(params, componentInfo) {
         var self = this;
@@ -9,9 +10,10 @@ define(['knockout', "text!./show.html", "css!./show.css"], function (ko, pageVie
 
     RouteUserModel.prototype.getRouteParams = function (baseRoute) {
         return {
-            baseRoute:"#user",
+            baseRoute: "#user",
             routes: [
-                new RouteItem({template: 'view-file'})
+                new RouteItem({route: "/file", template: 'view-file'}),
+                new RouteItem({route: "/message", template: 'message'})
             ]
         };
     };
@@ -19,9 +21,17 @@ define(['knockout', "text!./show.html", "css!./show.css"], function (ko, pageVie
         return {
             name: "user-brief",
             data: [
-                new MenuItem({icon: "fa fa-address-card", iconText: "我的菜单", ItemClass: "", targetItem: {}}),
-                new MenuItem({icon: "fa fa-address-card", iconText: "我的菜单", ItemClass: "", targetItem: {}}),
-                new MenuItem({icon: "fa fa-address-card", iconText: "我的菜单", ItemClass: "", targetItem: {}})
+                new MenuItem({
+                    icon: "fa fa-cog fa-lg", iconText: "我的文件", ItemClass: "", targetItem: {}, click: function () {
+                        window.location.hash = "#user/file";
+                    }
+                }),
+                new MenuItem({
+                    icon: "fa fa-cog fa-lg", iconText: "消息聊天", ItemClass: "", targetItem: {}, click: function () {
+                        window.location.hash = "#user/message";
+                    }
+                }),
+                new MenuItem({icon: "fa fa-cog fa-lg", iconText: "个人设置", ItemClass: "", targetItem: {}})
             ]
         };
     };

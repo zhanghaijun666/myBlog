@@ -1,8 +1,8 @@
 (function (global) {
-    define(['knockout', "text!./show.html", "css!./show.css"], function (ko, pageView) {
+    define(['knockout', "text!./show.html", "css!./show.css", "css!./top-nav.css", "css!./vertical-nav.css", "css!./horizontal.css"], function (ko, pageView) {
         function MenuListModel(params, componentInfo) {
             var self = this;
-            self.menuClass = params.menuClass || "right-menu";
+            self.menuClass = params.menuClass || "horizontal";
             self.menuList = params.menuList || new Array();
             self.count = isNaN(params.count) ? 4 : Number(params.count);
             self.permitType = params.permitType || "visible";
@@ -26,7 +26,6 @@
                 return {
                     menus: list.slice(0, this.count - 1),
                     dropMenu: new MenuItem({
-                        visible: true,
                         icon: 'fa fa-bars',
                         iconText: '更多',
                         childMenuItems: list.slice(this.count - 1, list.length)

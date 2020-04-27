@@ -74,7 +74,6 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
                 targetItem: data,
                 icon: "fa fa-download",
                 iconText: '下载',
-                itemClass: 'btn btn-default',
                 click: function (data) {
                     FileAPI.downloadFile(FileUrl.join(this.getParentFullPath(), data.fileName));
                 }
@@ -84,27 +83,24 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
                 targetItem: data,
                 icon: "fa fa-remove",
                 iconText: '删除',
-                itemClass: 'btn btn-default',
                 click: function (data) {
                     FileAPI.deleteFile(this.getParentFullPath() + data.fileName, this.getFileList.bind(this));
                 }
+            }),
+            new MenuItem({
+                context: this,
+                targetItem: data,
+                icon: "fa fa-wrench",
+                iconText: '重命名',
+                click: function (data) {
+                    const context = this;
+                    showInputDailog({
+                        success: function (dialog, container) {
+                            FileAPI.renameFile(FileUrl.join(context.getParentFullPath(), data.fileName), ko.unwrap(dialog.inputValue), context.getFileList.bind(context));
+                        }
+                    });
+                }
             })
-            // ,
-            // new MenuItem({
-            //     context: this,
-            //     targetItem: data,
-            //     icon: "fa fa-wrench",
-            //     iconText: '重命名',
-            //     itemClass: 'btn btn-default',
-            //     click: function (data) {
-            //         const context = this;
-            //         showInputDailog({
-            //             success: function (dialog, container) {
-            //                 FileAPI.renameFile(FileUrl.join(context.getParentFullPath(), data.fileName), ko.unwrap(dialog.inputValue), context.getFileList.bind(context));
-            //             }
-            //         });
-            //     }
-            // })
         ];
     };
     ViewFileModel.prototype.getTopMenus = function () {
@@ -113,12 +109,9 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
                 context: this,
                 icon: "fa fa-upload",
                 iconText: '上传',
-                itemClass: 'btn btn-primary',
                 childMenuItems: [
                     new MenuItem({
-                        icon: "fa fa-upload",
                         iconText: '上传文件',
-                        itemClass: 'btn btn-primary',
                         click: function () {
                             document.getElementById('uploadFile').click();
                         }
@@ -129,7 +122,6 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
                 context: this,
                 icon: "fa fa-folder-open-o",
                 iconText: '新建文件夹',
-                itemClass: 'btn btn-primary',
                 click: function () {
                     const context = this;
                     showInputDailog({

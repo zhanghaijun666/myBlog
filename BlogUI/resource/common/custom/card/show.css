@@ -5,6 +5,10 @@
 .custom-card > .top-menu {
     width: 100%;
     height: 50px;
+    padding: 9px 40px;
+}
+.custom-card > .top-menu .horizontal>li{
+    line-height: 20px;
 }
 .custom-card > .card-head {
     width: 100%;

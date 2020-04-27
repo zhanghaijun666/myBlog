@@ -26,7 +26,7 @@
     };
 
     FileUrl.join = function () {
-        return ("/" + Array.prototype.slice.call(arguments).join("/")).replace(/\/+/g, "/");
+        return ("/" + Array.prototype.slice.call(arguments).join("/")).replace(/\/+/g, "/").replace(/\/+\#/, "#");
     };
 
     exports.FileUrl = FileUrl;

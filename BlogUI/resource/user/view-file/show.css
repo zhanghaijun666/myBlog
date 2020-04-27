@@ -19,3 +19,7 @@
 .view-file .custom-card .file-entry > .entry {
     line-height: 22px;
 }
+
+.view-file .custom-card .crad-body-row .horizontal{
+    padding: 10px 0px;
+}
