@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
@@ -43,7 +44,7 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin();
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/static/**","/resource/**", "/template/**", "/login").permitAll()
+                .antMatchers("/", "/login").permitAll()
                 .antMatchers("/api/**").hasRole("USER")
                 .antMatchers("/h2/**", "/druid/**").access("hasRole('ADMIN') and hasRole('DBA')")
                 .anyRequest().authenticated()
@@ -67,6 +68,10 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
                 .expiredSessionStrategy(new SessionInformationExpiredStrategyImpl());
     }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/static/**", "/resource/**", "/template/**");
+    }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(new BlogUserDetailService(dataSource)).passwordEncoder(new BCryptPasswordEncoder());
