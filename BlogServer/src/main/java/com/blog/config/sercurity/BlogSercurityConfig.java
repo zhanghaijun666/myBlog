@@ -54,11 +54,10 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(new AuthenticationSuccess())//登陆成功处理
                 .failureHandler(new AuthenticationFailure())//登录失败的处理
                 .loginProcessingUrl("/login")//登录请求地址
-                .permitAll()
+                .and().rememberMe()
                 .and().logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
-                .permitAll()
                 .and().exceptionHandling()
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                 .accessDeniedHandler(new CustomAccessDeineHandler())
