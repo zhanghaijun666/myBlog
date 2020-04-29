@@ -23,6 +23,7 @@
             }
             data.append("username", username);
             data.append("password", password);
+            data.append("remember-me", "true");
             getBinary("/login", {cmd: 'POST', data: data}, callback);
         }
     };

@@ -3,6 +3,7 @@ package com.blog.controller;
 import com.blog.config.sercurity.BlogUserDetails;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ public class UserContorller {
 
     @RequestMapping(value = "/login-user", method = RequestMethod.GET)
     @ResponseBody
+    @PreAuthorize("hasAnyRole('USER')")
     public String currentUserName(HttpServletRequest request) {
         JSONObject json = new JSONObject();
         Principal principal = request.getUserPrincipal();

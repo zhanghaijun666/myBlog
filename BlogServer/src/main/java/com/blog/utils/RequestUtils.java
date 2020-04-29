@@ -20,7 +20,6 @@ public class RequestUtils {
     }
 
     public static User getUser(HttpServletRequest request) {
-        JSONObject json = new JSONObject();
         if(null == request){
             return null;
         }

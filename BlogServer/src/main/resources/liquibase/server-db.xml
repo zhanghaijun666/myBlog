@@ -45,5 +45,5 @@
         </createTable>
     </changeSet>
 
-<!--    <include file="liquibase/common.xml" relativeToChangelogFile="false"/>-->
+    <include file="liquibase/file-db.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

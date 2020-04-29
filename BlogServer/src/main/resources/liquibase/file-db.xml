@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="createTable-db-label" author="haijun.zhang">
+        <createTable tableName="label" remarks="Create label for db">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_label"/>
+            </column>
+            <column name="title" type="varchar(255)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(255)" defaultValue=""/>
+            <column name="background_color" type="varchar(255)" defaultValue=""/>
+            <column name="status" type="int" defaultValueNumeric="1"/>
+            <column name="parent_id" type="int" defaultValueNumeric="0"/>
+            <column name="user_id" type="int" defaultValueNumeric="0"/>
+
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
+        </createTable>
+    </changeSet>
+
+        <changeSet author="haijun.zhang" id="insert-labels" runOnChange="true">
+            <sql splitStatements="true" stripComments="true">
+                delete from label;
+            </sql>
+            <loadUpdateData tableName="label" file="liquibase/labels.txt" primaryKey="title"
+                            quotchar="'"
+                            separator=","
+                            encoding="UTF-8">
+                <column name="id" type="NUMERIC"/>
+                <column name="parent_id" type="NUMERIC"/>
+                <column name="title" type="STRING"/>
+                <column name="description" type="STRING"/>
+                <column name="background_color" type="STRING"/>
+                <column name="status" type="NUMERIC"/>
+            </loadUpdateData>
+        </changeSet>
+</databaseChangeLog>
