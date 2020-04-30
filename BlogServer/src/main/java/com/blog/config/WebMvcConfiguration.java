@@ -28,6 +28,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         registry.addInterceptor(new MvcMultipleInterceptor(PathUtils.joinPath(blogSetting.getUIDir(), "static"), "text/html;charset=utf-8")).addPathPatterns("/static/**/packed-**.html");
         registry.addInterceptor(new MvcMultipleInterceptor(PathUtils.joinPath(blogSetting.getUIDir(), "resource"), "application/x-javascript;charset=utf-8")).addPathPatterns("/resource/**/packed-**.js");
         registry.addInterceptor(new MvcMultipleInterceptor(PathUtils.joinPath(blogSetting.getUIDir(), "resource"), "text/html;charset=utf-8")).addPathPatterns("/resource/**/packed-**.html");
+        registry.addInterceptor(new MvcMultipleInterceptor(PathUtils.joinPath(blogSetting.getUIDir(), "resource"), "text/css;charset=UTF-8")).addPathPatterns("/resource/**/packed-**.css");
+        registry.addInterceptor(new MvcMultipleInterceptor(PathUtils.joinPath(blogSetting.getUIDir(), "resource"), "text/css;charset=UTF-8")).addPathPatterns("/resource/**/packed-**.css");
     }
 
     //页面跳转

@@ -1,14 +1,23 @@
 (function (global) {
-    define(["text!./show.html", "./socket.js", "css!./show.css"], function (pageView, BlogSocket) {
+    define(["text!./show.html", "css!./show.css"], function (pageView) {
         function UserMessageModel(params, componentInfo) {
             let self = this;
+            self.stompClient = Stomp.over(new SockJS("/websocket")),
+                self.stompClient.connect({}, function (frame) {
+                    console.log(frame);
+                    self.stompClient.subscribe('/topic/notice', function (message) {
+                        console.log(message);
+                    });
+                    self.stompClient.subscribe('/topic/getResponse', function (message) {
+                        console.log(message);
+                    });
+                    self.stompClient.send("/topic/notice",{},"6666666666666");
+                });
+            params.disposecallback = function () {
+                self.stompClient.disconnect()
+            };
+            window.stompClient = self.stompClient;
             BaseComponent.call(self, params, componentInfo);
-            self.socket = new BlogSocket();
-            setTimeout(function () {
-                self.socket.send("你们好");
-            }, 1000)
-
-
         }
 
         return {

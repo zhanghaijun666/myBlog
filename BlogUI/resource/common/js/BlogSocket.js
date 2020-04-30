@@ -5,7 +5,7 @@ define(["knockout"], function (ko) {
         }
         let self = this;
         self.connected = ko.observable(false);
-        self.blogSocket = new WebSocket((/^https/.test(location.protocol) ? "wss://" : "ws://") + window.location.host + "/blogsocket/" + RootView.loginUser().userId);
+        self.blogSocket = new WebSocket((/^https/.test(location.protocol) ? "wss://" : "ws://") + window.location.host + "/blogsocket");
         self.blogSocket.onopen = function (event) {
             self.connected(true);
         };
