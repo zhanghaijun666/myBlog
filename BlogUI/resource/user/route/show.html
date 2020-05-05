@@ -15,5 +15,6 @@
     </div>
 </template>
 <template id="user-navbar">
+    <div style="float: left" data-bind="component:{name:'custom-menu',params:{menuList:data,count:-1,menuClass:'top-nav'}}"></div>
     <div style="float: right" data-bind="component:{name:'custom-menu',params:{menuList:menus,count:-1,menuClass:'horizontal'}}"></div>
 </template>

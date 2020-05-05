@@ -39,4 +39,9 @@
         <div class="row-menu" data-bind="template:{name: 'common-template', data: $parent.rightMenu($data)}"></div>
     </div>
     <!-- {{{ --><!-- /ko --><!-- }}} -->
+    <!-- {{{ --><!-- ko if: ko.unwrap($data.dataList).length ===0 --><!-- }}} -->
+    <div class="no-data">
+        <img alt=""/>
+    </div>
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
 </template>

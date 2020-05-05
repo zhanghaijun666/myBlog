@@ -632,7 +632,18 @@ ul.am-dropdown-content > li > a:focus, ul.am-dropdown-content > li > a:hover {
     right: inherit;
     left: 100%;
 }
-
+/*tip*/
+.content .tip{
+    margin: 10px 120px 5px 120px;
+    padding: 3px 20px;
+    display: block;
+    clear: both;
+    overflow: hidden;
+    text-align: center;
+    background-color: #d0cece;
+    border-radius: 6px;
+    color: #ffffff;
+}
 /*other*/
 .other img {
     float: right;

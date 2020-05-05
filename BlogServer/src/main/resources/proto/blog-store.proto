@@ -25,6 +25,25 @@ enum ReturnCode {
 
 
 }
+message Msg {
+    enum MsgTypeEnum {
+        MsgTypeDefault = 0;
+        MsgOnline = 1;
+        MsgOffline = 2;
+        MsgText = 3;
+    }
+    message MsgData {
+        int64 msgId = 1;
+        MsgTypeEnum msgType = 2;
+        int32 fromUserId = 3;
+        OwnerType toType = 4;
+        int32 toId = 5;
+        string msgText = 6;
+
+        int64 sendTime = 10;
+        string ip = 11;
+    }
+}
 
 message StoreFile {
     enum StoreTypeEnum {
@@ -51,7 +70,22 @@ message StoreFile {
         StoreTree parentItem = 2;
     }
 }
-
+message Label {
+    int32 labelId = 1;
+    int32 parenId = 2;
+    string title = 3;
+    string description = 4;
+    string color = 5;
+    Status status = 6;
+}
+message LabelList {
+    repeated Label items = 1;
+}
+message LabelFile {
+    int32 labelId = 1;
+    repeated StoreFile.StoreTree items = 2;
+    Status status = 3;
+}
 message Result {
     ReturnCode code = 1;
     string msg = 2;

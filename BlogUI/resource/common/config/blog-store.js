@@ -43,6 +43,55 @@
           RETURN_FILE_EXIST: 100
         }
       },
+      Msg: {
+        fields: {},
+        nested: {
+          MsgTypeEnum: {
+            values: {
+              MsgTypeDefault: 0,
+              MsgOnline: 1,
+              MsgOffline: 2,
+              MsgText: 3
+            }
+          },
+          MsgData: {
+            fields: {
+              msgId: {
+                type: "int64",
+                id: 1
+              },
+              msgType: {
+                type: "MsgTypeEnum",
+                id: 2
+              },
+              fromUserId: {
+                type: "int32",
+                id: 3
+              },
+              toType: {
+                type: "OwnerType",
+                id: 4
+              },
+              toId: {
+                type: "int32",
+                id: 5
+              },
+              msgText: {
+                type: "string",
+                id: 6
+              },
+              sendTime: {
+                type: "int64",
+                id: 10
+              },
+              ip: {
+                type: "string",
+                id: 11
+              }
+            }
+          }
+        }
+      },
       StoreFile: {
         fields: {},
         nested: {
@@ -110,6 +159,60 @@
                 id: 2
               }
             }
+          }
+        }
+      },
+      Label: {
+        fields: {
+          labelId: {
+            type: "int32",
+            id: 1
+          },
+          parenId: {
+            type: "int32",
+            id: 2
+          },
+          title: {
+            type: "string",
+            id: 3
+          },
+          description: {
+            type: "string",
+            id: 4
+          },
+          color: {
+            type: "string",
+            id: 5
+          },
+          status: {
+            type: "Status",
+            id: 6
+          }
+        }
+      },
+      LabelList: {
+        fields: {
+          items: {
+            rule: "repeated",
+            type: "Label",
+            id: 1
+          }
+        }
+      },
+      LabelFile: {
+        fields: {
+          labelId: {
+            type: "int32",
+            id: 1
+          },
+          items: {
+            rule: "repeated",
+            type: "StoreFile.StoreTree",
+            id: 2
+          },
+          status: {
+            type: "Status",
+            id: 3
           }
         }
       },

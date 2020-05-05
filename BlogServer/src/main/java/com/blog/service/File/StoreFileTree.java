@@ -11,6 +11,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class StoreFileTree extends StoreFile {
 
@@ -35,6 +38,14 @@ public class StoreFileTree extends StoreFile {
         } catch (IOException e) {
             return "";
         }
+    }
+
+    public static List<BlogStore.StoreFile.StoreTree> readFile(Collection<String> hashList) {
+        List<BlogStore.StoreFile.StoreTree> list = new ArrayList<>();
+        for (String hash : hashList) {
+            list.add(readFile(hash));
+        }
+        return list;
     }
 
     public static BlogStore.StoreFile.StoreTree readFile(String hash) {

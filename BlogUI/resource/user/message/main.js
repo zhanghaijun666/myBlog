@@ -2,16 +2,39 @@
     define(["text!./show.html", "css!./show.css"], function (pageView) {
         function UserMessageModel(params, componentInfo) {
             let self = this;
-            self.stompClient = Stomp.over(new SockJS("/websocket")),
-                self.stompClient.connect({}, function (frame) {
-                    console.log(frame);
-                    self.stompClient.subscribe('/topic/notice', function (message) {
-                        console.log(message);
+            self.contactList = ko.observableArray([]);
+            self.messageList = ko.observableArray([]);
+            self.messagText = ko.observable("");
+
+            self.stompClient = Stomp.over(new SockJS("/blogchat")),
+                self.stompClient.connect({
+                    username: RootView.loginUser().name,
+                    userId: RootView.loginUser().userId
+                }, function (frame) {
+                    var userName = frame.headers['user-name'];
+                    if (!userName) {
+                        return;
+                    }
+                    // 聊天室订阅
+                    self.stompClient.subscribe('/topic/chatRoom', function (data) {
+                        self.messageList.push(data.body);
                     });
-                    self.stompClient.subscribe('/topic/getResponse', function (message) {
-                        console.log(message);
+                    // 本地订阅
+                    stompClient.subscribe('/user/' + userName + '/chat', function (data) {
+                        self.messageList.push(data.body);
                     });
-                    self.stompClient.send("/topic/notice",{},"6666666666666");
+                    // 聊天室动态订阅
+                    stompClient.subscribe('/topic/status', function (data) {
+                        self.contactList(JSON.parse(JSON.parse(data.body).items).items);
+                        bootoast({
+                            message: JSON.parse(data.body).online,
+                            type: 'success',
+                            position: 'bottom-right',
+                            timeout: 0.5
+                        });
+                    });
+                }, function (error) {
+                    console.log("socket链接异常");
                 });
             params.disposecallback = function () {
                 self.stompClient.disconnect()
@@ -19,6 +42,18 @@
             window.stompClient = self.stompClient;
             BaseComponent.call(self, params, componentInfo);
         }
+
+        UserMessageModel.prototype.sendMessage = function () {
+            if (this.messagText() && this.stompClient) {
+                // this.stompClient.send('/chatRoom', {}, this.messagText());
+                this.stompClient.send('/chat', {}, this.messagText());
+                this.messagText("");
+                setTimeout(function () {
+                    var talk_window = $("body .message div.talk_window > div.windows_body")[0];
+                    talk_window.scrollTop = talk_window.scrollHeight;
+                }, 100);
+            }
+        };
 
         return {
             viewModel: {

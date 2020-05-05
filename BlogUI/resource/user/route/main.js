@@ -2,18 +2,20 @@ define(['knockout', "text!./show.html", "css!./show.css"], function (ko, pageVie
 
     ko.components.register('view-file', {require: '/resource/user/view-file/main.js'});
     ko.components.register('message', {require: '/resource/user/message/main.js'});
+    ko.components.register('label-topo', {require: '/resource/user/label-topo/main.js'});
 
     function RouteUserModel(params, componentInfo) {
         var self = this;
         BaseComponent.call(self, params, componentInfo);
     }
 
-    RouteUserModel.prototype.getRouteParams = function (baseRoute) {
+    RouteUserModel.prototype.getRouteParams = function () {
         return {
             baseRoute: "#user",
             routes: [
-                new RouteItem({route: "/file", template: 'view-file'}),
-                new RouteItem({route: "/message", template: 'message'})
+                new RouteItem({baseRoute: "#user", route: "/file", template: 'view-file', iconText: "文件"}),
+                new RouteItem({baseRoute: "#user", route: "/message", template: 'message', iconText: "消息"}),
+                new RouteItem({baseRoute: "#user", route: "/label", template: 'label-topo', iconText: "拓扑"})
             ]
         };
     };
@@ -39,6 +41,7 @@ define(['knockout', "text!./show.html", "css!./show.css"], function (ko, pageVie
         return {
             name: "user-navbar",
             data: {
+                data: this.getRouteParams().routes,
                 menus: [
                     new MenuItem({
                         icon: "fa fa-home fa-lg",

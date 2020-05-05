@@ -52,9 +52,16 @@
 
     function RouteItem(options) {
         options = options || {};
+        this.baseRoute = options.baseRoute || "";
         this.template = options.template || "";
         this.route = options.route || "";
+        MenuItem.call(this, options);
     }
+
+    RouteItem.prototype = new MenuItem();
+    RouteItem.prototype.menuClick = function () {
+        window.location.hash = FileUrl.join(this.baseRoute, this.route);
+    };
 
     exports.MenuItem = MenuItem;
     exports.RouteItem = RouteItem;

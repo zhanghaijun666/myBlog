@@ -19,8 +19,19 @@ public class RequestUtils {
         return user.getUserId();
     }
 
+    public static User getUser(java.security.Principal principal) {
+        if (principal instanceof org.springframework.security.core.Authentication) {
+            Authentication authentication = (Authentication) principal;
+            if (authentication.getPrincipal() instanceof BlogUserDetails) {
+                BlogUserDetails userDetail = (BlogUserDetails) authentication.getPrincipal();
+                return userDetail.getUser();
+            }
+        }
+        return null;
+    }
+
     public static User getUser(HttpServletRequest request) {
-        if(null == request){
+        if (null == request) {
             return null;
         }
         Principal principal = request.getUserPrincipal();

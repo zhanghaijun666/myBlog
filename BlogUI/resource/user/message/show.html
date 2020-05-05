@@ -7,13 +7,13 @@
                 <button>+</button>
             </div>
             <div class="office_text">
-                <ul class="user_list" data-bind="foreach:[1,2,3,4,5,6,7,8,9,1,1,1,1,1,1,1,11]">
+                <ul class="user_list" data-bind="foreach: $data.contactList">
                     <li>
                         <div class="user_head">
-                            <img data-bind="attr:{src: '/resource/user/message/head/'+$data+'.jpg'}"/>
+                            <img data-bind="attr:{src: '/resource/user/message/head/1.jpg'}"/>
                         </div>
                         <div class="user_text">
-                            <p class="user_name">阿杰</p>
+                            <p class="user_name" data-bind="text:$data.nickname"></p>
                             <p class="user_message">[动画表情]</p>
                         </div>
                         <div class="user_time">昨天</div>
@@ -29,21 +29,24 @@
 <template id="talk_window">
     <div class="windows_top">
         <div class="windows_top_box">
-            <span>早安无恙</span>
+            <span data-bind="text:'对方昵称'"></span>
             <div class="extend"></div>
         </div>
     </div>
     <!--聊天内容-->
     <div class="windows_body">
         <div class="office_text">
-            <ul class="content" data-bind="foreach: [1,2,3,4,5,6]">
+            <ul class="content" data-bind="foreach: $data.messageList">
                 <li class="me">
                     <img src="/resource/user/message/own_head.jpg" title="金少凯">
-                    <span>疾风知劲草，板荡识诚臣</span>
+                    <span data-bind="text:$data"></span>
+                </li>
+                <li class="tip">
+                    <span data-bind="text:$data"></span>
                 </li>
                 <li class="other">
                     <img src="/resource/user/message/head/15.jpg" title="张文超">
-                    <span>勇夫安知义，智者必怀仁</span>
+                    <span data-bind="text:$data"></span>
                 </li>
             </ul>
         </div>
@@ -58,8 +61,8 @@
             <a href="javascript:;"></a>
         </div>
         <div class="input_box">
-            <textarea></textarea>
-            <button id="send">发送（S）</button>
+            <textarea data-bind="textInput: messagText"></textarea>
+            <button id="send" data-bind="click: sendMessage,text:'发送（S）'"></button>
         </div>
     </div>
 </template>
