@@ -15,6 +15,13 @@ define(["knockout"], function (ko) {
         openFile: function (data) {
             if (data instanceof Message && data.storeName === "StoreFile.StoreTree" && data.storeType === BlogStore.StoreFile.StoreTypeEnum.Tree) {
                 window.location.hash = FileUrl.join(this.routeBase, this.getParentFullPath(), data.fileName);
+            } else if (data instanceof Message && data.storeName === "StoreFile.StoreTree" && data.storeType === BlogStore.StoreFile.StoreTypeEnum.Blob) {
+                showDailog({
+                    header: data.fileName,
+                    modal:"modal-lg",
+                    bodyTemplate: "file-preview-tmp",
+                    fileSrc: FileUrl.join("/file/preview/", this.getParentFullPath(), data.fileName)
+                });
             }
         }
     }

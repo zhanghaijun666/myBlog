@@ -37,6 +37,30 @@ public class StoreFileBlob extends StoreFile {
         return hashList;
     }
 
+    private static byte[] byteMerger(byte[] bt1, byte[] bt2) {
+        byte[] bt3 = new byte[bt1.length + bt2.length];
+        System.arraycopy(bt1, 0, bt3, 0, bt1.length);
+        System.arraycopy(bt2, 0, bt3, bt1.length, bt2.length);
+        return bt3;
+    }
+
+    public static byte[] readFile(List<String> list) {
+        byte[] result = new byte[]{};
+        for (String hash : list) {
+            File hashFile = StoreFileBlob.getHashFile(hash);
+            try (InputStream in = new FileInputStream(hashFile)) {
+                int len = -1;
+                byte[] bytes = new byte[1 * 1024 * 1024];
+                while ((len = in.read(bytes)) != -1) {
+                    result = byteMerger(result, bytes);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
     public static void readFile(List<String> list, OutputStream out) {
         for (String hash : list) {
             File hashFile = StoreFileBlob.getHashFile(hash);

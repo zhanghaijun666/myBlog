@@ -2,10 +2,15 @@ package com.blog.service.File;
 
 import com.blog.proto.BlogStore;
 import com.blog.utils.PathUtils;
-import org.thymeleaf.util.StringUtils;
+import net.sf.jmimemagic.Magic;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.MediaType;
 
+import javax.activation.MimetypesFileTypeMap;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLConnection;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
@@ -54,5 +59,23 @@ public class StoreUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String getContentType(File file) {
+        if (file.isDirectory()) {
+            return "";
+        }
+        String contentType = null;
+        try {
+            contentType = new Magic().getMagicMatch(file, false).getMimeType();
+        } catch (Exception e) {
+        }
+        if (org.apache.commons.lang3.StringUtils.isBlank(contentType)) {
+            contentType = new MimetypesFileTypeMap().getContentType(file);
+        }
+        if (org.apache.commons.lang3.StringUtils.isBlank(contentType)) {
+            contentType = URLConnection.getFileNameMap().getContentTypeFor(file.getPath());
+        }
+        return StringUtils.isNotBlank(contentType) ? contentType : MediaType.APPLICATION_OCTET_STREAM_VALUE;
     }
 }

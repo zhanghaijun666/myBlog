@@ -83,7 +83,9 @@ public class FileUrl {
         Map.Entry<String, BlogStore.StoreFile.StoreTree> entry = this.getHashTree();
         return null == entry ? null : entry.getValue();
     }
-
+    public boolean isExist(){
+        return null != this.getStoreTree();
+    }
     public boolean isFolder() {
         return null != this.getStoreTree() && this.getStoreTree().getStoreType() == BlogStore.StoreFile.StoreTypeEnum.Tree;
     }

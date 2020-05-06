@@ -13,3 +13,6 @@
         <span style="cursor: pointer" data-bind="text: fileName,click:context.openFile.bind(context),attr:{title:context.renderSize(fileSize)}"></span>
     </div>
 </template>
+<template id="file-preview-tmp">
+    <iframe data-bind="attr:{src:$data.fileSrc}" width="100%" height="500px"></iframe>
+</template>
