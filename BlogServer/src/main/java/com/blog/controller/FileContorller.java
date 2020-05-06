@@ -51,6 +51,7 @@ public class FileContorller {
                     .setCreateTime(System.currentTimeMillis())
                     .setUpdateTime(System.currentTimeMillis())
                     .setCommitterId(fileUrl.getUserId());
+            tmpFile.delete();
             try (InputStream in = file.getInputStream()) {
                 storeTree.addAllChildItem(StoreFileBlob.writeFile(IOUtils.toByteArray(in)));
                 StoreFactory.addStore(new FileUrl(originPath, RequestUtils.getUserId(request)), storeTree.build());
