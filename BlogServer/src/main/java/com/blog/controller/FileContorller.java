@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,13 +24,15 @@ import java.util.Set;
 public class FileContorller {
 
     @PostMapping("/upload/**")
-    public String fileChunkUpload(@RequestParam("file") MultipartFile[] fileArray, HttpServletRequest request) throws IOException {
+    public String fileChunkUpload(@RequestParam("file") MultipartFile[] fileArray, HttpServletRequest request, HttpServletResponse response) throws IOException {
         String originPath = request.getRequestURI().replace("/file/upload", "");
         if (fileArray.length == 0) {
+            response.setStatus(HttpStatus.NOT_FOUND.value());
             return "文件为空";
         }
         FileUrl fileUrl = new FileUrl(originPath, RequestUtils.getUserId(request));
         if (!fileUrl.isOwner()) {
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
             return "权限不足";
         }
         Set<String> chilName = StoreUtil.getChildNameList(fileUrl);
@@ -67,15 +70,15 @@ public class FileContorller {
         FileUrl fileUrl = new FileUrl(originPath, RequestUtils.getUserId(request));
         if (!fileUrl.isExist() || fileUrl.isFolder()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else if (!StoreUtil.isValidContentType(fileUrl.getStoreTree().getContentType())) {
+            return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
         } else {
             HttpHeaders httpHeaders = new HttpHeaders();
-            // 不是用缓存
             httpHeaders.setCacheControl(CacheControl.noCache());
             httpHeaders.setPragma("no-cache");
             httpHeaders.setExpires(0L);
             httpHeaders.setContentType(MediaType.valueOf(fileUrl.getStoreTree().getContentType()));
-            return new ResponseEntity<>(
-                    StoreFileBlob.readFile(fileUrl.getStoreTree().getChildItemList()), httpHeaders, HttpStatus.OK);
+            return new ResponseEntity<>(StoreFileBlob.readFile(fileUrl.getStoreTree().getChildItemList()), httpHeaders, HttpStatus.OK);
         }
     }
 }

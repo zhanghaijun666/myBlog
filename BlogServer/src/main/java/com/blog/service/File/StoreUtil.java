@@ -70,12 +70,27 @@ public class StoreUtil {
             contentType = new Magic().getMagicMatch(file, false).getMimeType();
         } catch (Exception e) {
         }
-        if (org.apache.commons.lang3.StringUtils.isBlank(contentType)) {
+        if (!isValidContentType(contentType)) {
             contentType = new MimetypesFileTypeMap().getContentType(file);
         }
-        if (org.apache.commons.lang3.StringUtils.isBlank(contentType)) {
+        if (!isValidContentType(contentType)) {
             contentType = URLConnection.getFileNameMap().getContentTypeFor(file.getPath());
         }
         return StringUtils.isNotBlank(contentType) ? contentType : MediaType.APPLICATION_OCTET_STREAM_VALUE;
+    }
+
+    public static boolean isValidContentType(String contentType) {
+        if (StringUtils.isBlank(contentType)) {
+            return false;
+        }
+        List<MediaType> list = new ArrayList<>();
+        list.add(MediaType.ALL);
+        list.add(MediaType.APPLICATION_OCTET_STREAM);
+        try {
+            MediaType mediaType = MediaType.valueOf(contentType);
+            return !Objects.isNull(mediaType) && !list.contains(mediaType);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
