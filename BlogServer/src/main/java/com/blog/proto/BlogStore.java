@@ -2188,6 +2188,16 @@ public final class BlogStore {
       long getFileSize();
 
       /**
+       * <code>optional string icon = 10;</code>
+       */
+      java.lang.String getIcon();
+      /**
+       * <code>optional string icon = 10;</code>
+       */
+      com.google.protobuf.ByteString
+          getIconBytes();
+
+      /**
        * <code>optional int64 createTime = 20;</code>
        */
       long getCreateTime();
@@ -2221,6 +2231,7 @@ public final class BlogStore {
         fileName_ = "";
         contentType_ = "";
         fileSize_ = 0L;
+        icon_ = "";
         createTime_ = 0L;
         updateTime_ = 0L;
         committerId_ = 0;
@@ -2291,6 +2302,12 @@ public final class BlogStore {
               case 72: {
 
                 fileSize_ = input.readInt64();
+                break;
+              }
+              case 82: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                icon_ = s;
                 break;
               }
               case 160: {
@@ -2475,6 +2492,40 @@ public final class BlogStore {
         return fileSize_;
       }
 
+      public static final int ICON_FIELD_NUMBER = 10;
+      private volatile java.lang.Object icon_;
+      /**
+       * <code>optional string icon = 10;</code>
+       */
+      public java.lang.String getIcon() {
+        java.lang.Object ref = icon_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          icon_ = s;
+          return s;
+        }
+      }
+      /**
+       * <code>optional string icon = 10;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIconBytes() {
+        java.lang.Object ref = icon_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          icon_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
       public static final int CREATETIME_FIELD_NUMBER = 20;
       private long createTime_;
       /**
@@ -2535,6 +2586,9 @@ public final class BlogStore {
         if (fileSize_ != 0L) {
           output.writeInt64(9, fileSize_);
         }
+        if (!getIconBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 10, icon_);
+        }
         if (createTime_ != 0L) {
           output.writeInt64(20, createTime_);
         }
@@ -2581,6 +2635,9 @@ public final class BlogStore {
           size += com.google.protobuf.CodedOutputStream
             .computeInt64Size(9, fileSize_);
         }
+        if (!getIconBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, icon_);
+        }
         if (createTime_ != 0L) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt64Size(20, createTime_);
@@ -2622,6 +2679,8 @@ public final class BlogStore {
             .equals(other.getContentType());
         result = result && (getFileSize()
             == other.getFileSize());
+        result = result && getIcon()
+            .equals(other.getIcon());
         result = result && (getCreateTime()
             == other.getCreateTime());
         result = result && (getUpdateTime()
@@ -2655,6 +2714,8 @@ public final class BlogStore {
         hash = (37 * hash) + FILESIZE_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
             getFileSize());
+        hash = (37 * hash) + ICON_FIELD_NUMBER;
+        hash = (53 * hash) + getIcon().hashCode();
         hash = (37 * hash) + CREATETIME_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
             getCreateTime());
@@ -2795,6 +2856,8 @@ public final class BlogStore {
 
           fileSize_ = 0L;
 
+          icon_ = "";
+
           createTime_ = 0L;
 
           updateTime_ = 0L;
@@ -2836,6 +2899,7 @@ public final class BlogStore {
           result.fileName_ = fileName_;
           result.contentType_ = contentType_;
           result.fileSize_ = fileSize_;
+          result.icon_ = icon_;
           result.createTime_ = createTime_;
           result.updateTime_ = updateTime_;
           result.committerId_ = committerId_;
@@ -2910,6 +2974,10 @@ public final class BlogStore {
           }
           if (other.getFileSize() != 0L) {
             setFileSize(other.getFileSize());
+          }
+          if (!other.getIcon().isEmpty()) {
+            icon_ = other.icon_;
+            onChanged();
           }
           if (other.getCreateTime() != 0L) {
             setCreateTime(other.getCreateTime());
@@ -3297,6 +3365,75 @@ public final class BlogStore {
         public Builder clearFileSize() {
           
           fileSize_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object icon_ = "";
+        /**
+         * <code>optional string icon = 10;</code>
+         */
+        public java.lang.String getIcon() {
+          java.lang.Object ref = icon_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            icon_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string icon = 10;</code>
+         */
+        public com.google.protobuf.ByteString
+            getIconBytes() {
+          java.lang.Object ref = icon_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            icon_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string icon = 10;</code>
+         */
+        public Builder setIcon(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          icon_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string icon = 10;</code>
+         */
+        public Builder clearIcon() {
+          
+          icon_ = getDefaultInstance().getIcon();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string icon = 10;</code>
+         */
+        public Builder setIconBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          icon_ = value;
           onChanged();
           return this;
         }
@@ -10787,41 +10924,41 @@ public final class BlogStore {
       " \001(\0162\n.OwnerType\022\014\n\004toId\030\005 \001(\005\022\017\n\007msgTex" +
       "t\030\006 \001(\t\022\020\n\010sendTime\030\n \001(\003\022\n\n\002ip\030\013 \001(\t\"M\n" +
       "\013MsgTypeEnum\022\022\n\016MsgTypeDefault\020\000\022\r\n\tMsgO" +
-      "nline\020\001\022\016\n\nMsgOffline\020\002\022\013\n\007MsgText\020\003\"\206\003\n" +
-      "\tStoreFile\032\345\001\n\tStoreTree\022+\n\tstoreType\030\001 " +
+      "nline\020\001\022\016\n\nMsgOffline\020\002\022\013\n\007MsgText\020\003\"\224\003\n" +
+      "\tStoreFile\032\363\001\n\tStoreTree\022+\n\tstoreType\030\001 " +
       "\001(\0162\030.StoreFile.StoreTypeEnum\022\021\n\tchildIt" +
       "em\030\002 \003(\t\022\021\n\townerType\030\005 \001(\005\022\017\n\007ownerId\030\006",
       " \001(\005\022\020\n\010fileName\030\007 \001(\t\022\023\n\013contentType\030\010 " +
-      "\001(\t\022\020\n\010fileSize\030\t \001(\003\022\022\n\ncreateTime\030\024 \001(" +
-      "\003\022\022\n\nupdateTime\030\025 \001(\003\022\023\n\013committerId\030\026 \001" +
-      "(\005\032Z\n\tStoreList\022#\n\005items\030\001 \003(\0132\024.StoreFi" +
-      "le.StoreTree\022(\n\nparentItem\030\002 \001(\0132\024.Store" +
-      "File.StoreTree\"5\n\rStoreTypeEnum\022\020\n\014Store" +
-      "Default\020\000\022\010\n\004Tree\020\001\022\010\n\004Blob\020\002\"u\n\005Label\022\017" +
-      "\n\007labelId\030\001 \001(\005\022\017\n\007parenId\030\002 \001(\005\022\r\n\005titl" +
-      "e\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022\r\n\005color\030\005 " +
-      "\001(\t\022\027\n\006status\030\006 \001(\0162\007.Status\"\"\n\tLabelLis",
-      "t\022\025\n\005items\030\001 \003(\0132\006.Label\"Z\n\tLabelFile\022\017\n" +
-      "\007labelId\030\001 \001(\005\022#\n\005items\030\002 \003(\0132\024.StoreFil" +
-      "e.StoreTree\022\027\n\006status\030\003 \001(\0162\007.Status\"0\n\006" +
-      "Result\022\031\n\004code\030\001 \001(\0162\013.ReturnCode\022\013\n\003msg" +
-      "\030\002 \001(\t\"L\n\nResultList\022\026\n\005esult\030\001 \003(\0132\007.Re" +
-      "sult\022\031\n\004code\030\002 \001(\0162\013.ReturnCode\022\013\n\003msg\030\003" +
-      " \001(\t\"\207\001\n\010UserItem\022\016\n\006userId\030\001 \001(\005\022\020\n\010use" +
-      "rname\030\002 \001(\t\022\020\n\010nickname\030\003 \001(\t\022\r\n\005email\030\004" +
-      " \001(\t\022\r\n\005phone\030\005 \001(\t\022\020\n\010birthday\030\006 \001(\003\022\027\n" +
-      "\006status\030\024 \001(\0162\007.Status\"$\n\010UserList\022\030\n\005it",
-      "ems\030\001 \003(\0132\t.UserItem*2\n\tOwnerType\022\020\n\014Own" +
-      "erDefault\020\000\022\010\n\004User\020\001\022\t\n\005Group\020\002*@\n\006Stat" +
-      "us\022\021\n\rStatusDefault\020\000\022\020\n\014StatusActive\020\001\022" +
-      "\021\n\rStatusDeleted\020\002*\352\001\n\nReturnCode\022\027\n\023UNK" +
-      "NOWN_RETURN_CODE\020\000\022\r\n\tRETURN_OK\020\001\022\020\n\014RET" +
-      "URN_ERROR\020\002\022\025\n\021RETURN_USER_EXIST\0202\022\032\n\026RE" +
-      "TURN_USER_NAME_BLANK\0203\022\036\n\032RETURN_USER_PA" +
-      "SSWORD_BLANK\0204\022\033\n\027RETURN_USER_PHONE_EXIS" +
-      "T\0205\022\033\n\027RETURN_USER_EMAIL_EXIST\0206\022\025\n\021RETU" +
-      "RN_FILE_EXIST\020dB\033\n\016com.blog.protoB\tBlogS",
-      "toreb\006proto3"
+      "\001(\t\022\020\n\010fileSize\030\t \001(\003\022\014\n\004icon\030\n \001(\t\022\022\n\nc" +
+      "reateTime\030\024 \001(\003\022\022\n\nupdateTime\030\025 \001(\003\022\023\n\013c" +
+      "ommitterId\030\026 \001(\005\032Z\n\tStoreList\022#\n\005items\030\001" +
+      " \003(\0132\024.StoreFile.StoreTree\022(\n\nparentItem" +
+      "\030\002 \001(\0132\024.StoreFile.StoreTree\"5\n\rStoreTyp" +
+      "eEnum\022\020\n\014StoreDefault\020\000\022\010\n\004Tree\020\001\022\010\n\004Blo" +
+      "b\020\002\"u\n\005Label\022\017\n\007labelId\030\001 \001(\005\022\017\n\007parenId" +
+      "\030\002 \001(\005\022\r\n\005title\030\003 \001(\t\022\023\n\013description\030\004 \001" +
+      "(\t\022\r\n\005color\030\005 \001(\t\022\027\n\006status\030\006 \001(\0162\007.Stat",
+      "us\"\"\n\tLabelList\022\025\n\005items\030\001 \003(\0132\006.Label\"Z" +
+      "\n\tLabelFile\022\017\n\007labelId\030\001 \001(\005\022#\n\005items\030\002 " +
+      "\003(\0132\024.StoreFile.StoreTree\022\027\n\006status\030\003 \001(" +
+      "\0162\007.Status\"0\n\006Result\022\031\n\004code\030\001 \001(\0162\013.Ret" +
+      "urnCode\022\013\n\003msg\030\002 \001(\t\"L\n\nResultList\022\026\n\005es" +
+      "ult\030\001 \003(\0132\007.Result\022\031\n\004code\030\002 \001(\0162\013.Retur" +
+      "nCode\022\013\n\003msg\030\003 \001(\t\"\207\001\n\010UserItem\022\016\n\006userI" +
+      "d\030\001 \001(\005\022\020\n\010username\030\002 \001(\t\022\020\n\010nickname\030\003 " +
+      "\001(\t\022\r\n\005email\030\004 \001(\t\022\r\n\005phone\030\005 \001(\t\022\020\n\010bir" +
+      "thday\030\006 \001(\003\022\027\n\006status\030\024 \001(\0162\007.Status\"$\n\010",
+      "UserList\022\030\n\005items\030\001 \003(\0132\t.UserItem*2\n\tOw" +
+      "nerType\022\020\n\014OwnerDefault\020\000\022\010\n\004User\020\001\022\t\n\005G" +
+      "roup\020\002*@\n\006Status\022\021\n\rStatusDefault\020\000\022\020\n\014S" +
+      "tatusActive\020\001\022\021\n\rStatusDeleted\020\002*\352\001\n\nRet" +
+      "urnCode\022\027\n\023UNKNOWN_RETURN_CODE\020\000\022\r\n\tRETU" +
+      "RN_OK\020\001\022\020\n\014RETURN_ERROR\020\002\022\025\n\021RETURN_USER" +
+      "_EXIST\0202\022\032\n\026RETURN_USER_NAME_BLANK\0203\022\036\n\032" +
+      "RETURN_USER_PASSWORD_BLANK\0204\022\033\n\027RETURN_U" +
+      "SER_PHONE_EXIST\0205\022\033\n\027RETURN_USER_EMAIL_E" +
+      "XIST\0206\022\025\n\021RETURN_FILE_EXIST\020dB\033\n\016com.blo",
+      "g.protoB\tBlogStoreb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10858,7 +10995,7 @@ public final class BlogStore {
     internal_static_StoreFile_StoreTree_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StoreFile_StoreTree_descriptor,
-        new java.lang.String[] { "StoreType", "ChildItem", "OwnerType", "OwnerId", "FileName", "ContentType", "FileSize", "CreateTime", "UpdateTime", "CommitterId", });
+        new java.lang.String[] { "StoreType", "ChildItem", "OwnerType", "OwnerId", "FileName", "ContentType", "FileSize", "Icon", "CreateTime", "UpdateTime", "CommitterId", });
     internal_static_StoreFile_StoreList_descriptor =
       internal_static_StoreFile_descriptor.getNestedTypes().get(1);
     internal_static_StoreFile_StoreList_fieldAccessorTable = new

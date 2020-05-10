@@ -61,24 +61,6 @@ public class StoreUtil {
         }
     }
 
-    public static String getContentType(File file) {
-        if (file.isDirectory()) {
-            return "";
-        }
-        String contentType = null;
-        try {
-            contentType = new Magic().getMagicMatch(file, false).getMimeType();
-        } catch (Exception e) {
-        }
-        if (!isValidContentType(contentType)) {
-            contentType = new MimetypesFileTypeMap().getContentType(file);
-        }
-        if (!isValidContentType(contentType)) {
-            contentType = URLConnection.getFileNameMap().getContentTypeFor(file.getPath());
-        }
-        return StringUtils.isNotBlank(contentType) ? contentType : MediaType.APPLICATION_OCTET_STREAM_VALUE;
-    }
-
     public static boolean isValidContentType(String contentType) {
         if (StringUtils.isBlank(contentType)) {
             return false;

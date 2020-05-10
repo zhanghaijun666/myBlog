@@ -3,7 +3,7 @@
     opacity: 0;
     transition: opacity 0.8s ease;
 }
-.custom-menu li:hover ul {
+.custom-menu >li:hover ul {
     background: rgba(255, 255, 255, 0.9);
     border-radius: 0 0 6px 6px;
     box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.4);

@@ -84,7 +84,7 @@ define(["text!./show.html", "./file-api.js", "./file-utils.js", "css!./show.css"
                 icon: "fa fa-remove",
                 iconText: '删除',
                 click: function (data) {
-                    FileAPI.deleteFile(this.getParentFullPath() + data.fileName, this.getFileList.bind(this));
+                    FileAPI.deleteFile(FileUrl.join(this.getParentFullPath(), "/" + data.fileName), this.getFileList.bind(this));
                 }
             }),
             new MenuItem({

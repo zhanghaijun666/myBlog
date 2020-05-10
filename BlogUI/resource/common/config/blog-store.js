@@ -133,6 +133,10 @@
                 type: "int64",
                 id: 9
               },
+              icon: {
+                type: "string",
+                id: 10
+              },
               createTime: {
                 type: "int64",
                 id: 20

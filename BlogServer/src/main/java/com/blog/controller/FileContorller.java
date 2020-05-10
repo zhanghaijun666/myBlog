@@ -1,10 +1,7 @@
 package com.blog.controller;
 
 import com.blog.proto.BlogStore;
-import com.blog.service.File.FileUrl;
-import com.blog.service.File.StoreFactory;
-import com.blog.service.File.StoreFileBlob;
-import com.blog.service.File.StoreUtil;
+import com.blog.service.File.*;
 import com.blog.utils.RequestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -40,20 +37,17 @@ public class FileContorller {
             if (chilName.contains(file.getOriginalFilename())) {
                 continue;
             }
-            File tmpFile = new File(file.getOriginalFilename());
-            FileUtils.copyInputStreamToFile(file.getInputStream(), tmpFile);
             BlogStore.StoreFile.StoreTree.Builder storeTree = BlogStore.StoreFile.StoreTree.newBuilder()
                     .setStoreType(BlogStore.StoreFile.StoreTypeEnum.Blob)
                     .setOwnerType(fileUrl.getOwnerType())
                     .setOwnerId(fileUrl.getOwnerId())
                     .setFileName(file.getOriginalFilename())
-//                    .setContentType(file.getContentType())
-                    .setContentType(StoreUtil.getContentType(tmpFile))
+                    .setContentType(MimeUtils.getInstance().getContentType(file.getOriginalFilename()))
+                    .setIcon(MimeUtils.getInstance().getIcon(file.getOriginalFilename()))
                     .setFileSize(file.getSize())
                     .setCreateTime(System.currentTimeMillis())
                     .setUpdateTime(System.currentTimeMillis())
                     .setCommitterId(fileUrl.getUserId());
-            tmpFile.delete();
             try (InputStream in = file.getInputStream()) {
                 storeTree.addAllChildItem(StoreFileBlob.writeFile(IOUtils.toByteArray(in)));
                 StoreFactory.addStore(new FileUrl(originPath, RequestUtils.getUserId(request)), storeTree.build());

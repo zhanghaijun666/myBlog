@@ -60,6 +60,7 @@ message StoreFile {
         string fileName = 7;
         string contentType = 8;
         int64 fileSize = 9;
+        string icon = 10;
 
         int64 createTime = 20;
         int64 updateTime = 21;
