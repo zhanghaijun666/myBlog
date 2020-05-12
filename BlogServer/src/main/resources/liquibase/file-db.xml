@@ -28,6 +28,7 @@
 
     <changeSet author="haijun.zhang" id="insert-labels" runOnChange="true">
         <sql splitStatements="true" stripComments="true">
+            alter table label convert to character set utf8;
             delete from label;
         </sql>
         <loadUpdateData tableName="label" file="liquibase/labels.txt" primaryKey="title"
