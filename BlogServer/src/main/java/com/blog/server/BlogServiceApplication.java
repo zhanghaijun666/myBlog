@@ -1,14 +1,14 @@
 package com.blog.server;
 
+import net.hasor.spring.boot.EnableHasor;
+import net.hasor.spring.boot.EnableHasorWeb;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
-import javax.servlet.MultipartConfigElement;
-
+@EnableHasor()
+@EnableHasorWeb()
 @SpringBootApplication
 @ComponentScan({"com.blog.controller", "com.blog.config"})
 @ServletComponentScan(basePackages = "com.blog.filter")
