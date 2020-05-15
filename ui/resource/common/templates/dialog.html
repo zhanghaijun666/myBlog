@@ -1,0 +1,28 @@
+<template id="common-dialog-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" data-bind="text: $data.header"></h4>
+</template>
+<template id="common-dialog-foot">
+    <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="text:'关闭'"></button>
+    <button type="button" class="btn btn-primary" data-bind="text:'确定',click:$data.successEvent"></button>
+</template>
+<template id="common-dialog">
+    <div class="modal fade" aria-hidden="true">
+        <div class="modal-dialog" data-bind="css: $data.modal">
+            <div class="modal-content">
+                <div class="modal-header"
+                     data-bind="visible:$data.isShowHeader(), template:{name: 'common-template', data: $data.getHeaderParams()}"></div>
+                <div class="modal-body"
+                     data-bind="template:{name: 'common-template', data: $data.getBodyParams()}"></div>
+                <div class="modal-footer"
+                     data-bind="visible:$data.isShowFoot(), template:{name: 'common-template', data: $data.getFootParams()}"></div>
+            </div>
+        </div>
+    </div>
+</template>
+<template id="common-dialog-body">
+    <h2>common-dialog-body</h2>
+</template>
+<template id="common-dialog-input-body">
+    <input type="text" class="form-control" data-bind="textInput:$data.inputValue">
+</template>

@@ -1,0 +1,47 @@
+<div class="custom-card">
+    <!-- {{{ --><!-- ko let: {context: $data.context,cardContext:$data} --><!-- }}} -->
+    <!-- {{{ --><!-- ko if: $data.isShowTopMenu() --><!-- }}} -->
+    <div class="top-menu" data-bind="template:{name: 'common-template', data: $data.getTopMenuParams()}"></div>
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
+    <!-- {{{ --><!-- ko if: $data.isShowHead() --><!-- }}} -->
+    <div class="card-head" data-bind="template:{name: 'common-template', data: $data.getHeadParams()}"></div>
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
+    <div class="card-body" data-bind="template:{name: 'common-template', data: $data.getBodyParams()}"></div>
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
+</div>
+<template id="custom-card-loading">
+    <div class="loading">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</template>
+<template id="custom-card-head">
+    <!-- {{{ --><!-- ko if: cardContext.isShowTopMenu() --><!-- }}} -->
+    <div class="row-select">
+        <input type="checkbox" data-bind="checked:cardContext.chosenAll"/>
+    </div>
+    <div class="chosen-text" data-bind="text:cardContext.getChosenOrAll()"></div>
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
+    <div class="row-temp" data-bind="template:{name: 'common-template', data: $data.headTemplate}"></div>
+</template>
+<template id="custom-card-body">
+    <!-- {{{ --><!-- ko foreach: dataList --><!-- }}} -->
+    <div class="crad-body-row">
+        <!-- {{{ --><!-- ko if: cardContext.isShowTopMenu() --><!-- }}} -->
+        <div class="row-select">
+            <input type="checkbox" data-bind="checkedValue: $data, checked: cardContext.chosenItems">
+        </div>
+        <!-- {{{ --><!-- /ko --><!-- }}} -->
+        <div class="row-temp" data-bind="template:{name: 'common-template', data: {name:$parent.rowTemplate,data:$data}}"></div>
+        <div class="row-menu" data-bind="template:{name: 'common-template', data: $parent.rightMenu($data)}"></div>
+    </div>
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
+    <!-- {{{ --><!-- ko if: ko.unwrap($data.dataList).length ===0 --><!-- }}} -->
+    <div class="no-data">
+        <img alt=""/>
+    </div>
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
+</template>

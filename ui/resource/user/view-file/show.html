@@ -1,0 +1,18 @@
+<!--<input type="file" id="licenseUpload" accept=".lic" class="transparency"/>-->
+<div class="view-file">
+    <input type="file" id="uploadFile" multiple="multiple"/>
+    <div data-bind="template:{name: 'common-template', data: $data.getFileCardParams()}"></div>
+</div>
+
+<template id="file-header-template">
+    <div class="file-entry" data-bind="template:{name: 'common-template', data: context.getEntryParams.call(context)}"></div>
+</template>
+<template id="row-file-template">
+    <div class="row-file">
+        <head-image params="data:$data"></head-image>
+        <span style="cursor: pointer" data-bind="text: fileName,click:context.openFile.bind(context),attr:{title:context.renderSize(fileSize)}"></span>
+    </div>
+</template>
+<template id="file-preview-tmp">
+    <iframe data-bind="attr:{src:$data.fileSrc}" width="100%" height="500px"></iframe>
+</template>

@@ -1,0 +1,14 @@
+.label_topo, .label_topo > canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.label_topo {
+    /*background-color: rgb(216, 231, 242);*/
+}
+
+.label_topo > canvas {
+    background-color: rgb(238, 238, 238);
+    border: 1px solid rgb(68, 68, 68);
+    cursor: default;
+}

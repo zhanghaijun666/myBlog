@@ -1,0 +1,26 @@
+<div class="menu-shrink" data-bind="template: 'menu-shrink-template'"></div>
+<template id="menu-shrink-template">
+    <div class="nav">
+        <div class="nav-top" style="color: #fff3cd" data-bind="click: $component.miniShrink.bind($component,$element)">
+            <img alt="image" class="img-circle">
+            <span>
+                <strong class="font-bold">Beaut-zihan</strong>
+            </span>
+        </div>
+        <ul data-bind="foreach: $data.menuList">
+            <li class="nav-item" data-bind="template: 'menu-shrink-li-template'"></li>
+        </ul>
+    </div>
+</template>
+<template id="menu-shrink-li-template">
+    <a data-bind="click: $component.itemShrink.bind($component,$element) ">
+        <i class="fa fa-address-book"></i>
+        <span data-bind="text: iconText"></span>
+        <!--        <i class="fa fa-angle-down" data-bind="visible: $data.isDropdown()" aria-hidden="true" ></i>-->
+    </a>
+    <!-- {{{ --><!--  ko if: $data.isDropdown() --><!-- }}} -->
+    <ul data-bind="foreach: $data.getChildItems()">
+        <li data-bind="template: 'menu-shrink-li-template'"></li>
+    </ul>
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
+</template>

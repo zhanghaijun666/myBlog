@@ -1,0 +1,15 @@
+<div class="dropdown" data-bind="template: {name: 'drop-down-item-template', data: item}"></div>
+<template id="drop-down-item-template">
+    <a data-bind="class: $data.itemClass,click: $data.menuClick,attr:{'data-toggle':$data.isDropdown&&$data.isDropdown() ? 'dropdown' :'' }">
+        <i data-bind="class: $data.icon" aria-hidden="true"></i>
+        <span class="menu-text" data-bind="text: $data.iconText"></span>
+        <!-- {{{ --><!-- ko if: $data.isDropdown() --><!-- }}} -->
+        <span class="caret"></span>
+        <!-- {{{ --><!-- /ko --><!-- }}} -->
+    </a>
+    <!-- {{{ --><!-- ko if: $data.isDropdown() --><!-- }}} -->
+    <ul class="dropdown-menu" data-bind="foreach: getChildItems()">
+        <li data-bind="template: {name: 'drop-down-item-template', data: $data }"></li>
+    </ul>
+    <!-- {{{ --><!-- /ko --><!-- }}} -->
+</template>

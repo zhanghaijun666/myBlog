@@ -1,0 +1,20 @@
+<div class="route-user row">
+    <div class="col-md-2 user-brief visible-lg visible-md" data-bind="template:{name: 'common-template', data: $data.getLeftParams()}"></div>
+    <div class="col-md-10 route-user-body">
+        <div data-bind="template:{name: 'common-template', data: $data.getHeadParams()}"></div>
+        <div data-bind="component:{name:'ko-route',params:$data.getRouteParams()}    "></div>
+    </div>
+</div>
+
+<template id="user-brief">
+    <div class="user-head">
+        <img alt="头像">
+    </div>
+    <div class="user-menu">
+        <custom-menu params="menuList:$data,count:-1,menuClass:'vertical-nav'"></custom-menu>
+    </div>
+</template>
+<template id="user-navbar">
+    <div style="float: left" data-bind="component:{name:'custom-menu',params:{menuList:data,count:-1,menuClass:'top-nav'}}"></div>
+    <div style="float: right" data-bind="component:{name:'custom-menu',params:{menuList:menus,count:-1,menuClass:'horizontal'}}"></div>
+</template>

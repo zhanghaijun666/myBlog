@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎登录</title>
+    <style>
+        .login-page {
+            height: 100%;
+            width: 100%;
+            background-image: linear-gradient(120deg, #155799, #159957);
+            background-size: cover;
+            overflow: hidden;
+            min-height: 500px;
+        }
+
+        .login-page .login-large {
+            border: 1px solid;
+            margin: 100px auto 0 auto;
+            min-height: 380px;
+            max-width: 420px;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .login-page .login-large > div:nth-child(1) {
+            margin: 10px 0 0 -58px;
+            padding: 18px 10px 18px 60px;
+            background: #27A9E3;
+            position: relative;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .login-page .login-large > div:nth-child(2) {
+            background: url(./aiwrap.png);
+            width: 18px;
+            height: 10px;
+            margin: 0 0 20px -58px;
+            position: relative;
+        }
+
+        .login-page .login-large > div:nth-child(3) input {
+            margin-bottom: 20px;
+            height: 40px;
+            vertical-align: middle;
+            padding: 0px 18px;
+            font-size: 14px;
+        }
+
+        .login-page .login-large > div:nth-child(3) > div {
+            margin-bottom: 20px;
+            height: 40px;
+        }
+
+        .login-page .login-large > div:nth-child(3) > div:last-child {
+            margin-bottom: 0px;
+        }
+
+        .login-page .login-large button:not(.btn-link) {
+            height: 100%;
+            width: 100%;
+            background: #27A9E3;
+            color: #fff;
+        }
+
+        .login-page .login-large span {
+            font-size: 16px;
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="login-page">
+<form action="/login" method="post">
+    <div class="login-large">
+        <div><span>用户登录</span></div>
+        <div></div>
+        <div>
+            <input type="text" name="username" class="form-control" style="width: 300px;" placeholder="账号">
+            <input type="password" name="password" class="form-control" style="width: 300px;" placeholder="密码">
+            <div>
+                <button type="submit" class="btn"><span>登录</span></button>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>
