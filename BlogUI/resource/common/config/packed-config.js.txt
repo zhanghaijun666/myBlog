@@ -1,7 +1,0 @@
-./requirejs.config.js
-./knockout-components.js
-./sammy.js
-./view.js
-./lang.js
-../local/
-../js/

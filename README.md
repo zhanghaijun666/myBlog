@@ -5,11 +5,14 @@
 - 本项目代码托管在[github](https://github.com/zhanghaijun666/blog-server)
 
 
-### 用到的工具/技术
+### 用到的工具/技术栈
 - [spring boot官方脚手架](https://start.spring.io/ "spring boot官方脚手架")
 - [liquibase](http://www.liquibase.org/ "liquibase")
 - [MyBatis](http://www.mybatis.org/mybatis-3/configuration.html "mybatis")
 - [MyBatis Generator](http://www.mybatis.org/generator/configreference/xmlconfig.html "MyBatis Generator")
+- [protobuf](https://github.com/protocolbuffers/protobuf/releases)
+- [cordova](http://cordova.axuer.com/docs/zh-cn/latest/)
+- [gitlab](https://gitlab.com/gitlab-org/gitlab-ce/tree/master)
 
 ###  问题反馈
 1. Email: zhanghaijun_java@163.com

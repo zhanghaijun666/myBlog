@@ -1,4 +1,0 @@
-./iconic.css
-./blog.css
-./toast.css
-./bootoast.css
