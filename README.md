@@ -14,5 +14,13 @@
 - [cordova](http://cordova.axuer.com/docs/zh-cn/latest/)
 - [gitlab](https://gitlab.com/gitlab-org/gitlab-ce/tree/master)
 
+### springboot启动命令
+mvn spring-boot:run -Dspring-boot.run.profiles=test
+mvn spring-boot:run -Dspring-boot.run.profiles=prod
+MAVEN指定pom文件
+mvn -f pom-test.xml spring-boot:run -Dspring.config.name=application-test
+MAVEN指定端口
+mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8989
+
 ###  问题反馈
 1. Email: zhanghaijun_java@163.com
