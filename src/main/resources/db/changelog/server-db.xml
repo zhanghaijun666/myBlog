@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <property name="longtext.type" value="clob" dbms="oracle"/>
+    <property name="longtext.type" value="longtext" dbms="mysql"/>
+    <property name="longtext.type" value="longtext" dbms="h2"/>
+    <property name="longtext.type" value="text" dbms="sqlite"/>
+    <property name="bigint.type" value="bigint" dbms="oracle"/>
+    <property name="bigint.type" value="bigint" dbms="mysql"/>
+    <property name="bigint.type" value="bigint" dbms="h2"/>
+    <property name="bigint.type" value="int" dbms="sqlite"/>
+    <property name="now" value="CURRENT TIMESTAMP" dbms="h2"/>
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+    <property name="type.uuid" value="java.sql.Types.VARCHAR(36)"/>
+
+    <!--<includeAll path="classpath:db/changelog/" relativeToChangelogFile="false"/>-->
+    <include file="db/changelog/user-db.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/file-db.xml" relativeToChangelogFile="false"/>
+
+</databaseChangeLog>

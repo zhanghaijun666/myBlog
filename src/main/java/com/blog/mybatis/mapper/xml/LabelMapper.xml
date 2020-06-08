@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.mybatis.mapper.LabelMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blog.mybatis.entity.Label">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="description" property="description" />
+        <result column="color" property="color" />
+        <result column="parent_id" property="parentId" />
+        <result column="status" property="status" />
+        <result column="created_at" property="createdAt" />
+        <result column="created_by" property="createdBy" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="updated_by" property="updatedBy" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, title, description, color, parent_id, status, created_at, created_by, updated_at, updated_by
+    </sql>
+
+</mapper>

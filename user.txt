@@ -1,3 +1,0 @@
-#name:pass:role
-a:a:USER
-admin:admin:USER,ADMIN,DBA

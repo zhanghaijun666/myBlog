@@ -10,9 +10,14 @@
 - [liquibase](http://www.liquibase.org/ "liquibase")
 - [MyBatis](http://www.mybatis.org/mybatis-3/configuration.html "mybatis")
 - [MyBatis Generator](http://www.mybatis.org/generator/configreference/xmlconfig.html "MyBatis Generator")
+- [MyBatis-Plus](https://mybatis.plus/guide/generator.html)
+- [maven repository](https://mvnrepository.com/)
+- [Hibernate Validator](http://hibernate.org/validator/)
 - [protobuf](https://github.com/protocolbuffers/protobuf/releases)
 - [cordova](http://cordova.axuer.com/docs/zh-cn/latest/)
 - [gitlab](https://gitlab.com/gitlab-org/gitlab-ce/tree/master)
+- [字母转字符](http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20)
+
 
 ###  问题反馈
 1. Email: zhanghaijun_java@163.com

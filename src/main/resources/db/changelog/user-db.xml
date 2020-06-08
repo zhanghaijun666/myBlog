@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="createTable-db-user" author="haijun.zhang">
+        <createTable tableName="user" remarks="Create user for db">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_users"/>
+            </column>
+            <column name="username" type="varchar(255)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nickname" type="varchar(255)" defaultValue=""/>
+            <column name="email" type="varchar(255)"/>
+            <column name="phone" type="varchar(255)"/>
+            <column name="birthday" type="${bigint.type}"/>
+            <column name="file_hash" type="varchar(255)" defaultValue=""/>
+
+            <column name="status" type="int"/>
+            <column name="created_at" type="datetime"/>
+            <column name="created_by" type="int"/>
+            <column name="updated_at" type="datetime"/>
+            <column name="updated_by" type="int"/>
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>
