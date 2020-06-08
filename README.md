@@ -7,6 +7,7 @@
 
 ### 用到的工具/技术栈
 - [spring boot官方脚手架](https://start.spring.io/ "spring boot官方脚手架")
+- [Spring Security](https://docs.spring.io/spring-security/site/docs/4.2.2.RELEASE/reference/htmlsingle/)
 - [liquibase](http://www.liquibase.org/ "liquibase")
 - [MyBatis](http://www.mybatis.org/mybatis-3/configuration.html "mybatis")
 - [MyBatis Generator](http://www.mybatis.org/generator/configreference/xmlconfig.html "MyBatis Generator")

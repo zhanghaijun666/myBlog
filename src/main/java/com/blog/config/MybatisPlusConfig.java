@@ -8,11 +8,17 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan("com.tct.mapper")
+@MapperScan("com.blog.mybatis.mapper")
 public class MybatisPlusConfig {
     @Bean
     public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
         return paginationInterceptor;
     }
+
+    /*@Bean
+    public H2KeyGenerator getH2KeyGenerator() {
+        return new H2KeyGenerator();
+    }*/
+
 }

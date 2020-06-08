@@ -1,50 +1,9 @@
 package com.blog.utils;
 
-import com.blog.config.sercurity.BlogUserDetails;
-import com.blog.db.User;
-import com.blog.service.File.FileUrl;
-import org.json.JSONObject;
-import org.springframework.security.core.Authentication;
-
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 
 public class RequestUtils {
-    public static int getUserId(HttpServletRequest request) {
-        User user = RequestUtils.getUser(request);
-        if (null == user) {
-            return FileUrl.DEFAULT_OWNER_ID;
-        }
-        return user.getUserId();
-    }
-
-    public static User getUser(java.security.Principal principal) {
-        if (principal instanceof org.springframework.security.core.Authentication) {
-            Authentication authentication = (Authentication) principal;
-            if (authentication.getPrincipal() instanceof BlogUserDetails) {
-                BlogUserDetails userDetail = (BlogUserDetails) authentication.getPrincipal();
-                return userDetail.getUser();
-            }
-        }
-        return null;
-    }
-
-    public static User getUser(HttpServletRequest request) {
-        if (null == request) {
-            return null;
-        }
-        Principal principal = request.getUserPrincipal();
-        if (null != principal && principal instanceof Authentication) {
-            Authentication authentication = (Authentication) principal;
-            if (authentication.getPrincipal() instanceof BlogUserDetails) {
-                BlogUserDetails userDetail = (BlogUserDetails) authentication.getPrincipal();
-                return userDetail.getUser();
-            }
-        }
-        return null;
-    }
-
 
     public static String getAccessUrl(ServletRequest request) {
         if (request instanceof HttpServletRequest) {

@@ -1,10 +1,7 @@
-package com.blog.config;
+package com.blog.config.ui;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 @EnableWebMvc
@@ -18,6 +15,18 @@ public class BlogMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/ui/**").addResourceLocations("classpath:/ui/");
+    }
+
+    //页面跳转
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addRedirectViewController("/ui", "/ui/packed-index.html");
+    }
+
+    //拦截器
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new BlogUiInterceptor()).addPathPatterns("/ui/**/packed-**");
     }
 
     @Override

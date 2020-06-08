@@ -1,9 +1,9 @@
 package com.blog.utils;
 
+import org.javalite.common.Convert;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.javalite.common.Convert;
 
 public class BasicConvertUtils {
 

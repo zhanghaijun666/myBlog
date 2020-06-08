@@ -7,9 +7,9 @@ requirejs.config({
     //never includes a ".js" extension since
     //the paths config could be for a directory.
     paths: {
-        "text": "/static/require/text",
-        "css": "/static/require/css",
-        "BlogStore": "/resource/common/config/blog-store"
+        "text": "/ui/static/require/text",
+        "css": "/ui/static/require/css",
+        "BlogStore": "/ui/resource/common/config/blog-store"
     },
     shim: {
     }
