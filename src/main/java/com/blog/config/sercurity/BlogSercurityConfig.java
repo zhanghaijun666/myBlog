@@ -1,11 +1,14 @@
 package com.blog.config.sercurity;
 
+import com.blog.filter.JWTAuthenticationFilter;
+import com.blog.filter.JWTLoginFilter;
 import com.blog.config.DataSourceConfig;
+import com.blog.mybatis.service.UserService;
 import com.blog.sso.BlogUserDetailService;
 import com.blog.utils.ResponseUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -20,29 +23,29 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.session.SessionInformationExpiredEvent;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import java.io.IOException;
 
 @EnableWebSecurity
 @Configuration
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
 @Import(DataSourceConfig.class)
 public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private DataSource dataSource;
 
-    @Autowired
-    private BlogUserDetailService userDetailService;
+    private final UserService userService;
+
+    public BlogSercurityConfig(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(new BlogUserDetailService()).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(new BlogUserDetailService(userService)).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
@@ -52,24 +55,15 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/label").permitAll()
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers("/api/**").hasRole("USER")
                 .antMatchers("/h2/**", "/druid/**").access("hasRole('ADMIN') and hasRole('DBA')")
                 .anyRequest().authenticated()
-                .and().formLogin()
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .successHandler(new AuthenticationSuccess())//登陆成功处理
-                .failureHandler(new AuthenticationFailure())//登录失败的处理
-                .loginProcessingUrl("/login")//登录请求地址
-                .and().rememberMe()
-                .and().logout()
-                .logoutUrl("/logout")
-                .and().exceptionHandling()
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
-                .accessDeniedHandler(new CustomAccessDeineHandler())
-                .and().sessionManagement()
-                .maximumSessions(1)
-                .expiredSessionStrategy(new SessionInformationExpiredStrategyImpl());
+                .and()
+                // 添加一个过滤器 所有访问 /login 的请求交给 JWTLoginFilter 来处理 这个类处理所有的JWT相关内容
+                .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+                // 添加一个过滤器验证其他请求的Token是否合法
+                .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override

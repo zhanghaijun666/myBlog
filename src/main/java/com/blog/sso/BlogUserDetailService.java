@@ -3,11 +3,12 @@ package com.blog.sso;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.blog.mybatis.entity.User;
 import com.blog.mybatis.service.UserService;
+import com.blog.sso.BlogUserDetails;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -16,8 +17,11 @@ import java.io.FileReader;
 
 @Component
 public class BlogUserDetailService implements UserDetailsService {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public BlogUserDetailService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -28,9 +32,8 @@ public class BlogUserDetailService implements UserDetailsService {
         queryWrapper.lambda().eq(User::getUsername, username);
         User dbUser = userService.getOne(queryWrapper);
         if (null == dbUser) {
-            throw new UsernameNotFoundException("User not find.");
+            dbUser = checkUserInfo(username);
         }
-        dbUser = checkUserInfo(username);
         if (null == dbUser) {
             throw new UsernameNotFoundException("User not find.");
         }
@@ -60,7 +63,7 @@ public class BlogUserDetailService implements UserDetailsService {
                 if (StringUtils.equals(user, platUser)) {
                     User dbUser = new User();
                     dbUser.setUsername(user);
-                    dbUser.setPassword(platPass);
+                    dbUser.setPassword(new BCryptPasswordEncoder().encode(platPass));
 //                    dbUser.setStatus(BlogStore.Status.StatusActive_VALUE);
                     if (userService.save(dbUser)) {
                         return dbUser;

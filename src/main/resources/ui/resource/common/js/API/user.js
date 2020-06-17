@@ -4,15 +4,15 @@
     }
     exports.API.UserApi = {
         getLoginUser: function (callback) {
-            getBinary("/login-user", {cmd: 'GET'}, function (data) {
+            getBinary("/user/login", {cmd: 'GET', Accept: "application/json"}, function (data) {
                 var user = JSON.parse(data);
-                callback(user.name ? user : undefined);
+                callback(user.username ? user : undefined);
             }, function () {
                 callback(undefined);
             });
         }
         , logout: function () {
-            getBinary("/logout", {cmd: 'GET'}, function () {
+            getBinary("/logout", {cmd: 'GET', Accept: "application/json"}, function () {
                 location.reload();
             });
         }
@@ -24,7 +24,7 @@
             data.append("username", username);
             data.append("password", password);
             data.append("remember-me", "true");
-            getBinary("/login", {cmd: 'POST', data: data}, callback);
+            getBinary("/login", {cmd: 'POST', data: data, Accept: "application/json"}, callback);
         }
     };
 })(this);

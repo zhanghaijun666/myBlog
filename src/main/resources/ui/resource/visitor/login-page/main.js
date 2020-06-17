@@ -11,9 +11,12 @@
         LoginModel.prototype.doLogin = function () {
             const context = this;
             API.UserApi.login(context.username(), context.password(), function (data) {
-                context.errorStr(data);
-                if (!data) {
+                var result = JSON.parse(data);
+                if (!result.code || result.code == 1) {
+                    localStorage.setItem(HEADER_STRING, result.result);
                     RootView.sammyPage.refresh();
+                } else {
+                    context.errorStr(result.msg);
                 }
             });
         };

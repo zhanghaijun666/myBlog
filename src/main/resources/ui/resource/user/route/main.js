@@ -1,8 +1,8 @@
 define(['knockout', "text!./show.html", "css!./show.css"], function (ko, pageView) {
 
-    ko.components.register('view-file', {require: '/resource/user/view-file/main.js'});
-    ko.components.register('message', {require: '/resource/user/message/main.js'});
-    ko.components.register('label-topo', {require: '/resource/user/label-topo/main.js'});
+    ko.components.register('view-file', {require: '/ui/resource/user/view-file/main.js'});
+    ko.components.register('message', {require: '/ui/resource/user/message/main.js'});
+    ko.components.register('label-topo', {require: '/ui/resource/user/label-topo/main.js'});
 
     function RouteUserModel(params, componentInfo) {
         var self = this;

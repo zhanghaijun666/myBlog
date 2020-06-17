@@ -1,9 +1,10 @@
 (function (exports) {
+    exports.HEADER_STRING = "Authorization";
     exports.getBinary = function (url, options, callback, errorCallback) {
         if (!url) {
             return;
         }
-        url = url.replace(/\/+/g,"/")
+        url = url.replace(/\/+/g, "/")
         var ot;
         var oloaded = 0;
         options = options || {};
@@ -97,6 +98,7 @@
         //接受的数据类型
         const accept = options.Accept || (/^\/?api\/.*/.test(url) ? 'application/x-protobuf' : 'text/plan');
         xhr.setRequestHeader('Accept', accept);
+        xhr.setRequestHeader(HEADER_STRING, localStorage.getItem(HEADER_STRING));
         xhr.responseType = accept === "application/x-protobuf" ? "arraybuffer" : (options.responseType || "text");
         if (options.data) {
             xhr.setRequestHeader("Content-Type", options.type || (/^\/?api\/.*/.test(url) ? 'application/x-protobuf' : 'application/json'));

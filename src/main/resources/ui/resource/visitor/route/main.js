@@ -1,6 +1,6 @@
 define(['knockout', "text!./show.html", "css!./show.css"], function (ko, pageView) {
 
-    ko.components.register('personal-resume', {require: '/resource/visitor/personal-resume/main.js'});
+    ko.components.register('personal-resume', {require: '/ui/resource/visitor/personal-resume/main.js'});
 
     function RouteVisitorModel(params, componentInfo) {
         var self = this;

@@ -21,7 +21,7 @@
             <column name="birthday" type="${bigint.type}"/>
             <column name="file_hash" type="varchar(255)" defaultValue=""/>
 
-            <column name="status" type="int"/>
+            <column name="status" type="int" defaultValueNumeric="1"/>
             <column name="created_at" type="datetime"/>
             <column name="created_by" type="int"/>
             <column name="updated_at" type="datetime"/>

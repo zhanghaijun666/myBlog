@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"com.blog.config", "com.blog.mybatis","com.blog.sso"})
+@ComponentScan({"com.blog.config", "com.blog.filter", "com.blog.controller", "com.blog.mybatis"})
 @MapperScan("com.blog.mybatis.mapper.xml")
 public class BlogServeApplication {
 

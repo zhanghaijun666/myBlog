@@ -1,7 +1,7 @@
 define(['knockout', "text!./show.html", "css!./show.css"], function (ko, pageView) {
 
-    ko.components.register('admin-navbar', {require: '/resource/admin/shrink-menu/main.js'});
-    ko.components.register('user-list', {require: '/resource/admin/user-list/main.js'});
+    ko.components.register('admin-navbar', {require: '/ui/resource/admin/shrink-menu/main.js'});
+    ko.components.register('user-list', {require: '/ui/resource/admin/user-list/main.js'});
 
     function RouteAdminModel(params, componentInfo) {
         var self = this;

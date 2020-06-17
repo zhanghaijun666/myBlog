@@ -1,4 +1,4 @@
-package com.blog.mybatis.controller;
+package com.blog.controller;
 
 
 import com.blog.mybatis.entity.Label;

@@ -1,4 +1,4 @@
-package com.blog.mybatis.controller;
+package com.blog.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
