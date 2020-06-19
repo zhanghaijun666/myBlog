@@ -51,13 +51,16 @@ public class BlogSercurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         //允许同源使用 iframe 处理h2控制台无法访问的情况
-        http.headers().frameOptions().sameOrigin();
+        http.authorizeRequests()
+                .antMatchers("/h2/**","/druid/**").permitAll() // 放行 H2 的请求
+                .and().csrf().ignoringAntMatchers("/h2/**","/druid/**") // 禁用 H2 控制台的 CSRF 防护
+                .and().headers().frameOptions().sameOrigin();
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/label").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers("/api/**").hasRole("USER")
-                .antMatchers("/h2/**", "/druid/**").access("hasRole('ADMIN') and hasRole('DBA')")
+                .antMatchers("/admin/**").access("hasRole('ADMIN') and hasRole('DBA')")
                 .anyRequest().authenticated()
                 .and()
                 // 添加一个过滤器 所有访问 /login 的请求交给 JWTLoginFilter 来处理 这个类处理所有的JWT相关内容

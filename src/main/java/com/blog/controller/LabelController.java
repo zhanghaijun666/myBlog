@@ -23,6 +23,6 @@ public class LabelController {
 
     @GetMapping
     public List<Label> getAllLabel() {
-        return labelService.selectAll();
+        return labelService.list();
     }
 }

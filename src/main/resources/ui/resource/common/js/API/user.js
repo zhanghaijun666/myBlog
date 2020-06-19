@@ -4,7 +4,7 @@
     }
     exports.API.UserApi = {
         getLoginUser: function (callback) {
-            getBinary("/user/login", {cmd: 'GET', Accept: "application/json"}, function (data) {
+            getBinary("/user/token", {cmd: 'GET', Accept: "application/json"}, function (data) {
                 var user = JSON.parse(data);
                 callback(user.username ? user : undefined);
             }, function () {
@@ -25,6 +25,16 @@
             data.append("password", password);
             data.append("remember-me", "true");
             getBinary("/login", {cmd: 'POST', data: data, Accept: "application/json"}, callback);
+        }
+        , getAllUser: function () {
+            getBinary("/user/all", {cmd: 'GET', Accept: "application/x-protobuf"}, function (data) {
+                var array = [];
+                ko.utils.arrayForEach(createAutoStructure("UserList", data).items, function (item) {
+                    array.push(new Message("UserItem", data,true));
+                });
+                console.log(array);
+                console.log(new Message("UserList", data));
+            });
         }
     };
 })(this);

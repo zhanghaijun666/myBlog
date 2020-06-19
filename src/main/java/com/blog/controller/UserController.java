@@ -4,16 +4,19 @@ package com.blog.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.blog.mybatis.entity.User;
 import com.blog.mybatis.service.UserService;
+import com.blog.proto.BlogStore;
 import com.blog.sso.BlogUserDetails;
-import com.blog.sso.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.stream.Collectors;
 
 /**
  * @author haijun.zhang
@@ -26,42 +29,28 @@ public class UserController {
     @Autowired
     UserService service;
 
-    @RequestMapping(value = "/login", produces = "application/json;charset=UTF-8")
-    public User loginUser() {
+    @GetMapping(value = "/token", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void tokenUser(HttpServletResponse response) throws IOException {
         Authentication aut = SecurityContextHolder.getContext().getAuthentication();
         if (aut != null && aut.getPrincipal() instanceof BlogUserDetails) {
-            return ((BlogUserDetails) aut.getPrincipal()).getUser();
+            ((BlogUserDetails) aut.getPrincipal()).getUser().bulidUserItem();
         } else if (aut != null && aut.getPrincipal() instanceof String) {
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().eq(User::getUsername, aut.getPrincipal());
             User dbUser = service.getOne(queryWrapper);
             if (dbUser != null) {
-                return dbUser;
+                dbUser.bulidUserItem().writeTo(response.getOutputStream());
             }
+        } else {
+            BlogStore.UserItem.getDefaultInstance().writeTo(response.getOutputStream());
         }
-        return null;
     }
 
-    // 路由映射到/users
-    @RequestMapping(value = "/all", produces = "application/json;charset=UTF-8")
-    public String usersList() {
-        List<User> list = service.list();
-        return JSONResult.fillResultString(0, "", list);
-    }
-
-    @RequestMapping(value = "/hello", produces = "application/json;charset=UTF-8")
-    public String hello() {
-        ArrayList<String> users = new ArrayList<String>() {{
-            add("hello");
-        }};
-        return JSONResult.fillResultString(0, "", users);
-    }
-
-    @RequestMapping(value = "/world", produces = "application/json;charset=UTF-8")
-    public String world() {
-        ArrayList<String> users = new ArrayList<String>() {{
-            add("world");
-        }};
-        return JSONResult.fillResultString(0, "", users);
+    @GetMapping(value = "/all", produces = "application/x-protobuf")
+    public void usersList(HttpServletResponse response) throws IOException {
+        BlogStore.UserList.newBuilder()
+                .addAllItems(service.list().stream().map(User::bulidUserItem).collect(Collectors.toList()))
+                .build()
+                .writeTo(response.getOutputStream());
     }
 }

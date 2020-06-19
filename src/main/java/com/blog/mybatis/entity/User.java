@@ -6,6 +6,9 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+
+import com.blog.proto.BlogStore;
+import com.blog.utils.BasicConvertUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -55,6 +58,18 @@ public class User extends Model<User> {
     @Override
     protected Serializable pkVal() {
         return this.id;
+    }
+
+    public BlogStore.UserItem bulidUserItem() {
+        return BlogStore.UserItem.newBuilder()
+                .setUserId(this.getId())
+                .setUsername(this.getUsername())
+                .setNickname(BasicConvertUtils.toString(this.getNickname(), this.getUsername()))
+                .setEmail(BasicConvertUtils.toString(this.getEmail(), ""))
+                .setPhone(BasicConvertUtils.toString(this.getPhone(), ""))
+                .setBirthday(BasicConvertUtils.toLong(this.getBirthday(), 0))
+                .setStatus(BlogStore.Status.forNumber(this.getStatus()))
+                .build();
     }
 
 }
