@@ -35,6 +35,18 @@
                 console.log(array);
                 console.log(new Message("UserList", data));
             });
+        }, saveUser: function () {
+            var user = new Message("UserItem", {
+                username: "user",
+                nickname: "用户",
+                email: "user@blog.com",
+                phone: "1234567",
+                birthday: 1592668800000
+            });
+            console.log(user);
+            getBinary("/api/user/save", {cmd: 'POST', data: user.toArrayBuffer()}, function (data) {
+                console.log(new Message("Result", data));
+            });
         }
     };
 })(this);

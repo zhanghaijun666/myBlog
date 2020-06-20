@@ -5,12 +5,8 @@ import com.blog.mybatis.entity.User;
 import com.blog.mybatis.service.UserService;
 import com.blog.proto.BlogStore;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import java.util.stream.Collectors;
 
 @Path("/user")
@@ -29,5 +25,14 @@ public class UserApi {
         return BlogStore.UserList.newBuilder()
                 .addAllItems(service.list().stream().map(User::bulidUserItem).collect(Collectors.toList()))
                 .build();
+    }
+
+    @POST
+    @Path("/save")
+    public BlogStore.Result saveUsere(BlogStore.UserItem item) {
+        if (service.save(User.toBulid(item))) {
+            return BlogStore.Result.newBuilder().setCode(BlogStore.ReturnCode.RETURN_OK).build();
+        }
+        return BlogStore.Result.newBuilder().setCode(BlogStore.ReturnCode.RETURN_ERROR).build();
     }
 }
