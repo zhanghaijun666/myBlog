@@ -2,12 +2,12 @@ package com.blog.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.blog.config.jersey.BlogMediaType;
 import com.blog.mybatis.entity.User;
 import com.blog.mybatis.service.UserService;
 import com.blog.proto.BlogStore;
 import com.blog.sso.BlogUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +29,7 @@ public class UserController {
     @Autowired
     UserService service;
 
-    @GetMapping(value = "/token", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/token", produces = BlogMediaType.APPLICATION_PROTOBUF)
     public void tokenUser(HttpServletResponse response) throws IOException {
         Authentication aut = SecurityContextHolder.getContext().getAuthentication();
         if (aut != null && aut.getPrincipal() instanceof BlogUserDetails) {
@@ -46,7 +46,7 @@ public class UserController {
         }
     }
 
-    @GetMapping(value = "/all", produces = "application/x-protobuf")
+    @GetMapping(value = "/all", produces = BlogMediaType.APPLICATION_PROTOBUF)
     public void usersList(HttpServletResponse response) throws IOException {
         BlogStore.UserList.newBuilder()
                 .addAllItems(service.list().stream().map(User::bulidUserItem).collect(Collectors.toList()))

@@ -4,9 +4,9 @@
     }
     exports.API.UserApi = {
         getLoginUser: function (callback) {
-            getBinary("/user/token", {cmd: 'GET', Accept: "application/json"}, function (data) {
-                var user = JSON.parse(data);
-                callback(user.username ? user : undefined);
+            getBinary("/user/token", {cmd: 'GET', Accept: "application/x-protobuf"}, function (data) {
+                var user = new Message("UserItem", data);
+                callback(user.userId ? user : undefined);
             }, function () {
                 callback(undefined);
             });

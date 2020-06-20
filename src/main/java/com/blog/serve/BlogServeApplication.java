@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 
 @SpringBootApplication
-@ComponentScan({"com.blog.config", "com.blog.filter", "com.blog.controller", "com.blog.mybatis"})
+@ComponentScan({"com.blog.config", "com.blog.filter", "com.blog.controller", "com.blog.api", "com.blog.mybatis"})
 @MapperScan("com.blog.mybatis.mapper.xml")
 public class BlogServeApplication {
 
@@ -22,20 +22,22 @@ public class BlogServeApplication {
         app.setBannerMode(Banner.Mode.CONSOLE);
         app.run(args);
     }
+
+
     /**
      * protobuf 序列化
      */
-    @Bean
-    ProtobufHttpMessageConverter protobufHttpMessageConverter() {
-        return new ProtobufHttpMessageConverter();
-    }
+//    @Bean
+//    ProtobufHttpMessageConverter protobufHttpMessageConverter() {
+//        return new ProtobufHttpMessageConverter();
+//    }
 
     /**
      * protobuf 反序列化
      */
-    @Bean
-    RestTemplate restTemplate(ProtobufHttpMessageConverter protobufHttpMessageConverter) {
-        return new RestTemplate(Collections.singletonList(protobufHttpMessageConverter));
-    }
+//    @Bean
+//    RestTemplate restTemplate(ProtobufHttpMessageConverter protobufHttpMessageConverter) {
+//        return new RestTemplate(Collections.singletonList(protobufHttpMessageConverter));
+//    }
 
 }

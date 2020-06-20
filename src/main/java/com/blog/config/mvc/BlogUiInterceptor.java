@@ -1,4 +1,4 @@
-package com.blog.config.ui;
+package com.blog.config.mvc;
 
 import com.blog.utils.PathUtils;
 import com.blog.utils.ResourceUtils;
