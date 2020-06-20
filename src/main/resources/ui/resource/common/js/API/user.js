@@ -6,7 +6,7 @@
         getLoginUser: function (callback) {
             getBinary("/user/token", {cmd: 'GET', Accept: "application/x-protobuf"}, function (data) {
                 var user = new Message("UserItem", data);
-                callback(user.userId ? user : undefined);
+                callback(user && user.userId ? user : undefined);
             }, function () {
                 callback(undefined);
             });
@@ -30,7 +30,7 @@
             getBinary("/user/all", {cmd: 'GET', Accept: "application/x-protobuf"}, function (data) {
                 var array = [];
                 ko.utils.arrayForEach(createAutoStructure("UserList", data).items, function (item) {
-                    array.push(new Message("UserItem", data,true));
+                    array.push(new Message("UserItem", data, true));
                 });
                 console.log(array);
                 console.log(new Message("UserList", data));

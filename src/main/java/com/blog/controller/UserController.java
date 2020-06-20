@@ -29,28 +29,26 @@ public class UserController {
     @Autowired
     UserService service;
 
-    @GetMapping(value = "/token", produces = BlogMediaType.APPLICATION_PROTOBUF)
-    public void tokenUser(HttpServletResponse response) throws IOException {
+    @GetMapping(value = "/token", produces = {BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    public BlogStore.UserItem tokenUser() {
         Authentication aut = SecurityContextHolder.getContext().getAuthentication();
         if (aut != null && aut.getPrincipal() instanceof BlogUserDetails) {
-            ((BlogUserDetails) aut.getPrincipal()).getUser().bulidUserItem();
+            return ((BlogUserDetails) aut.getPrincipal()).getUser().bulidUserItem();
         } else if (aut != null && aut.getPrincipal() instanceof String) {
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().eq(User::getUsername, aut.getPrincipal());
             User dbUser = service.getOne(queryWrapper);
             if (dbUser != null) {
-                dbUser.bulidUserItem().writeTo(response.getOutputStream());
+                return dbUser.bulidUserItem();
             }
-        } else {
-            BlogStore.UserItem.getDefaultInstance().writeTo(response.getOutputStream());
         }
+        return BlogStore.UserItem.getDefaultInstance();
     }
 
-    @GetMapping(value = "/all", produces = BlogMediaType.APPLICATION_PROTOBUF)
-    public void usersList(HttpServletResponse response) throws IOException {
-        BlogStore.UserList.newBuilder()
+    @GetMapping(value = "/all", produces = {BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    public BlogStore.UserList usersList() {
+        return BlogStore.UserList.newBuilder()
                 .addAllItems(service.list().stream().map(User::bulidUserItem).collect(Collectors.toList()))
-                .build()
-                .writeTo(response.getOutputStream());
+                .build();
     }
 }

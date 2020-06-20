@@ -1,7 +1,10 @@
 package com.blog.config.mvc;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.*;
+
+import java.util.List;
 
 @Configuration
 @EnableWebMvc
@@ -32,5 +35,10 @@ public class BlogMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedOrigins("*").allowCredentials(true).allowedMethods("GET").maxAge(3600 * 24);
+    }
+
+    @Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(new MyMessageConverter());
     }
 }
