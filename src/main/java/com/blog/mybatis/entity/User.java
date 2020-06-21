@@ -8,8 +8,9 @@ import com.blog.proto.BlogStore;
 import com.blog.utils.BasicConvertUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.validator.constraints.Length;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.validation.constraints.Size;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -34,7 +35,7 @@ public class User extends Model<User> {
     private Integer id;
 
     @NotBlank(message = "姓名 不允许为空")
-    @Length(min = 2, max = 10, message = "姓名 长度必须在 {min} - {max} 之间")
+    @Size(min = 2, max = 10, message = "姓名 长度必须在 {min} - {max} 之间")
     private String username;
 
     private String password;
@@ -64,6 +65,10 @@ public class User extends Model<User> {
     @Override
     protected Serializable pkVal() {
         return this.id;
+    }
+
+    public void setPassword(String password) {
+        this.password = new BCryptPasswordEncoder().encode(password);
     }
 
     public BlogStore.UserItem bulidUserItem() {

@@ -1,5 +1,7 @@
 package com.blog.api;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.blog.config.jersey.BlogMediaType;
 import com.blog.mybatis.entity.User;
 import com.blog.mybatis.service.UserService;
@@ -30,7 +32,9 @@ public class UserApi {
     @POST
     @Path("/save")
     public BlogStore.Result saveUsere(BlogStore.UserItem item) {
-        if (service.save(User.toBulid(item))) {
+        User dbUser = User.toBulid(item);
+        Wrapper wrapper = new QueryWrapper<User>().lambda().eq(User::getUsername, dbUser.getUsername());
+        if (service.saveOrUpdate(dbUser, wrapper)) {
             return BlogStore.Result.newBuilder().setCode(BlogStore.ReturnCode.RETURN_OK).build();
         }
         return BlogStore.Result.newBuilder().setCode(BlogStore.ReturnCode.RETURN_ERROR).build();
